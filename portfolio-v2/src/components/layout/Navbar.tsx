@@ -67,9 +67,16 @@ const Navbar = () => {
           animate={{ opacity: 1, x: 0 }}
           className="flex items-center gap-4"
         >
-          <button className="hidden sm:flex items-center gap-2 glass px-4 py-2 rounded-xl text-xs font-mono text-muted hover:text-white transition-all group">
+          <button 
+            onClick={() => {
+              const event = new KeyboardEvent('keydown', { key: 'k', metaKey: true, ctrlKey: true });
+              window.dispatchEvent(event);
+            }}
+            className="hidden sm:flex items-center gap-2 glass px-4 py-2 rounded-xl text-xs font-mono text-muted hover:text-white hover:border-white/20 transition-all group"
+          >
             <Command className="w-3 h-3 group-hover:text-primary transition-colors" />
-            <span>K</span>
+            <span>Search</span>
+            <span className="opacity-40">⌘K</span>
           </button>
           
           <button 
