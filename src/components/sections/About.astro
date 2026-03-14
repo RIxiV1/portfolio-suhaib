@@ -1,0 +1,134 @@
+---
+const bioLines = [
+  "Junior dev. Based in India.",
+  "I like to build and break stuff.",
+  "Open to Internships/full-time roles and freelance work.",
+  "Let's make something worth breaking."
+];
+
+const stats = [
+  { label: "public projects", value: 5 },
+  { label: "languages", value: 3 },
+  { label: "Chrome extension shipped", value: 1 }
+];
+---
+
+<section id="about" class="container about-section">
+  <div class="about-grid">
+    
+    <div class="bio-col" data-stitch="stagger-group">
+      {bioLines.map((line, i) => (
+        <p class={`bio-line stagger-item`}>{line}</p>
+      ))}
+    </div>
+    
+    <div class="stats-col">
+      <ul class="stats-list" data-stitch="stagger-group">
+        {stats.map(stat => (
+          <li class="stat-item stagger-item">
+            <span class="stat-number" data-stitch="counter" data-target={stat.value}>0</span>
+            <span class="stat-label">{stat.label}</span>
+          </li>
+        ))}
+        <li class="stat-item stagger-item">
+          <span class="stat-number check">✓</span>
+          <span class="stat-label">Open to work</span>
+        </li>
+      </ul>
+    </div>
+    
+  </div>
+</section>
+
+<style>
+  .about-section {
+    padding-top: 15vh;
+    padding-bottom: 15vh;
+  }
+  
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+  
+  @media (min-width: 768px) {
+    .about-grid {
+      grid-template-columns: 3fr 2fr;
+      align-items: center;
+      gap: 6rem;
+    }
+  }
+
+  .bio-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .bio-line {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--text-main);
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    will-change: transform, opacity;
+  }
+  
+  .bio-line.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .bio-line:last-child {
+    color: var(--primary);
+    font-family: var(--font-mono);
+    margin-top: 1rem;
+  }
+
+  .stats-col {
+    background: rgba(15, 15, 26, 0.5);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2.5rem;
+  }
+
+  .stats-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  }
+  
+  .stat-item.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .stat-number {
+    font-family: var(--font-mono);
+    font-size: 2.5rem;
+    color: var(--secondary);
+    font-weight: 700;
+    min-width: 2.5rem;
+  }
+  
+  .stat-number.check {
+    color: var(--primary);
+  }
+
+  .stat-label {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+  }
+</style>
