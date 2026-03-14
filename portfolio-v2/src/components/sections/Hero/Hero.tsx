@@ -55,7 +55,7 @@ const Hero = () => {
           variants={itemVariants}
           className="text-muted text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          I'm Suhaib, a full-stack engineer focused on building clean, high-performance web applications with a focus on UI/UX and 3D interactions.
+          I build (and break) things for the web.
         </motion.p>
 
         <motion.div 

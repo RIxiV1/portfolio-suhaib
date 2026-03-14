@@ -1,43 +1,63 @@
-# Astro Starter Kit: Minimal
+# 🚀 Premium Developer Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
-```
+A high-performance, visually stunning developer portfolio built with **Astro**, **React**, and **Framer Motion**. Designed for maximum impact with a focus on premium UI/UX, 3D interactions, and seamless performance.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+![Portfolio Preview](./public/preview.png)
 
-## 🚀 Project Structure
+## ✨ Key Features
 
-Inside of your Astro project, you'll see the following folders and files:
+- **🌑 Premium Dark Mode**: A sleek, curated dark aesthetic designed for modern eyes.
+- **✨ 3D Interactions**: Dynamic 3D background elements that react to mouse movement.
+- **🎯 Custom Cursor**: A physics-based fluid cursor that enhances navigation.
+- **📱 Fully Responsive**: Flawless experience across mobile, tablet, and desktop.
+- **🚀 Performance First**: Optimized with Astro for lightning-fast load times.
+- **🎨 Glassmorphism & Micro-animations**: Subtle, high-end visual touches throughout.
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Astro](https://astro.build/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Components**: React
+- **Icons**: Lucide React
+- **Deploy**: GitHub Pages / Vercel / Netlify
+
+## 📁 Project Structure
 
 ```text
 /
-├── public/
+├── public/          # Static assets (images, icons, robots.txt)
 ├── src/
-│   └── pages/
-│       └── index.astro
+│   ├── components/  # Reusable UI components
+│   ├── data/        # Project and experience data
+│   ├── layouts/     # Page layouts
+│   ├── lib/         # Utility functions
+│   └── pages/       # Project routes (index.astro)
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 💻 Local Setup
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/RIxiV1/portfolio-suhaib.git
+   ```
 
-Any static assets, like images, can be placed in the `public/` directory.
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-## 🧞 Commands
+3. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
 
-All commands are run from the root of the project, from a terminal:
+4. **Build for production**:
+   ```bash
+   npm run build
+   ```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+---
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Built with ❤️ by [RIxiV1](https://github.com/RIxiV1)

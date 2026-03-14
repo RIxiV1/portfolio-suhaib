@@ -32,13 +32,13 @@ const Contact = () => {
           </p>
 
           <div className="flex flex-col gap-6">
-            <a href="mailto:hello@example.com" className="flex items-center gap-4 group">
+            <a href="mailto:shaiksuhaib360@gmail.com" className="flex items-center gap-4 group">
               <div className="p-3 rounded-full bg-white/5 border border-white/10 group-hover:border-primary/50 group-hover:bg-primary/10 transition-all">
                 <Mail className="w-5 h-5 text-primary" />
               </div>
               <div>
                 <p className="text-xs font-mono text-muted uppercase tracking-wider">Email Me</p>
-                <p className="text-lg font-medium">hello@example.com</p>
+                <p className="text-lg font-medium">shaiksuhaib360@gmail.com</p>
               </div>
             </a>
             
@@ -47,7 +47,7 @@ const Contact = () => {
                 { icon: Github, link: "https://github.com/RIxiV1" },
                 { icon: Linkedin, link: "https://www.linkedin.com/in/shaiksuhaib" },
                 { icon: Twitter, link: "https://x.com/suhaibX0" },
-                { icon: MessageSquare, link: "#" },
+                { icon: MessageSquare, link: "https://medium.com/@shaiksuhaib360" },
               ].map((item, i) => (
                 <a 
                   key={i} 

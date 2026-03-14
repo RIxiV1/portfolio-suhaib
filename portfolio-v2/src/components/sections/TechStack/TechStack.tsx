@@ -4,9 +4,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const technologies = [
-  "Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", 
-  "Node.js", "Three.js", "GSAP", "PostgreSQL", "Prisma", 
-  "Docker", "AWS", "Git", "Figma", "Redux", "Zustand"
+  "JavaScript", "TypeScript", "Python", "React", "CSS", 
+  "Tailwind", "SQL", "HTML", "Git", "Node.js"
 ];
 
 const TechStack = () => {

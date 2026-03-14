@@ -40,10 +40,10 @@ const About = () => {
             <span className="font-mono text-xs uppercase tracking-widest">About Me</span>
           </div>
           <p className="text-xl md:text-2xl leading-relaxed text-foreground/90">
-            I'm a self-taught full-stack developer based in India. I specialize in building highly interactive, performant web applications that don't just work—they feel amazing to use. 
+            Junior dev. Based in India. I like to build and break stuff. 
           </p>
           <p className="mt-6 text-muted leading-relaxed">
-            My journey started with a curiosity for how things break, which naturally led to a passion for building robust systems. I love diving into the intersections of design, engineering, and 3D graphics.
+            Open to Internships/full-time roles and freelance work. Let's make something worth breaking.
           </p>
         </motion.div>
 
@@ -73,8 +73,8 @@ const About = () => {
           transition={{ delay: 0.2 }}
           className="md:col-span-2 glass p-8 rounded-3xl flex flex-col items-center justify-center text-center"
         >
-          <div className="text-5xl font-bold text-primary mb-2">5+</div>
-          <p className="text-muted font-mono text-xs uppercase tracking-widest">Public Projects</p>
+          <div className="text-5xl font-bold text-primary mb-2">5</div>
+          <p className="text-muted font-mono text-xs uppercase tracking-widest">public projects</p>
         </motion.div>
 
         {/* Hobby Card */}
