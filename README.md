@@ -1,63 +1,33 @@
-# 🚀 Premium Developer Portfolio
+# Suhaib's Portfolio — Ultimate Edition (v3)
 
-A high-performance, visually stunning developer portfolio built with **Astro**, **React**, and **Framer Motion**. Designed for maximum impact with a focus on premium UI/UX, 3D interactions, and seamless performance.
+A high-end developer portfolio built with:
 
-![Portfolio Preview](./public/preview.png)
+- **Next.js 15** (App Router)
+- **TypeScript**
+- **Tailwind CSS 4**
+- **Framer Motion** — animations
+- **GSAP + Lenis** — smooth scroll
+- **React Three Fiber / Three.js** — 3D effects
 
-## ✨ Key Features
+## Getting Started
 
-- **🌑 Premium Dark Mode**: A sleek, curated dark aesthetic designed for modern eyes.
-- **✨ 3D Interactions**: Dynamic 3D background elements that react to mouse movement.
-- **🎯 Custom Cursor**: A physics-based fluid cursor that enhances navigation.
-- **📱 Fully Responsive**: Flawless experience across mobile, tablet, and desktop.
-- **🚀 Performance First**: Optimized with Astro for lightning-fast load times.
-- **🎨 Glassmorphism & Micro-animations**: Subtle, high-end visual touches throughout.
-
-## 🛠️ Tech Stack
-
-- **Framework**: [Astro](https://astro.build/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
-- **Components**: React
-- **Icons**: Lucide React
-- **Deploy**: GitHub Pages / Vercel / Netlify
-
-## 📁 Project Structure
-
-```text
-/
-├── public/          # Static assets (images, icons, robots.txt)
-├── src/
-│   ├── components/  # Reusable UI components
-│   ├── data/        # Project and experience data
-│   ├── layouts/     # Page layouts
-│   ├── lib/         # Utility functions
-│   └── pages/       # Project routes (index.astro)
-└── package.json
+```bash
+cd portfolio-v3
+npm install
+npm run dev
 ```
 
-## 💻 Local Setup
+Open [http://localhost:3000](http://localhost:3000) to view.
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/RIxiV1/portfolio-suhaib.git
-   ```
+## Sections
 
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+- 🎬 **Hero** — Cinematic intro with neon glow orbs
+- 🧩 **About** — Bento-grid layout with live stats
+- 🗂 **Projects** — Animated filtering + code-preview modals
+- ⚡ **Tech Stack** — Infinite marquee 
+- 📍 **Experience** — Neon-path vertical timeline
+- 📬 **Contact** — Glow-focus form with social links
 
-3. **Start the development server**:
-   ```bash
-   npm run dev
-   ```
+## Live Dev Server
 
-4. **Build for production**:
-   ```bash
-   npm run build
-   ```
-
----
-
-Built with ❤️ by [RIxiV1](https://github.com/RIxiV1)
+Running on port 3001 (`npm run dev -- --port 3001`)
