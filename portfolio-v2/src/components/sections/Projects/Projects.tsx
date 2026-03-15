@@ -2,14 +2,16 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { projects } from '@/data/projects';
+import { projects, Project } from '@/data/projects';
 import Image from 'next/image';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, Eye } from 'lucide-react';
+import ProjectModal from '@/components/ui/ProjectModal';
 
 const categories = ["All", "AI", "Frontend", "Chrome API", "Python", "TypeScript"];
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const filteredProjects = projects.filter(project => 
     activeCategory === "All" || project.tags.includes(activeCategory)
@@ -75,7 +77,8 @@ const Projects = () => {
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.4 }}
               whileHover={{ y: -10 }}
-              className="group relative flex flex-col glass rounded-2xl overflow-hidden"
+              onClick={() => setSelectedProject(project)}
+              className="group relative flex flex-col glass rounded-2xl overflow-hidden cursor-pointer"
             >
               {/* Project Image Container */}
               <div className="relative aspect-[16/10] overflow-hidden">
@@ -86,8 +89,15 @@ const Projects = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
                 
+                {/* Visual indicator for clickable */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                   <div className="p-4 rounded-full bg-primary/20 backdrop-blur-md border border-primary/30 text-primary">
+                      <Eye className="w-6 h-6" />
+                   </div>
+                </div>
+
                 {/* Overlay Links */}
-                <div className="absolute top-4 right-4 flex gap-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">
+                <div className="absolute top-4 right-4 flex gap-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all z-10" onClick={(e) => e.stopPropagation()}>
                   <a href={project.link} target="_blank" rel="noopener noreferrer" className="p-2 glass rounded-full hover:bg-white hover:text-black transition-colors">
                     <Github className="w-5 h-5" />
                   </a>
@@ -99,7 +109,9 @@ const Projects = () => {
 
               {/* Project Info */}
               <div className="p-6 flex flex-col flex-1">
-                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{project.title}</h3>
+                </div>
                 <p className="text-muted text-sm mb-6 flex-1 line-clamp-2">
                   {project.description}
                 </p>
@@ -119,6 +131,12 @@ const Projects = () => {
           ))}
         </AnimatePresence>
       </motion.div>
+
+      <ProjectModal 
+        project={selectedProject}
+        isOpen={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </section>
   );
 };
