@@ -9,6 +9,7 @@ const navLinks = [
   { name: 'Work', href: '#projects' },
   { name: 'About', href: '#about' },
   { name: 'Journey', href: '#experience' },
+  { name: 'Writing', href: '#writing' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -46,16 +47,16 @@ export default function Navbar() {
           transition={{ delay: 0.1 }}
           className="hidden md:flex items-center glass px-6 py-2.5 rounded-full gap-8"
         >
-          {navLinks.map(link => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-[var(--muted)] hover:text-white transition-colors relative group"
-            >
-              {link.name}
-              <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-[var(--primary)] transition-all group-hover:w-full" />
-            </a>
-          ))}
+            {navLinks.map(link => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-sm font-medium text-[var(--muted)] hover:text-white transition-colors relative group"
+              >
+                {link.name}
+                <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-[var(--primary)] transition-all group-hover:w-full" />
+              </a>
+            ))}
         </motion.div>
 
         {/* Actions */}

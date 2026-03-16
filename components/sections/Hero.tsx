@@ -4,10 +4,11 @@ import { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, Twitter } from 'lucide-react';
 
-function FloatingOrb({ className }: { className?: string }) {
+function FloatingOrb({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
     <div
       className={`absolute rounded-full blur-3xl pointer-events-none ${className}`}
+      style={style}
     />
   );
 }
@@ -18,7 +19,7 @@ const container = {
 };
 const item = {
   hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as any } },
 };
 
 export default function Hero() {
