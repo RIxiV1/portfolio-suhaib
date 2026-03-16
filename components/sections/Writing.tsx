@@ -33,7 +33,7 @@ function WritingCard({ article, featured }: { article: Article; featured?: boole
       whileHover={{ scale: 1.01, y: -4 }}
       transition={{ duration: 0.2 }}
       className={`group relative glass glass-hover rounded-3xl p-8 flex flex-col h-full overflow-hidden ${
-        featured ? 'lg:p-10' : 'p-6'
+        featured ? 'lg:p-10 writing-card-border' : 'p-6'
       }`}
     >
       {/* Decorative top border */}
