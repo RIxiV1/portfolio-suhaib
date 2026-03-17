@@ -78,6 +78,7 @@ portfolio-v3/
 ├── data/
 │   ├── projects.ts       # Project definitions + code snippets
 │   └── experience.ts     # Career timeline data
+|── public/               # Static assets
 └── lib/
     └── utils.ts          # clsx + tailwind-merge helper
 ```
