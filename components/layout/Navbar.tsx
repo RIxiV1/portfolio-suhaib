@@ -74,6 +74,14 @@ export default function Navbar() {
           </a>
 
           <button
+            className="p-2.5 glass rounded-xl hover:text-[var(--primary)] transition-colors"
+            onClick={() => window.dispatchEvent(new CustomEvent('toggle-nexus'))}
+            title="Open The Nexus"
+          >
+            <Command className="w-5 h-5" />
+          </button>
+
+          <button
             className="p-2.5 glass rounded-xl md:hidden"
             onClick={() => setMenuOpen(v => !v)}
           >
