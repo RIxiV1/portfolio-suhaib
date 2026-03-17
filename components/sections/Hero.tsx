@@ -84,7 +84,7 @@ export default function Hero() {
           variants={item}
           className="max-w-lg text-sm leading-relaxed text-[var(--muted)]"
         >
-          Junior dev. Based in India. Open to internships, full-time roles & freelance.
+          CS student & developer. Based in India. Open to internships, full-time roles & freelance.
           Let's make something worth breaking.
         </motion.p>
 

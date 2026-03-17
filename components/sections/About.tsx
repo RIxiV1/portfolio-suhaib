@@ -67,7 +67,7 @@ export default function About() {
             <span className="font-mono text-[10px] uppercase tracking-widest">Who I am</span>
           </div>
           <p className="text-xl md:text-2xl leading-relaxed font-light mb-5">
-            Junior developer. Based in India. I like to{' '}
+            CS student & developer. Based in India. I like to{' '}
             <span className="text-gradient-blue font-semibold">build and break stuff</span>.
           </p>
           <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
@@ -102,7 +102,7 @@ export default function About() {
               Open to work
             </span>
           </div>
-          <div className="text-5xl font-bold text-gradient-blue">5</div>
+          <div className="text-5xl font-bold text-gradient-blue">4</div>
           <p className="font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--muted)' }}>
             public projects
           </p>
