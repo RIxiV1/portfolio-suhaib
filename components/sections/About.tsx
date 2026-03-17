@@ -1,19 +1,31 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { User, Globe, Code2, Zap, Coffee } from 'lucide-react';
+import { motion, type Transition, type Variants } from 'framer-motion';
+import { MapPin, Code2, Coffee, Rocket, Github, Briefcase } from 'lucide-react';
 
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] },
-});
+const fadeUpVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1] as unknown as Transition['ease'],
+    },
+  },
+};
 
-function BentoCard({ children, className }: { children: React.ReactNode; className?: string }) {
+function BentoCard({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
     <motion.div
       whileHover={{ scale: 1.01, y: -2 }}
+      transition={{ duration: 0.2 }}
       className={`glass glass-hover rounded-3xl p-6 ${className}`}
     >
       {children}
@@ -25,74 +37,111 @@ export default function About() {
   return (
     <section id="about" className="section-padding container-narrow">
       {/* Section header */}
-      <motion.div {...fadeUp()} className="flex flex-col mb-14">
-        <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--muted)] mb-3">Perspective</span>
-        <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-gradient">A bit about me.</h2>
+      <motion.div
+        variants={fadeUpVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="flex flex-col mb-14"
+      >
+        <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--muted)] mb-3">
+          About
+        </span>
+        <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-gradient">
+          A bit about me.
+        </h2>
       </motion.div>
 
       {/* Bento grid */}
-      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
-
-        {/* Main bio */}
+      <motion.div
+        variants={fadeUpVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="grid grid-cols-1 md:grid-cols-6 gap-4"
+      >
+        {/* Main bio — large card */}
         <BentoCard className="md:col-span-4">
-          <div className="flex items-center gap-2 text-[var(--primary)] mb-5">
-            <User className="w-4 h-4" />
+          <div className="flex items-center gap-2 mb-5" style={{ color: 'var(--primary)' }}>
+            <Code2 className="w-4 h-4" />
             <span className="font-mono text-[10px] uppercase tracking-widest">Who I am</span>
           </div>
-          <p className="text-xl md:text-2xl leading-relaxed font-light text-[var(--foreground)]">
-            Junior dev. Based in India. I like to
-            {' '}<span className="text-gradient-blue font-semibold">build and break stuff</span>.
+          <p className="text-xl md:text-2xl leading-relaxed font-light mb-5">
+            Junior developer. Based in India. I like to{' '}
+            <span className="text-gradient-blue font-semibold">build and break stuff</span>.
           </p>
-          <p className="mt-5 text-sm leading-relaxed text-[var(--muted)]">
-            Open to Internships, full-time roles and freelance work.
-            Let's make something worth breaking.
+          <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
+            I write code that solves real problems — Chrome extensions, AI-powered tools, and
+            full-stack web apps. I care about good UX, clean architecture, and shipping things
+            that actually work. Currently open to internships, full-time roles, and freelance.
           </p>
         </BentoCard>
 
         {/* Location */}
-        <BentoCard className="md:col-span-2 flex flex-col justify-between">
-          <div className="flex items-center gap-2 text-[var(--accent)] mb-4">
-            <Globe className="w-4 h-4" />
-            <span className="font-mono text-[10px] uppercase tracking-widest">Base</span>
+        <BentoCard className="md:col-span-2 flex flex-col justify-between gap-4">
+          <div className="flex items-center gap-2" style={{ color: 'var(--accent)' }}>
+            <MapPin className="w-4 h-4" />
+            <span className="font-mono text-[10px] uppercase tracking-widest">Location</span>
           </div>
           <div>
-            <h3 className="text-3xl font-bold mb-1">India</h3>
-            <p className="text-sm text-[var(--muted)]">Working remotely worldwide</p>
+            <p className="text-2xl font-bold mb-1">India</p>
+            <p className="text-sm" style={{ color: 'var(--muted)' }}>
+              Working remotely. Available worldwide.
+            </p>
           </div>
         </BentoCard>
 
-        {/* Status */}
-        <BentoCard className="md:col-span-2 flex flex-col items-center justify-center text-center">
-          <div className="flex items-center gap-2 mb-2">
+        {/* Open to work */}
+        <BentoCard className="md:col-span-2 flex flex-col items-center justify-center text-center gap-3">
+          <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-mono text-[10px] uppercase tracking-widest text-emerald-400">Open to work</span>
+            <span
+              className="font-mono text-[10px] uppercase tracking-widest"
+              style={{ color: '#34d399' }}
+            >
+              Open to work
+            </span>
           </div>
-          <div className="text-5xl font-bold text-gradient-blue mt-2">5</div>
-          <p className="text-[var(--muted)] font-mono text-xs uppercase tracking-widest mt-1">public projects</p>
+          <div className="text-5xl font-bold text-gradient-blue">5</div>
+          <p className="font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--muted)' }}>
+            public projects
+          </p>
         </BentoCard>
 
         {/* Focus */}
         <BentoCard className="md:col-span-2">
-          <div className="flex items-center gap-2 text-[var(--primary)] mb-4">
-            <Code2 className="w-4 h-4" />
+          <div className="flex items-center gap-2 mb-4" style={{ color: 'var(--primary)' }}>
+            <Rocket className="w-4 h-4" />
             <span className="font-mono text-[10px] uppercase tracking-widest">Focus</span>
           </div>
-          <p className="text-base font-medium">
-            Full-stack web apps, AI tooling, and Chrome extensions.
-          </p>
+          <ul className="text-sm space-y-2" style={{ color: 'var(--muted)' }}>
+            <li className="flex items-center gap-2">
+              <span className="w-1 h-1 rounded-full bg-[var(--primary)]" />
+              Full-stack web apps
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="w-1 h-1 rounded-full bg-[var(--primary)]" />
+              AI tooling &amp; automation
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="w-1 h-1 rounded-full bg-[var(--primary)]" />
+              Chrome extensions
+            </li>
+          </ul>
         </BentoCard>
 
-        {/* Hobby */}
+        {/* Currently */}
         <BentoCard className="md:col-span-2">
-          <div className="flex items-center gap-2 text-amber-400 mb-4">
+          <div className="flex items-center gap-2 mb-4" style={{ color: '#f59e0b' }}>
             <Coffee className="w-4 h-4" />
-            <span className="font-mono text-[10px] uppercase tracking-widest">Fuel</span>
+            <span className="font-mono text-[10px] uppercase tracking-widest">Currently</span>
           </div>
-          <p className="text-base font-medium">
-            Caffeine + curiosity. Late-night debugging sessions that turn into features.
+          <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
+            Building side projects, contributing to open-source, and learning every day.
+            Fuelled by caffeine and curiosity.
           </p>
         </BentoCard>
-      </div>
+      </motion.div>
     </section>
   );
 }
