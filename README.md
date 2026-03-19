@@ -1,11 +1,7 @@
 # 🚀 Shaik Mohammed Suhaib Portfolio
 
-<div align="center">
-  <img src="public/portfolio-preview.png" alt="Portfolio Preview" width="100%" style="border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" />
-</div>
-
+![Preview](portfolio-preview.png)
 ---
-
 ### ✨ Overview
 
 A premium, interactive developer portfolio dedicated to **Agentic AI** and **Product Engineering**. Designed with a deep, cinematic aesthetic using cutting-edge technologies.
