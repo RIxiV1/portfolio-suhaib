@@ -1,11 +1,7 @@
 "use client"
 
 import { NavBar } from "@/components/ui/tubelight-navbar"
-import { BackgroundPaths } from "@/components/ui/background-paths"
-import { LampContainer } from "@/components/ui/lamp"
-import { SkillsMarquee } from "@/components/ui/marquee"
-import { DisplayCards } from "@/components/ui/display-cards"
-import { PulseBeamsDemo } from "@/components/ui/pulse-beams"
+import { EtheralShadow } from "@/components/ui/etheral-shadow"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
 import { Cursor } from "@/components/ui/inverted-cursor"
 import { SpecialText } from "@/components/ui/special-text"
@@ -29,7 +25,13 @@ export default function PortfolioPage() {
 
       {/* 1. HERO Section */}
       <section id="home" className="relative min-h-screen">
-        <BackgroundPaths title="Shaik Mohammed Suhaib" />
+        <EtheralShadow 
+          title="Shaik Mohammed Suhaib"
+          color="rgba(12, 12, 25, 1)"
+          animation={{ scale: 80, speed: 60 }}
+          noise={{ opacity: 0.5, scale: 1.0 }}
+          sizing="fill"
+        />
       </section>
 
       {/* 2. ABOUT Section */}
