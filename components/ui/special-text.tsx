@@ -61,7 +61,7 @@ export function SpecialText({
         }, 10000)
       }
 
-      iteration += 1 / 3
+      iteration += 1
     }, speed)
 
     return () => clearInterval(interval)

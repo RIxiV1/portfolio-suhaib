@@ -51,10 +51,10 @@ export default function PortfolioPage() {
       </section>
 
       {/* Glassmorphic Container for the rest of the content */}
-      <div className="relative space-y-24 pb-24">
+      <div className="relative space-y-32 pb-32">
         
         {/* 2. ABOUT Section */}
-        <section id="about" className="px-4">
+        <section id="about" className="px-4 scroll-mt-32">
           <div className="max-w-5xl mx-auto backdrop-blur-3xl bg-foreground/[0.05] border border-foreground/15 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-violet-500/5 opacity-50 dark:opacity-30" />
             
@@ -104,7 +104,7 @@ export default function PortfolioPage() {
         </section>
 
         {/* 3. SKILLS Section with Lamp */}
-        <section id="skills" className="relative px-4">
+        <section id="skills" className="relative px-4 scroll-mt-32">
           <div className="max-w-6xl mx-auto backdrop-blur-2xl bg-foreground/[0.03] border border-foreground/10 rounded-[2.5rem] py-20 overflow-hidden shadow-inner">
             <h2 className="text-4xl font-bold text-center mb-16">
               <SpecialText inView>Skills & Technologies</SpecialText>
@@ -118,7 +118,7 @@ export default function PortfolioPage() {
         </section>
 
         {/* 4. PROJECTS Section */}
-        <section id="projects" className="px-4">
+        <section id="projects" className="px-4 scroll-mt-32">
           <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.06] border border-foreground/15 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative">
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
               <SpecialText inView>Featured Projects</SpecialText>
@@ -133,10 +133,8 @@ export default function PortfolioPage() {
               <AnimatedTabs />
             </div>
           </div>
-        </section>
-
-        {/* 5. BLOG Section */}
-        <section id="blog" className="px-4">
+        </section        {/* 5. BLOG Section */}
+        <section id="blog" className="px-4 scroll-mt-32">
           <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.06] border border-foreground/15 rounded-[2.5rem] p-12 md:p-16 shadow-2xl">
             <h2 className="text-4xl font-bold text-center mb-16">
               <SpecialText inView>Blog & Research</SpecialText>
@@ -170,7 +168,7 @@ export default function PortfolioPage() {
                   href={blog.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative rounded-2xl border border-foreground/10 bg-foreground/5 backdrop-blur-xl hover:bg-foreground/10 hover:border-cyan-400/30 transition-all duration-500 overflow-hidden"
+                  className="group relative rounded-2xl border border-foreground/10 bg-white/40 dark:bg-foreground/5 p-8 backdrop-blur-xl hover:bg-white/60 dark:hover:bg-foreground/10 hover:border-cyan-400/30 transition-all duration-500 overflow-hidden shadow-xl shadow-black/5 dark:shadow-none"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   <div className="flex items-center justify-between mb-6">
@@ -179,10 +177,10 @@ export default function PortfolioPage() {
                     </span>
                     <span className="text-xs text-muted-foreground font-mono tracking-tighter">{blog.date}</span>
                   </div>
-                  <h3 className="text-xl font-medium text-foreground group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors leading-tight">
+                  <h3 className="text-xl font-bold text-foreground group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors leading-tight">
                     {blog.title}
                   </h3>
-                  <p className="mt-4 text-sm text-muted-foreground leading-relaxed font-light">
+                  <p className="mt-4 text-sm text-slate-600 dark:text-muted-foreground leading-relaxed font-normal">
                     {blog.description}
                   </p>
                   <div className="mt-6 flex items-center gap-2 text-xs font-mono text-cyan-600 dark:text-cyan-400 uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all duration-300">
@@ -193,9 +191,10 @@ export default function PortfolioPage() {
             </div>
           </div>
         </section>
+ion>
 
         {/* 6. CONTACT Section */}
-        <section id="contact" className="px-4">
+        <section id="contact" className="px-4 scroll-mt-32">
           <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.04] border border-foreground/15 rounded-[2.5rem] shadow-2xl relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/5 to-transparent opacity-30" />
             <PulseBeamsDemo />
