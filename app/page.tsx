@@ -15,7 +15,19 @@ import { FileText } from "lucide-react"
 
 export default function PortfolioPage() {
   return (
-    <main className="relative bg-slate-950 text-white overflow-x-hidden cursor-none">
+    <main className="relative min-h-screen text-white overflow-x-hidden cursor-none selection:bg-cyan-500/30">
+      {/* Background Layer - Fixed and Persistent */}
+      <div className="fixed inset-0 -z-50 bg-slate-950">
+        <EtheralShadow 
+          color="rgba(10, 10, 25, 1)"
+          animation={{ scale: 70, speed: 40 }}
+          noise={{ opacity: 0.4, scale: 1.0 }}
+          sizing="fill"
+          title="" // Hide title in the universal background
+          className="opacity-60"
+        />
+      </div>
+
       {/* Custom Cursor - Desktop Only */}
       <Cursor size={60} />
 
@@ -28,195 +40,193 @@ export default function PortfolioPage() {
       </div>
 
       {/* 1. HERO Section */}
-      <section id="home" className="relative min-h-screen">
-        <EtheralShadow 
-          title="Shaik Mohammed Suhaib"
-          color="rgba(12, 12, 25, 1)"
-          animation={{ scale: 80, speed: 60 }}
-          noise={{ opacity: 0.5, scale: 1.0 }}
-          sizing="fill"
-        />
+      <section id="home" className="relative h-screen flex items-center justify-center">
+        <div className="text-center z-10">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mix-blend-difference">
+            Shaik Mohammed Suhaib
+          </h1>
+          <p className="mt-4 text-slate-400 text-lg md:text-xl font-light tracking-widest uppercase">
+            Product Engineering · AI Systems
+          </p>
+        </div>
       </section>
 
-      {/* 2. ABOUT Section */}
-      <section id="about" className="py-24 px-4 bg-slate-950">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
-            <SpecialText inView>About Me</SpecialText>
-          </h2>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <p className="text-lg text-slate-300 leading-relaxed">
-                {`I'm an IT student focused on building AI-powered systems and real-world products.`}
-              </p>
-              <p className="text-slate-400 leading-relaxed">
-                Currently exploring agentic AI, recommendation systems, and web-based AI tools — combining product thinking with engineering to turn ideas into functional, user-focused applications.
-              </p>
-              <div className="flex gap-4 pt-4">
-                <a
-                  href="https://github.com/RIxiV1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-cyan-400 hover:text-cyan-300 transition-colors"
-                >
-                  GitHub
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/shaiksuhaib"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-cyan-400 hover:text-cyan-300 transition-colors"
-                >
-                  LinkedIn
-                </a>
-                <a
-                  href="https://x.com/suhaibX0"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-cyan-400 hover:text-cyan-300 transition-colors"
-                >
-                  Twitter
-                </a>
-              </div>
-            </div>
-            <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 to-violet-500/20 rounded-2xl blur-2xl" />
-              <div className="relative bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-                <div className="flex items-center gap-2 text-sm text-slate-500">
-                  <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
-                  Currently available for opportunities
+      {/* Glassmorphic Container for the rest of the content */}
+      <div className="relative space-y-24 pb-24">
+        
+        {/* 2. ABOUT Section */}
+        <section id="about" className="px-4">
+          <div className="max-w-5xl mx-auto backdrop-blur-3xl bg-white/[0.02] border border-white/10 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-violet-500/5 opacity-50" />
+            
+            <div className="relative z-10">
+              <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
+                <SpecialText inView>About Me</SpecialText>
+              </h2>
+              <div className="grid md:grid-cols-2 gap-16 items-center">
+                <div className="space-y-8">
+                  <p className="text-xl text-slate-200 leading-relaxed font-light">
+                    {`I'm an IT student focused on building AI-powered systems and real-world products.`}
+                  </p>
+                  <p className="text-slate-400 leading-relaxed text-lg">
+                    Currently exploring agentic AI, recommendation systems, and web-based AI tools — combining product thinking with engineering to turn ideas into functional, user-focused applications.
+                  </p>
+                  <div className="flex gap-6 pt-6">
+                    {["GitHub", "LinkedIn", "Twitter"].map((label) => (
+                      <a
+                        key={label}
+                        href={label === "GitHub" ? "https://github.com/RIxiV1" : label === "LinkedIn" ? "https://www.linkedin.com/in/shaiksuhaib" : "https://x.com/suhaibX0"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-cyan-400 hover:text-white transition-all duration-300 border-b border-transparent hover:border-cyan-400 pb-1 font-mono text-sm uppercase tracking-wider"
+                      >
+                        {label}
+                      </a>
+                    ))}
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <p className="text-slate-300"><span className="text-slate-500">Location:</span> Tirupati, India</p>
-                  <p className="text-slate-300"><span className="text-slate-500">Focus:</span> AI Systems, Full Stack</p>
-                  <p className="text-slate-300"><span className="text-slate-500">Email:</span> shaiksuhaib360@gmail.com</p>
+                <div className="relative group/card">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/30 to-violet-500/30 rounded-2xl blur-3xl opacity-20 group-hover/card:opacity-40 transition-opacity duration-500" />
+                  <div className="relative bg-white/[0.03] border border-white/10 backdrop-blur-2xl rounded-3xl p-8 space-y-6 shadow-xl transition-transform duration-500 group-hover/card:-translate-y-2">
+                    <div className="flex items-center gap-3 text-sm text-cyan-400 font-mono">
+                      <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
+                      Status: Open to Work
+                    </div>
+                    <div className="space-y-4">
+                      <p className="text-slate-300 flex justify-between"><span className="text-slate-500 font-mono uppercase text-xs">Location</span> Tirupati, India</p>
+                      <p className="text-slate-300 flex justify-between"><span className="text-slate-500 font-mono uppercase text-xs">Focus</span> AI Systems, Full Stack</p>
+                      <p className="text-slate-300 flex justify-between truncate gap-4"><span className="text-slate-500 font-mono uppercase text-xs shrink-0">Email</span> shaiksuhaib360@gmail.com</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 3. SKILLS Section with Lamp */}
-      <section id="skills">
-        <LampContainer>
-          <div className="text-center mb-8">
-            <h2 className="text-4xl font-bold text-white">
+        {/* 3. SKILLS Section with Lamp */}
+        <section id="skills" className="relative px-4">
+          <div className="max-w-6xl mx-auto backdrop-blur-2xl bg-white/[0.01] border border-white/5 rounded-[2.5rem] py-20 overflow-hidden shadow-inner">
+            <h2 className="text-4xl font-bold text-center mb-16">
               <SpecialText inView>Skills & Technologies</SpecialText>
             </h2>
+            <div className="relative">
+              <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-slate-950/80 to-transparent z-10" />
+              <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-slate-950/80 to-transparent z-10" />
+              <SkillsMarquee />
+            </div>
           </div>
-          <SkillsMarquee />
-        </LampContainer>
-      </section>
+        </section>
 
-      {/* 4. PROJECTS Section */}
-      <section id="projects" className="py-24 px-4 bg-slate-950">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-            <SpecialText inView>Featured Projects</SpecialText>
-          </h2>
-          
-          {/* Quick Preview Cards */}
-          <div className="flex justify-center mb-16">
-            <DisplayCards />
+        {/* 4. PROJECTS Section */}
+        <section id="projects" className="px-4">
+          <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-white/[0.02] border border-white/10 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative">
+            <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
+              <SpecialText inView>Featured Projects</SpecialText>
+            </h2>
+            
+            <div className="flex justify-center mb-20">
+              <DisplayCards />
+            </div>
+
+            <div className="relative">
+              <div className="absolute -inset-10 bg-cyan-500/5 blur-[100px] opacity-20 pointer-events-none" />
+              <AnimatedTabs />
+            </div>
           </div>
+        </section>
 
-          {/* Full Project Explorer */}
-          <AnimatedTabs />
+        {/* 5. BLOG Section */}
+        <section id="blog" className="px-4">
+          <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-white/[0.02] border border-white/10 rounded-[2.5rem] p-12 md:p-16 shadow-2xl">
+            <h2 className="text-4xl font-bold text-center mb-16">
+              <SpecialText inView>Blog & Research</SpecialText>
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Recommendation Systems: The Math Behind Discovery",
+                  description: "Exploring the algorithms that power modern content discovery and personalization.",
+                  date: "Mar 2026",
+                  tag: "AI/ML",
+                  url: "https://medium.com/@shaiksuhaib360"
+                },
+                {
+                  title: "Network Theory: The Science of Connections",
+                  description: "The invisible threads that bind our world through mathematical relationships.",
+                  date: "Sep 2025",
+                  tag: "Math",
+                  url: "https://medium.com/@shaiksuhaib360"
+                },
+                {
+                  title: "Chaos Theory & The Butterfly Effect",
+                  description: "Why small changes can lead to dramatically different and unpredictable outcomes.",
+                  date: "Sep 2025",
+                  tag: "Science",
+                  url: "https://medium.com/@shaiksuhaib360"
+                }
+              ].map((blog) => (
+                <a
+                  key={blog.title}
+                  href={blog.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative rounded-2xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-xl hover:bg-white/[0.06] hover:border-cyan-400/30 transition-all duration-500 overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-cyan-400 border border-cyan-400/30 rounded-full px-3 py-1 uppercase">
+                      {blog.tag}
+                    </span>
+                    <span className="text-xs text-slate-500 font-mono tracking-tighter">{blog.date}</span>
+                  </div>
+                  <h3 className="text-xl font-medium text-white group-hover:text-cyan-400 transition-colors leading-tight">
+                    {blog.title}
+                  </h3>
+                  <p className="mt-4 text-sm text-slate-400 leading-relaxed font-light">
+                    {blog.description}
+                  </p>
+                  <div className="mt-6 flex items-center gap-2 text-xs font-mono text-cyan-400 uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all duration-300">
+                    Read Now <span className="text-lg">→</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 6. CONTACT Section */}
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 bg-white/[0.01] backdrop-blur-sm">
+            <PulseBeamsDemo />
+          </div>
         </div>
-      </section>
 
-      {/* 5. BLOG Section */}
-      <section id="blog" className="py-24 px-4 bg-slate-900/50">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12">
-            <SpecialText inView>Blog</SpecialText>
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                title: "Recommendation Systems: The Math Behind Netflix, Spotify & Social Media",
-                description: "Why your 'Recommended for You' is actually a giant math problem. Exploring the algorithms that power modern content discovery.",
-                date: "Mar 2026",
-                tag: "AI/ML",
-                url: "https://medium.com/@shaiksuhaib360"
-              },
-              {
-                title: "Network Theory: How Everything Connects",
-                description: "The invisible threads that bind our world. Understanding the mathematics of connections and relationships.",
-                date: "Sep 2025",
-                tag: "Math",
-                url: "https://medium.com/@shaiksuhaib360"
-              },
-              {
-                title: "Why Chaos Theory Explains the Butterfly Effect",
-                description: "Diving into chaos theory and understanding why small changes can lead to dramatically different outcomes.",
-                date: "Sep 2025",
-                tag: "Science",
-                url: "https://medium.com/@shaiksuhaib360"
-              }
-            ].map((blog) => (
-              <a
-                key={blog.title}
-                href={blog.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group rounded-xl border border-slate-800 bg-slate-900 p-6 hover:border-cyan-500/50 hover:bg-slate-800/50 transition-all duration-300"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-mono text-cyan-400 border border-cyan-400/30 rounded-full px-2 py-0.5">
-                    {blog.tag}
-                  </span>
-                  <span className="text-xs text-slate-500">{blog.date}</span>
-                </div>
-                <h3 className="text-lg font-semibold text-white group-hover:text-cyan-400 transition-colors leading-snug">
-                  {blog.title}
-                </h3>
-                <p className="mt-3 text-sm text-slate-400 leading-relaxed">
-                  {blog.description}
-                </p>
-                <div className="mt-4 text-sm text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                  Read on Medium →
-                </div>
-              </a>
-            ))}
-          </div>
-          <div className="text-center mt-10">
+        {/* 7. RESUME Section */}
+        <section id="resume" className="flex flex-col items-center justify-center py-20 translate-y-[-50px]">
+          <div className="relative group">
+            <div className="absolute -inset-4 bg-cyan-400/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <a
-              href="https://medium.com/@shaiksuhaib360"
+              href="https://drive.google.com/file/d/1ZaHawnbNC8nFV-uir2fsXjMqfoUzO4YJ/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-cyan-400 hover:text-cyan-300 transition-colors text-sm"
+              className="relative block"
             >
-              View all posts on Medium →
+              <InteractiveHoverButton text="Download Resume" />
             </a>
           </div>
-        </div>
-      </section>
-
-      {/* 6. CONTACT Section */}
-      <PulseBeamsDemo />
-
-      {/* 7. RESUME Section */}
-      <section id="resume" className="py-24 flex flex-col items-center justify-center bg-slate-950">
-        <a
-          href="https://drive.google.com/file/d/1ZaHawnbNC8nFV-uir2fsXjMqfoUzO4YJ/view?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <InteractiveHoverButton text="Download Resume" />
-        </a>
-        <p className="text-slate-500 text-sm mt-4 flex items-center gap-2">
-          <FileText className="w-4 h-4" />
-          PDF format
-        </p>
-      </section>
+          <p className="text-slate-500 text-[10px] mt-6 flex items-center gap-2 font-mono uppercase tracking-[0.3em]">
+            <FileText className="w-3 h-3 text-cyan-400" />
+            Format: PDF 2026
+          </p>
+        </section>
+      </div>
 
       {/* Footer */}
-      <footer className="w-full py-8 bg-slate-950 border-t border-slate-800">
+      <footer className="w-full py-12 backdrop-blur-3xl border-t border-white/5 bg-black/20">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-slate-500">
-            © {new Date().getFullYear()} Shaik Mohammed Suhaib. All rights reserved.
+          <p className="text-slate-500 font-mono text-xs tracking-[0.2em] uppercase">
+            © {new Date().getFullYear()} Shaik Mohammed Suhaib · Built for the Future
           </p>
         </div>
       </footer>
