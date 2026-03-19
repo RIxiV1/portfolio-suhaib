@@ -133,7 +133,9 @@ export default function PortfolioPage() {
               <AnimatedTabs />
             </div>
           </div>
-        </section        {/* 5. BLOG Section */}
+        </section>
+
+        {/* 5. BLOG Section */}
         <section id="blog" className="px-4 scroll-mt-32">
           <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.06] border border-foreground/15 rounded-[2.5rem] p-12 md:p-16 shadow-2xl">
             <h2 className="text-4xl font-bold text-center mb-16">
@@ -191,7 +193,6 @@ export default function PortfolioPage() {
             </div>
           </div>
         </section>
-ion>
 
         {/* 6. CONTACT Section */}
         <section id="contact" className="px-4 scroll-mt-32">
