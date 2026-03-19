@@ -15,9 +15,9 @@ import { FileText } from "lucide-react"
 
 export default function PortfolioPage() {
   return (
-    <main className="relative min-h-screen text-white overflow-x-hidden cursor-none selection:bg-cyan-500/30">
+    <main className="relative min-h-screen text-foreground overflow-x-hidden cursor-none selection:bg-cyan-500/30 transition-colors duration-500">
       {/* Background Layer - Fixed and Persistent */}
-      <div className="fixed inset-0 -z-50 bg-slate-950">
+      <div className="fixed inset-0 -z-50 bg-background transition-colors duration-500">
         <EtheralShadow 
           color="rgba(10, 10, 25, 1)"
           animation={{ scale: 70, speed: 40 }}
@@ -42,7 +42,7 @@ export default function PortfolioPage() {
       {/* 1. HERO Section */}
       <section id="home" className="relative h-screen flex items-center justify-center">
         <div className="text-center z-10">
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mix-blend-difference">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-foreground">
             Shaik Mohammed Suhaib
           </h1>
           <p className="mt-4 text-slate-400 text-lg md:text-xl font-light tracking-widest uppercase">
@@ -56,8 +56,8 @@ export default function PortfolioPage() {
         
         {/* 2. ABOUT Section */}
         <section id="about" className="px-4">
-          <div className="max-w-5xl mx-auto backdrop-blur-3xl bg-white/[0.02] border border-white/10 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-violet-500/5 opacity-50" />
+          <div className="max-w-5xl mx-auto backdrop-blur-3xl bg-foreground/[0.02] border border-foreground/10 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-violet-500/5 opacity-50 dark:opacity-20" />
             
             <div className="relative z-10">
               <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
@@ -65,10 +65,10 @@ export default function PortfolioPage() {
               </h2>
               <div className="grid md:grid-cols-2 gap-16 items-center">
                 <div className="space-y-8">
-                  <p className="text-xl text-slate-200 leading-relaxed font-light">
+                  <p className="text-xl text-foreground font-light leading-relaxed">
                     {`I'm an IT student focused on building AI-powered systems and real-world products.`}
                   </p>
-                  <p className="text-slate-400 leading-relaxed text-lg">
+                  <p className="text-muted-foreground leading-relaxed text-lg">
                     Currently exploring agentic AI, recommendation systems, and web-based AI tools — combining product thinking with engineering to turn ideas into functional, user-focused applications.
                   </p>
                   <div className="flex gap-6 pt-6">
@@ -87,15 +87,15 @@ export default function PortfolioPage() {
                 </div>
                 <div className="relative group/card">
                   <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/30 to-violet-500/30 rounded-2xl blur-3xl opacity-20 group-hover/card:opacity-40 transition-opacity duration-500" />
-                  <div className="relative bg-white/[0.03] border border-white/10 backdrop-blur-2xl rounded-3xl p-8 space-y-6 shadow-xl transition-transform duration-500 group-hover/card:-translate-y-2">
-                    <div className="flex items-center gap-3 text-sm text-cyan-400 font-mono">
-                      <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
+                  <div className="relative bg-foreground/5 border border-foreground/10 backdrop-blur-2xl rounded-3xl p-8 space-y-6 shadow-xl transition-transform duration-500 group-hover/card:-translate-y-2">
+                    <div className="flex items-center gap-3 text-sm text-cyan-500 dark:text-cyan-400 font-mono">
+                      <span className="w-2 h-2 bg-cyan-500 dark:bg-cyan-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
                       Status: Open to Work
                     </div>
                     <div className="space-y-4">
-                      <p className="text-slate-300 flex justify-between"><span className="text-slate-500 font-mono uppercase text-xs">Location</span> Tirupati, India</p>
-                      <p className="text-slate-300 flex justify-between"><span className="text-slate-500 font-mono uppercase text-xs">Focus</span> AI Systems, Full Stack</p>
-                      <p className="text-slate-300 flex justify-between truncate gap-4"><span className="text-slate-500 font-mono uppercase text-xs shrink-0">Email</span> shaiksuhaib360@gmail.com</p>
+                      <p className="text-foreground/80 flex justify-between"><span className="text-muted-foreground font-mono uppercase text-xs">Location</span> Tirupati, India</p>
+                      <p className="text-foreground/80 flex justify-between"><span className="text-muted-foreground font-mono uppercase text-xs">Focus</span> AI Systems, Full Stack</p>
+                      <p className="text-foreground/80 flex justify-between truncate gap-4"><span className="text-muted-foreground font-mono uppercase text-xs shrink-0">Email</span> shaiksuhaib360@gmail.com</p>
                     </div>
                   </div>
                 </div>
@@ -106,13 +106,13 @@ export default function PortfolioPage() {
 
         {/* 3. SKILLS Section with Lamp */}
         <section id="skills" className="relative px-4">
-          <div className="max-w-6xl mx-auto backdrop-blur-2xl bg-white/[0.01] border border-white/5 rounded-[2.5rem] py-20 overflow-hidden shadow-inner">
+          <div className="max-w-6xl mx-auto backdrop-blur-2xl bg-foreground/[0.01] border border-foreground/5 rounded-[2.5rem] py-20 overflow-hidden shadow-inner">
             <h2 className="text-4xl font-bold text-center mb-16">
               <SpecialText inView>Skills & Technologies</SpecialText>
             </h2>
             <div className="relative">
-              <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-slate-950/80 to-transparent z-10" />
-              <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-slate-950/80 to-transparent z-10" />
+              <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-background/80 to-transparent z-10" />
+              <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-background/80 to-transparent z-10" />
               <SkillsMarquee />
             </div>
           </div>
@@ -120,7 +120,7 @@ export default function PortfolioPage() {
 
         {/* 4. PROJECTS Section */}
         <section id="projects" className="px-4">
-          <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-white/[0.02] border border-white/10 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative">
+          <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.02] border border-foreground/10 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative">
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
               <SpecialText inView>Featured Projects</SpecialText>
             </h2>
@@ -138,7 +138,7 @@ export default function PortfolioPage() {
 
         {/* 5. BLOG Section */}
         <section id="blog" className="px-4">
-          <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-white/[0.02] border border-white/10 rounded-[2.5rem] p-12 md:p-16 shadow-2xl">
+          <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.02] border border-foreground/10 rounded-[2.5rem] p-12 md:p-16 shadow-2xl">
             <h2 className="text-4xl font-bold text-center mb-16">
               <SpecialText inView>Blog & Research</SpecialText>
             </h2>
@@ -171,22 +171,22 @@ export default function PortfolioPage() {
                   href={blog.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative rounded-2xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-xl hover:bg-white/[0.06] hover:border-cyan-400/30 transition-all duration-500 overflow-hidden"
+                  className="group relative rounded-2xl border border-foreground/10 bg-foreground/5 backdrop-blur-xl hover:bg-foreground/10 hover:border-cyan-400/30 transition-all duration-500 overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   <div className="flex items-center justify-between mb-6">
-                    <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-cyan-400 border border-cyan-400/30 rounded-full px-3 py-1 uppercase">
+                    <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-cyan-600 dark:text-cyan-400 border border-cyan-400/30 rounded-full px-3 py-1 uppercase">
                       {blog.tag}
                     </span>
-                    <span className="text-xs text-slate-500 font-mono tracking-tighter">{blog.date}</span>
+                    <span className="text-xs text-muted-foreground font-mono tracking-tighter">{blog.date}</span>
                   </div>
-                  <h3 className="text-xl font-medium text-white group-hover:text-cyan-400 transition-colors leading-tight">
+                  <h3 className="text-xl font-medium text-foreground group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors leading-tight">
                     {blog.title}
                   </h3>
-                  <p className="mt-4 text-sm text-slate-400 leading-relaxed font-light">
+                  <p className="mt-4 text-sm text-muted-foreground leading-relaxed font-light">
                     {blog.description}
                   </p>
-                  <div className="mt-6 flex items-center gap-2 text-xs font-mono text-cyan-400 uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all duration-300">
+                  <div className="mt-6 flex items-center gap-2 text-xs font-mono text-cyan-600 dark:text-cyan-400 uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all duration-300">
                     Read Now <span className="text-lg">→</span>
                   </div>
                 </a>
@@ -223,9 +223,9 @@ export default function PortfolioPage() {
       </div>
 
       {/* Footer */}
-      <footer className="w-full py-12 backdrop-blur-3xl border-t border-white/5 bg-black/20">
+      <footer className="w-full py-12 backdrop-blur-3xl border-t border-foreground/5 bg-foreground/5 dark:bg-black/20">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-slate-500 font-mono text-xs tracking-[0.2em] uppercase">
+          <p className="text-muted-foreground font-mono text-xs tracking-[0.2em] uppercase">
             © {new Date().getFullYear()} Shaik Mohammed Suhaib · Built for the Future
           </p>
         </div>

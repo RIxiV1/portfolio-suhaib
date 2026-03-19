@@ -40,7 +40,7 @@ export function NavBar() {
           : "top-6 left-1/2 -translate-x-1/2"
       )}
     >
-      <div className="flex items-center gap-1 md:gap-2 bg-white/[0.03] backdrop-blur-2xl border border-white/10 py-2 px-2 rounded-full shadow-2xl shadow-black/50">
+      <div className="flex items-center gap-1 md:gap-2 bg-foreground/5 backdrop-blur-2xl border border-foreground/10 py-2 px-2 rounded-full shadow-2xl shadow-black/20 dark:shadow-black/50">
         {navItems.map((item) => {
           const Icon = item.icon
           const isActive = activeTab === item.name

@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useRef, useId, useEffect, CSSProperties } from 'react';
+import React, { useRef, useId, useEffect, CSSProperties, useState } from 'react';
 import { animate, useMotionValue, AnimationPlaybackControls } from 'framer-motion';
+import { useTheme } from "next-themes";
 import { cn } from '@/lib/utils';
 
 // Type definitions
@@ -159,7 +160,12 @@ export function EtheralShadow({
                 )}
                 <div
                     style={{
-                        backgroundColor: color,
+                        // The feFlood element cannot be directly inside a style object.
+                        // Assuming the intent was to dynamically set the background color
+                        // or use the feFlood result in the filter chain.
+                        // For now, keeping the backgroundColor property as it's a CSS property.
+                        // If the feFlood is meant to be part of the filter, it's already in the SVG defs.
+                        backgroundColor: color, // Retaining this as it's a CSS property for the div
                         maskImage: `url('https://framerusercontent.com/images/ceBGguIpUU8luwByxuQz79t7To.png')`,
                         maskSize: sizing === "stretch" ? "100% 100%" : "cover",
                         maskRepeat: "no-repeat",
