@@ -29,6 +29,7 @@ export function SpecialText({
   
   const [displayText, setDisplayText] = useState("")
   const [isAnimating, setIsAnimating] = useState(false)
+  const [triggerCount, setTriggerCount] = useState(0)
 
   const scramble = useCallback(() => {
     if (isAnimating) return
@@ -53,6 +54,11 @@ export function SpecialText({
       if (iteration >= originalText.length) {
         clearInterval(interval)
         setIsAnimating(false)
+        
+        // After appearing, wait 3 seconds and then trigger again
+        setTimeout(() => {
+          setTriggerCount(prev => prev + 1)
+        }, 3000)
       }
 
       iteration += 1 / 3
@@ -63,10 +69,10 @@ export function SpecialText({
 
   useEffect(() => {
     if (isInView) {
-      const timer = setTimeout(scramble, delay)
+      const timer = setTimeout(scramble, triggerCount === 0 ? delay : 0)
       return () => clearTimeout(timer)
     }
-  }, [isInView, scramble, delay])
+  }, [isInView, scramble, delay, triggerCount])
 
   return (
     <span ref={containerRef} className={cn("font-sans", className)}>
