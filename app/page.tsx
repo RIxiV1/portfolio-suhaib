@@ -2,6 +2,10 @@
 
 import { NavBar } from "@/components/ui/tubelight-navbar"
 import { EtheralShadow } from "@/components/ui/etheral-shadow"
+import { LampContainer } from "@/components/ui/lamp"
+import { SkillsMarquee } from "@/components/ui/marquee"
+import { DisplayCards } from "@/components/ui/display-cards"
+import { PulseBeamsDemo } from "@/components/ui/pulse-beams"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
 import { Cursor } from "@/components/ui/inverted-cursor"
 import { SpecialText } from "@/components/ui/special-text"
