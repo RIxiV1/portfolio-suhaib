@@ -55,10 +55,10 @@ export function SpecialText({
         clearInterval(interval)
         setIsAnimating(false)
         
-        // After appearing, wait 6 seconds and then trigger again
+        // After appearing, wait 10 seconds and then trigger again
         setTimeout(() => {
           setTriggerCount(prev => prev + 1)
-        }, 6000)
+        }, 10000)
       }
 
       iteration += 1 / 3
