@@ -1,8 +1,8 @@
-# 🚀 Shaik Mohammed Suhaib | Portfolio v3
+# 🚀 Shaik Mohammed Suhaib | Portfolio
 
 A high-performance, premium developer portfolio built with the latest web technologies. This project focuses on a seamless, interactive user experience with a focus on AI systems and product engineering.
 
-![Portfolio Preview](public/placeholder-logo.png) <!-- Replace with actual screenshot if available -->
+![Portfolio Preview](public/portfolio-screenshot.png) 
 
 ## ✨ Features
 
@@ -19,50 +19,12 @@ A high-performance, premium developer portfolio built with the latest web techno
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Next.js 16 (Canary/Pre-release)](https://nextjs.org/)
+- **Framework**: [Next.js 16](https://nextjs.org/)
 - **Library**: [React 19](https://react.dev/)
 - **Styling**: [Tailwind CSS 4.2](https://tailwindcss.com/)
 - **Animation**: [Framer Motion](https://www.framer.com/motion/) & [Motion](https://motion.dev/)
 - **Components**: [Radix UI](https://www.radix-ui.com/)
 - **Icons**: [Lucide React](https://lucide.dev/)
-- **Forms & Validation**: [React Hook Form](https://react-hook-form.com/) & [Zod](https://zod.dev/)
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18+ 
-- npm / pnpm / yarn
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/RIxiV1/portfolio-suhaib.git
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   # or
-   pnpm install
-   ```
-3. Run the development server:
-   ```bash
-   npm run dev
-   ```
-4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## 📁 Project Structure
-
-```text
-├── app/              # Next.js App Router (Page, Layout, Globals)
-├── components/       # UI Components (Radix, Shadcn, Custom)
-├── hooks/            # Custom React hooks
-├── lib/              # Utility functions and shared logic
-├── public/           # Static assets and images
-├── styles/           # Global styles and Tailwind config
-└── package.json      # Project dependencies and scripts
-```
 
 ## 📬 Contact
 
