@@ -18,7 +18,7 @@ const CHARS = "_!X$0-+*#"
 export function SpecialText({
   children,
   speed = 15,
-  delay = 0,
+  delay = 1000,
   inView: inViewProp,
   once = true,
   className,
@@ -55,10 +55,10 @@ export function SpecialText({
         clearInterval(interval)
         setIsAnimating(false)
         
-        // After appearing, wait 3 seconds and then trigger again
+        // After appearing, wait 6 seconds and then trigger again
         setTimeout(() => {
           setTriggerCount(prev => prev + 1)
-        }, 3000)
+        }, 6000)
       }
 
       iteration += 1 / 3
