@@ -126,19 +126,19 @@ const socialLinks = [
 
 export function PulseBeamsDemo() {
   return (
-    <section id="contact" className="relative w-full min-h-screen flex items-center justify-center bg-slate-950 overflow-hidden py-24">
+    <div className="relative w-full flex items-center justify-center overflow-hidden py-16 md:py-24">
       <PulseBeams 
-        className="w-[500px] h-[500px]"
+        className="w-[300px] h-[300px] md:w-[500px] md:h-[500px]"
         gradientColors={{ start: "#18CCFC", middle: "#6344F5", end: "#AE48FF" }}
       >
-        <div className="text-center space-y-6">
-          <h2 className="text-4xl md:text-5xl font-bold text-white">
+        <div className="text-center space-y-6 px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground">
             <SpecialText inView>Get In Touch</SpecialText>
           </h2>
-          <p className="text-slate-400">
+          <p className="text-muted-foreground font-mono text-sm tracking-tight truncate max-w-[280px] md:max-w-none">
             shaiksuhaib360@gmail.com
           </p>
-          <div className="flex justify-center gap-6">
+          <div className="flex justify-center gap-4 md:gap-6">
             {socialLinks.map((link) => {
               const Icon = link.icon
               return (
@@ -147,19 +147,21 @@ export function PulseBeamsDemo() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-12 h-12 rounded-full bg-slate-900 border border-slate-800 text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all"
+                  className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-foreground/5 border border-foreground/10 text-muted-foreground hover:text-cyan-500 dark:hover:text-cyan-400 hover:border-cyan-500/50 transition-all duration-300"
                   aria-label={link.name}
                 >
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-4 h-4 md:w-5 md:h-5" />
                 </a>
               )
             })}
           </div>
-          <a href="mailto:shaiksuhaib360@gmail.com">
-            <InteractiveHoverButton text="Send Email" />
-          </a>
+          <div className="pt-4">
+            <a href="mailto:shaiksuhaib360@gmail.com">
+              <InteractiveHoverButton text="Send Email" />
+            </a>
+          </div>
         </div>
       </PulseBeams>
-    </section>
+    </div>
   )
 }

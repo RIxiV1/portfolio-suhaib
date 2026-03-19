@@ -19,7 +19,6 @@ export default function PortfolioPage() {
       {/* Background Layer - Fixed and Persistent */}
       <div className="fixed inset-0 -z-50 bg-background transition-colors duration-500">
         <EtheralShadow 
-          color="rgba(10, 10, 25, 1)"
           animation={{ scale: 70, speed: 40 }}
           noise={{ opacity: 0.4, scale: 1.0 }}
           sizing="fill"
@@ -56,8 +55,8 @@ export default function PortfolioPage() {
         
         {/* 2. ABOUT Section */}
         <section id="about" className="px-4">
-          <div className="max-w-5xl mx-auto backdrop-blur-3xl bg-foreground/[0.02] border border-foreground/10 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-violet-500/5 opacity-50 dark:opacity-20" />
+          <div className="max-w-5xl mx-auto backdrop-blur-3xl bg-foreground/[0.05] border border-foreground/15 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-violet-500/5 opacity-50 dark:opacity-30" />
             
             <div className="relative z-10">
               <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
@@ -87,7 +86,7 @@ export default function PortfolioPage() {
                 </div>
                 <div className="relative group/card">
                   <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/30 to-violet-500/30 rounded-2xl blur-3xl opacity-20 group-hover/card:opacity-40 transition-opacity duration-500" />
-                  <div className="relative bg-foreground/5 border border-foreground/10 backdrop-blur-2xl rounded-3xl p-8 space-y-6 shadow-xl transition-transform duration-500 group-hover/card:-translate-y-2">
+                  <div className="relative bg-foreground/8 border border-foreground/15 backdrop-blur-2xl rounded-3xl p-8 space-y-6 shadow-xl transition-transform duration-500 group-hover/card:-translate-y-2">
                     <div className="flex items-center gap-3 text-sm text-cyan-500 dark:text-cyan-400 font-mono">
                       <span className="w-2 h-2 bg-cyan-500 dark:bg-cyan-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
                       Status: Open to Work
@@ -106,7 +105,7 @@ export default function PortfolioPage() {
 
         {/* 3. SKILLS Section with Lamp */}
         <section id="skills" className="relative px-4">
-          <div className="max-w-6xl mx-auto backdrop-blur-2xl bg-foreground/[0.01] border border-foreground/5 rounded-[2.5rem] py-20 overflow-hidden shadow-inner">
+          <div className="max-w-6xl mx-auto backdrop-blur-2xl bg-foreground/[0.03] border border-foreground/10 rounded-[2.5rem] py-20 overflow-hidden shadow-inner">
             <h2 className="text-4xl font-bold text-center mb-16">
               <SpecialText inView>Skills & Technologies</SpecialText>
             </h2>
@@ -120,7 +119,7 @@ export default function PortfolioPage() {
 
         {/* 4. PROJECTS Section */}
         <section id="projects" className="px-4">
-          <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.02] border border-foreground/10 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative">
+          <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.06] border border-foreground/15 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative">
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
               <SpecialText inView>Featured Projects</SpecialText>
             </h2>
@@ -138,7 +137,7 @@ export default function PortfolioPage() {
 
         {/* 5. BLOG Section */}
         <section id="blog" className="px-4">
-          <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.02] border border-foreground/10 rounded-[2.5rem] p-12 md:p-16 shadow-2xl">
+          <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.06] border border-foreground/15 rounded-[2.5rem] p-12 md:p-16 shadow-2xl">
             <h2 className="text-4xl font-bold text-center mb-16">
               <SpecialText inView>Blog & Research</SpecialText>
             </h2>
@@ -196,11 +195,12 @@ export default function PortfolioPage() {
         </section>
 
         {/* 6. CONTACT Section */}
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 bg-white/[0.01] backdrop-blur-sm">
+        <section id="contact" className="px-4">
+          <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.04] border border-foreground/15 rounded-[2.5rem] shadow-2xl relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/5 to-transparent opacity-30" />
             <PulseBeamsDemo />
           </div>
-        </div>
+        </section>
 
         {/* 7. RESUME Section */}
         <section id="resume" className="flex flex-col items-center justify-center py-20 translate-y-[-50px]">

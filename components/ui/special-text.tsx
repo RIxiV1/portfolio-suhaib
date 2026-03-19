@@ -17,7 +17,7 @@ const CHARS = "_!X$0-+*#"
 
 export function SpecialText({
   children,
-  speed = 15,
+  speed = 10,
   delay = 1000,
   inView: inViewProp,
   once = true,

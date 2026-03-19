@@ -59,18 +59,24 @@ const useInstanceId = (): string => {
 
 export function EtheralShadow({
     sizing = 'fill',
-    color = 'rgba(128, 128, 128, 1)',
+    color,
     animation,
     noise,
     style,
     className,
-    title = "Etheral Shadows"
+    title = ""
 }: ShadowOverlayProps) {
+    const { theme } = useTheme();
+    const [mounted, setMounted] = useState(false);
     const id = useInstanceId();
     const animationEnabled = animation && animation.scale > 0;
     const feColorMatrixRef = useRef<SVGFEColorMatrixElement>(null);
     const hueRotateMotionValue = useMotionValue(180);
     const hueRotateAnimation = useRef<AnimationPlaybackControls | null>(null);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const displacementScale = animation ? mapRange(animation.scale, 1, 100, 20, 100) : 0;
     const animationDuration = animation ? mapRange(animation.speed, 1, 100, 1000, 50) : 1;
@@ -102,6 +108,9 @@ export function EtheralShadow({
             };
         }
     }, [animationEnabled, animationDuration, hueRotateMotionValue]);
+
+    // Dynamic color based on theme
+    const resolvedColor = color || (mounted && theme === 'light' ? 'rgba(100, 150, 255, 0.4)' : 'rgba(10, 10, 25, 1)');
 
     return (
         <div
@@ -160,36 +169,34 @@ export function EtheralShadow({
                 )}
                 <div
                     style={{
-                        // The feFlood element cannot be directly inside a style object.
-                        // Assuming the intent was to dynamically set the background color
-                        // or use the feFlood result in the filter chain.
-                        // For now, keeping the backgroundColor property as it's a CSS property.
-                        // If the feFlood is meant to be part of the filter, it's already in the SVG defs.
-                        backgroundColor: color, // Retaining this as it's a CSS property for the div
+                        backgroundColor: resolvedColor,
                         maskImage: `url('https://framerusercontent.com/images/ceBGguIpUU8luwByxuQz79t7To.png')`,
                         maskSize: sizing === "stretch" ? "100% 100%" : "cover",
                         maskRepeat: "no-repeat",
                         maskPosition: "center",
                         width: "100%",
-                        height: "100%"
+                        height: "100%",
+                        transition: "background-color 1s ease-in-out"
                     }}
                 />
             </div>
 
-            <div
-                style={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    textAlign: "center",
-                    zIndex: 10
-                }}
-            >
-                <h1 className="md:text-7xl text-6xl lg:text-9xl font-bold text-center text-white relative z-20 tracking-tighter mix-blend-difference">
-                    {title}
-                </h1>
-            </div>
+            {title && (
+                <div
+                    style={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        textAlign: "center",
+                        zIndex: 10
+                    }}
+                >
+                    <h1 className="md:text-7xl text-6xl lg:text-9xl font-bold text-center text-foreground relative z-20 tracking-tighter">
+                        {title}
+                    </h1>
+                </div>
+            )}
 
             {noise && noise.opacity > 0 && (
                 <div
@@ -199,8 +206,9 @@ export function EtheralShadow({
                         backgroundImage: `url("https://framerusercontent.com/images/g0QcWrxr87K0ufOxIUFBakwYA8.png")`,
                         backgroundSize: noise.scale * 200,
                         backgroundRepeat: "repeat",
-                        opacity: noise.opacity / 2,
-                        pointerEvents: "none"
+                        opacity: theme === 'light' ? noise.opacity / 4 : noise.opacity / 2,
+                        pointerEvents: "none",
+                        transition: "opacity 1s ease-in-out"
                     }}
                 />
             )}
