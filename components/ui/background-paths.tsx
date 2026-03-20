@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
 
 function FloatingPaths({ position }: { position: number }) {

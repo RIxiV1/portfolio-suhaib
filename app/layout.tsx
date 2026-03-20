@@ -11,6 +11,29 @@ export const metadata: Metadata = {
   title: 'Shaik Mohammed Suhaib | Full Stack Developer',
   description: 'Personal portfolio of Shaik Mohammed Suhaib - Full Stack Developer focused on AI-powered systems, agentic AI, and building intelligent products.',
   generator: 'v0.app',
+  metadataBase: new URL('https://shaiksuhaib.com'), // Replace with actual domain if known
+  openGraph: {
+    title: 'Shaik Mohammed Suhaib | Full Stack Developer',
+    description: 'Personal portfolio of Shaik Mohammed Suhaib - Full Stack Developer focused on AI-powered systems, agentic AI, and building intelligent products.',
+    url: 'https://shaiksuhaib.com',
+    siteName: 'Shaik Mohammed Suhaib Portfolio',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Shaik Mohammed Suhaib | Full Stack Developer',
+    description: 'Personal portfolio of Shaik Mohammed Suhaib - Full Stack Developer focused on AI-powered systems, agentic AI, and building intelligent products.',
+    images: ['/og-image.png'],
+    creator: '@suhaibX0',
+  },
   icons: {
     icon: [
       {

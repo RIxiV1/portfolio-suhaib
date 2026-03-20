@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import { Home, User, Briefcase, Code, BookOpen, Mail, type LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -14,6 +14,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { name: "Home", icon: Home, href: "#home" },
   { name: "About", icon: User, href: "#about" },
+  { name: "Experience", icon: Briefcase, href: "#experience" },
   { name: "Skills", icon: Code, href: "#skills" },
   { name: "Projects", icon: Briefcase, href: "#projects" },
   { name: "Blog", icon: BookOpen, href: "#blog" },

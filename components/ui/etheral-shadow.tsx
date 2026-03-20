@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useId, useEffect, CSSProperties, useState } from 'react';
-import { animate, useMotionValue, AnimationPlaybackControls } from 'framer-motion';
+import { animate, useMotionValue, AnimationPlaybackControls, useInView, useReducedMotion } from 'motion/react';
 import { useTheme } from "next-themes";
 import { cn } from '@/lib/utils';
 
@@ -66,6 +66,10 @@ export function EtheralShadow({
     className,
     title = ""
 }: ShadowOverlayProps) {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const isInView = useInView(containerRef, { amount: 0.1 });
+    const shouldReduceMotion = useReducedMotion();
+    
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
     const id = useInstanceId();
@@ -82,7 +86,7 @@ export function EtheralShadow({
     const animationDuration = animation ? mapRange(animation.speed, 1, 100, 1000, 50) : 1;
 
     useEffect(() => {
-        if (feColorMatrixRef.current && animationEnabled) {
+        if (feColorMatrixRef.current && animationEnabled && isInView && !shouldReduceMotion) {
             if (hueRotateAnimation.current) {
                 hueRotateAnimation.current.stop();
             }
@@ -106,14 +110,19 @@ export function EtheralShadow({
                     hueRotateAnimation.current.stop();
                 }
             };
+        } else {
+            if (hueRotateAnimation.current) {
+                hueRotateAnimation.current.stop();
+            }
         }
-    }, [animationEnabled, animationDuration, hueRotateMotionValue]);
+    }, [animationEnabled, animationDuration, hueRotateMotionValue, isInView, shouldReduceMotion]);
 
     // Dynamic color based on theme
-    const resolvedColor = color || (mounted && theme === 'light' ? 'rgba(100, 150, 255, 0.4)' : 'rgba(10, 10, 25, 1)');
+    const resolvedColor = color || (mounted && theme === 'light' ? 'rgba(100, 150, 255, 0.4)' : 'rgba(5, 5, 20, 0.95)');
 
     return (
         <div
+            ref={containerRef}
             className={cn("w-full h-full min-h-screen", className)}
             style={{
                 overflow: "hidden",

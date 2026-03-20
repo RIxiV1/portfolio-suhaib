@@ -11,19 +11,20 @@ import { Cursor } from "@/components/ui/inverted-cursor"
 import { SpecialText } from "@/components/ui/special-text"
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
 import { AnimatedTabs } from "@/components/ui/animated-tabs"
-import { FileText } from "lucide-react"
+import { FileText, GraduationCap, Briefcase } from "lucide-react"
+import { ContactForm } from "@/components/ui/contact-form"
 
 export default function PortfolioPage() {
   return (
-    <main className="relative min-h-screen text-foreground overflow-x-hidden cursor-none selection:bg-cyan-500/30 transition-colors duration-500">
+    <main className="relative min-h-screen text-foreground overflow-x-hidden transition-colors duration-500">
       {/* Background Layer - Fixed and Persistent */}
       <div className="fixed inset-0 -z-50 bg-background transition-colors duration-500">
         <EtheralShadow 
           animation={{ scale: 70, speed: 40 }}
-          noise={{ opacity: 0.4, scale: 1.0 }}
+          noise={{ opacity: 0.3, scale: 1.0 }}
           sizing="fill"
           title="" // Hide title in the universal background
-          className="opacity-60"
+          className="opacity-40"
         />
       </div>
 
@@ -40,12 +41,14 @@ export default function PortfolioPage() {
 
       {/* 1. HERO Section */}
       <section id="home" className="relative h-screen flex items-center justify-center">
-        <div className="text-center z-10">
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-foreground">
-            Shaik Mohammed Suhaib
-          </h1>
-          <p className="mt-4 text-slate-400 text-lg md:text-xl font-light tracking-widest uppercase">
-            Product Engineering · AI Systems
+        <div className="text-center z-10 space-y-6">
+          <div className="relative inline-block">
+          <h1 className="text-7xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter leading-none bg-clip-text text-transparent bg-gradient-to-b from-foreground via-foreground/90 to-foreground/40 drop-shadow-2xl cursor-default">
+              Shaik Mohammed Suhaib
+            </h1>
+          </div>
+          <p className="text-slate-400 text-lg md:text-xl font-light tracking-[0.4em] uppercase opacity-80">
+            Product Engineering <span className="text-cyan-500/50 mx-2">·</span> AI Systems
           </p>
         </div>
       </section>
@@ -77,6 +80,7 @@ export default function PortfolioPage() {
                         href={label === "GitHub" ? "https://github.com/RIxiV1" : label === "LinkedIn" ? "https://www.linkedin.com/in/shaiksuhaib" : "https://x.com/suhaibX0"}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`Visit my ${label} profile`}
                         className="text-cyan-400 hover:text-white transition-all duration-300 border-b border-transparent hover:border-cyan-400 pb-1 font-mono text-sm uppercase tracking-wider"
                       >
                         {label}
@@ -96,6 +100,53 @@ export default function PortfolioPage() {
                       <p className="text-foreground/80 flex justify-between"><span className="text-muted-foreground font-mono uppercase text-xs">Focus</span> AI Systems, Full Stack</p>
                       <p className="text-foreground/80 flex justify-between truncate gap-4"><span className="text-muted-foreground font-mono uppercase text-xs shrink-0">Email</span> shaiksuhaib360@gmail.com</p>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* 2.5 EDUCATION & EXPERIENCE Section */}
+        <section id="experience" className="px-4 scroll-mt-32">
+          <div className="max-w-5xl mx-auto space-y-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
+              <SpecialText inView>Education & Experience</SpecialText>
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Education */}
+              <div className="backdrop-blur-3xl bg-foreground/[0.03] border border-foreground/10 rounded-[2.5rem] p-8 md:p-10 shadow-xl space-y-8">
+                <div className="flex items-center gap-4 text-cyan-500">
+                  <GraduationCap className="w-8 h-8" />
+                  <h3 className="text-2xl font-bold text-foreground">Education</h3>
+                </div>
+                <div className="space-y-6">
+                  <div className="relative pl-6 border-l border-cyan-500/30">
+                    <div className="absolute left-[-5px] top-2 w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
+                    <h4 className="font-bold text-lg text-foreground">B.Tech in Information Technology</h4>
+                    <p className="text-muted-foreground text-sm font-mono mt-1">2022 — 2026</p>
+                    <p className="text-foreground/70 mt-3 text-sm leading-relaxed">
+                      Sree Vidyanikethan Engineering College, Tirupati. Deepening expertise in AI systems, algorithms, and full-stack development.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Experience / Projects Highlights */}
+              <div className="backdrop-blur-3xl bg-foreground/[0.03] border border-foreground/10 rounded-[2.5rem] p-8 md:p-10 shadow-xl space-y-8">
+                <div className="flex items-center gap-4 text-violet-500">
+                  <Briefcase className="w-8 h-8" />
+                  <h3 className="text-2xl font-bold text-foreground">Experience</h3>
+                </div>
+                <div className="space-y-6">
+                  <div className="relative pl-6 border-l border-violet-500/30">
+                    <div className="absolute left-[-5px] top-2 w-2 h-2 rounded-full bg-violet-500 shadow-[0_0_10px_rgba(139,92,246,0.8)]" />
+                    <h4 className="font-bold text-lg text-foreground">Independent Developer & AI Researcher</h4>
+                    <p className="text-muted-foreground text-sm font-mono mt-1">2024 — Present</p>
+                    <p className="text-foreground/70 mt-3 text-sm leading-relaxed">
+                      Building agentic AI tools and recommendation systems. Focused on turning complex math into functional, user-centric software.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -196,9 +247,18 @@ export default function PortfolioPage() {
 
         {/* 6. CONTACT Section */}
         <section id="contact" className="px-4 scroll-mt-32">
-          <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.04] border border-foreground/15 rounded-[2.5rem] shadow-2xl relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/5 to-transparent opacity-30" />
-            <PulseBeamsDemo />
+          <div className="max-w-6xl mx-auto space-y-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-center">
+              <SpecialText inView>Get In Touch</SpecialText>
+            </h2>
+            
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              <div className="backdrop-blur-3xl bg-foreground/[0.04] border border-foreground/15 rounded-[2.5rem] shadow-2xl relative overflow-hidden group h-full flex items-center justify-center min-h-[400px]">
+                <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/5 to-transparent opacity-30" />
+                <PulseBeamsDemo />
+              </div>
+              <ContactForm />
+            </div>
           </div>
         </section>
 
