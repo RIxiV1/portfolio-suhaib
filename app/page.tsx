@@ -125,9 +125,9 @@ export default function PortfolioPage() {
                   <div className="relative pl-6 border-l border-cyan-500/30">
                     <div className="absolute left-[-5px] top-2 w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
                     <h4 className="font-bold text-lg text-foreground">B.Tech in Information Technology</h4>
-                    <p className="text-muted-foreground text-sm font-mono mt-1">2022 — 2026</p>
+                    <p className="text-muted-foreground text-sm font-mono mt-1">2024 — 2028</p>
                     <p className="text-foreground/70 mt-3 text-sm leading-relaxed">
-                      Sree Vidyanikethan Engineering College, Tirupati. Deepening expertise in AI systems, algorithms, and full-stack development.
+                      Vel Tech Rangarajan Dr. Sagunthala R&D Institute of Science and Technology, Chennai. Core focus on AI, algorithms, and intelligent systems development.
                     </p>
                   </div>
                 </div>
