@@ -42,10 +42,10 @@ export default function PortfolioPage() {
       <section id="home" className="relative h-screen flex items-center justify-center">
         <div className="text-center z-10">
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-foreground">
-            <SpecialText>Shaik Mohammed Suhaib</SpecialText>
+            Shaik Mohammed Suhaib
           </h1>
-          <p className="mt-4 text-muted-foreground text-lg md:text-xl font-light tracking-widest uppercase">
-            <SpecialText delay={1500}>Product Engineering · AI Systems</SpecialText>
+          <p className="mt-4 text-slate-400 text-lg md:text-xl font-light tracking-widest uppercase">
+            Product Engineering · AI Systems
           </p>
         </div>
       </section>
