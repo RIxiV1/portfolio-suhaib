@@ -19,11 +19,10 @@ export function SpecialText({
   inView: inViewProp,
 }: SpecialTextProps) {
   const containerRef = useRef<HTMLSpanElement>(null)
-  const inViewHook = useInView(containerRef, { once: true, margin: "-50px" })
+  const inViewHook = useInView(containerRef, { once: true, margin: "-10%" })
   const isInView = inViewProp !== undefined ? inViewProp : inViewHook
   const prefersReduced = useReducedMotion()
 
-  // Use a local ref for magnetic effect
   const mouse = useMouseMove(containerRef)
   
   const letters = children.split("")
@@ -42,15 +41,13 @@ export function SpecialText({
   const letterVariants = {
     hidden: { 
       opacity: 0, 
-      y: 40, 
-      filter: "blur(15px)",
-      scale: 0.5,
+      y: 20, 
+      filter: "blur(10px)",
     },
     visible: { 
       opacity: 1, 
       y: 0, 
       filter: "blur(0px)",
-      scale: 1,
       transition: {
         type: "spring",
         stiffness: 150,
@@ -89,13 +86,10 @@ export function SpecialText({
           ease: "easeInOut",
           repeatDelay: 3
         }}
-        className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-violet-500/10 to-transparent w-1/3 -skew-x-12 pointer-events-none"
+        className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent w-1/3 -skew-x-12 pointer-events-none"
       />
 
       {letters.map((char, i) => {
-        // Calculate a slight magnetic offset based on mouse position
-        // This is a subtle effect since we're using a single container ref for performance
-        // We'll use the relative X/Y to nudge the letters
         const mouseX = mouse.x
         const mouseY = mouse.y
         
@@ -104,17 +98,16 @@ export function SpecialText({
             key={`${char}-${i}`}
             variants={letterVariants}
             whileHover={{
-              y: -8,
-              scale: 1.3,
-              rotate: (Math.random() - 0.5) * 10,
+              y: -5,
+              scale: 1.2,
+              color: "#22d3ee", // Explicit color on hover for visual feedback
             }}
             style={{
-              // Add a slight "magnetic" drift
-              x: mouseX ? (mouseX - 200) * 0.02 : 0,
-              y: mouseY ? (mouseY - 50) * 0.02 : 0,
+              x: mouseX ? (mouseX - 200) * 0.01 : 0,
+              y: mouseY ? (mouseY - 50) * 0.01 : 0,
             }}
             className={cn(
-              "inline-block relative text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-white/50 group-hover/text:from-cyan-400 group-hover/text:to-violet-400 transition-all duration-700 ease-out",
+              "inline-block relative text-white transition-all duration-500 ease-out",
               char === " " ? "w-[0.3em]" : ""
             )}
           >
@@ -122,14 +115,14 @@ export function SpecialText({
             <motion.span
               animate={{ 
                 opacity: [0, 0.4, 0],
-                scale: [1, 1.8, 1],
+                scale: [1, 1.5, 1],
               }}
               transition={{
                 duration: 4,
                 repeat: Infinity,
                 delay: i * 0.15,
               }}
-              className="absolute inset-0 bg-cyan-400/10 blur-2xl rounded-full pointer-events-none opacity-0 group-hover/text:opacity-100 transition-opacity"
+              className="absolute inset-0 bg-cyan-400/5 blur-xl rounded-full pointer-events-none opacity-0 group-hover/text:opacity-100 transition-opacity"
             />
             <span className="relative z-10">{char}</span>
           </motion.span>
