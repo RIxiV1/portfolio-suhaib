@@ -10,6 +10,7 @@ interface CursorProps {
 export function Cursor({ size = 60, className }: CursorProps) {
   const [isVisible, setIsVisible] = useState(false)
   const [isTouchDevice, setIsTouchDevice] = useState(false)
+  const [isHovering, setIsHovering] = useState(false)
   
   const cursorX = useMotionValue(-100)
   const cursorY = useMotionValue(-100)
@@ -31,15 +32,26 @@ export function Cursor({ size = 60, className }: CursorProps) {
       if (!isVisible) setIsVisible(true)
     }
 
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest('a, button, [role="button"], input, textarea, select')) {
+        setIsHovering(true)
+      } else {
+        setIsHovering(false)
+      }
+    }
+
     const hideCursor = () => setIsVisible(false)
     const showCursor = () => setIsVisible(true)
 
     window.addEventListener("mousemove", moveCursor)
+    document.addEventListener("mouseover", handleMouseOver)
     document.addEventListener("mouseleave", hideCursor)
     document.addEventListener("mouseenter", showCursor)
 
     return () => {
       window.removeEventListener("mousemove", moveCursor)
+      document.removeEventListener("mouseover", handleMouseOver)
       document.removeEventListener("mouseleave", hideCursor)
       document.removeEventListener("mouseenter", showCursor)
     }
@@ -53,6 +65,10 @@ export function Cursor({ size = 60, className }: CursorProps) {
         "pointer-events-none fixed z-[9999] rounded-full bg-white mix-blend-difference hidden md:block",
         className
       )}
+      animate={{
+        scale: isHovering ? 1.5 : 1,
+      }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
       style={{
         width: size,
         height: size,

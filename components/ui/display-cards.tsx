@@ -8,6 +8,7 @@ interface DisplayCardProps {
   icon?: React.ReactNode
   title?: string
   titleClassName?: string
+  description?: string
 }
 
 function DisplayCard({
@@ -15,6 +16,7 @@ function DisplayCard({
   icon = <Chrome className="size-4 text-cyan-300" />,
   title = "Featured",
   titleClassName = "text-cyan-500",
+  description = "A sophisticated product engineering achievement.",
 }: DisplayCardProps) {
   return (
     <div
@@ -32,7 +34,7 @@ function DisplayCard({
         </span>
       </div>
       <div>
-        <p className="text-sm text-slate-500">AI-powered project</p>
+        <p className="text-xs text-slate-400 leading-relaxed font-mono tracking-tight">{description}</p>
       </div>
     </div>
   )
@@ -44,18 +46,21 @@ const displayCards = [
     title: "InfoBlend AI",
     icon: <Chrome className="size-4" />,
     titleClassName: "text-cyan-400",
+    description: "Built semantic clustering to process web data 30% faster."
   },
   {
     className: "[--x-offset:0] [--y-offset:0] [--rotation:0deg] hover:[--y-offset:-0.5rem]",
     title: "SubSentry",
     icon: <CreditCard className="size-4" />,
     titleClassName: "text-violet-400",
+    description: "Architected a secure, encrypted billing sync pipeline."
   },
   {
     className: "[--x-offset:1rem] [--y-offset:-1rem] [--rotation:10deg] hover:[--y-offset:-1.5rem]",
     title: "Resume Agent",
     icon: <FileSearch className="size-4" />,
     titleClassName: "text-emerald-400",
+    description: "Deployed agentic RAG for ultra-low latency parsing."
   },
 ]
 

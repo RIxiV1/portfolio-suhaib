@@ -17,9 +17,20 @@ export function ContactForm() {
     e.preventDefault()
     setStatus("loading")
     
-    // Simulate API call - In a real app, replace with Formspree or Server Action
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500))
+      const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
+      if (endpoint) {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+        if (!response.ok) throw new Error("Failed to submit");
+      } else {
+        // Fallback simulation if environment variable is not set
+        await new Promise(resolve => setTimeout(resolve, 1500))
+      }
+      
       setStatus("success")
       setFormData({ name: "", email: "", message: "" })
       setTimeout(() => setStatus("idle"), 5000)

@@ -118,7 +118,7 @@ export function EtheralShadow({
     }, [animationEnabled, animationDuration, hueRotateMotionValue, isInView, shouldReduceMotion]);
 
     // Dynamic color based on theme
-    const resolvedColor = color || (mounted && theme === 'light' ? 'rgba(100, 150, 255, 0.4)' : 'rgba(5, 5, 20, 0.95)');
+    const resolvedColor = color || (mounted && theme === 'light' ? 'rgba(34, 211, 238, 0.2)' : 'rgba(5, 5, 20, 0.95)');
 
     return (
         <div
@@ -146,7 +146,7 @@ export function EtheralShadow({
                                 <feTurbulence
                                     result="undulation"
                                     numOctaves="2"
-                                    baseFrequency={`${mapRange(animation.scale, 0, 100, 0.001, 0.0005)},${mapRange(animation.scale, 0, 100, 0.004, 0.002)}`}
+                                    baseFrequency={`${mapRange(animation.scale, 0, 100, 0.0005, 0.0002)},${mapRange(animation.scale, 0, 100, 0.002, 0.001)}`}
                                     seed="0"
                                     type="turbulence"
                                 />

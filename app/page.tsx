@@ -1,20 +1,23 @@
 "use client"
 
 import { NavBar } from "@/components/ui/tubelight-navbar"
-import { EtheralShadow } from "@/components/ui/etheral-shadow"
-import { LampContainer } from "@/components/ui/lamp"
-import { SkillsMarquee } from "@/components/ui/marquee"
-import { DisplayCards } from "@/components/ui/display-cards"
-import { PulseBeamsDemo } from "@/components/ui/pulse-beams"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
 import { Cursor } from "@/components/ui/inverted-cursor"
 import { SpecialText } from "@/components/ui/special-text"
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
-import { AnimatedTabs } from "@/components/ui/animated-tabs"
+import { AIAssistant } from "@/components/ui/ai-assistant"
 import { FileText, GraduationCap, Briefcase } from "lucide-react"
 import { ContactForm } from "@/components/ui/contact-form"
 import { FadeUp } from "@/components/ui/fade-up"
 import { Spotlight } from "@/components/ui/spotlight"
+import dynamic from 'next/dynamic'
+
+// Lazy-load heavy or GPU-intensive components
+const EtheralShadow = dynamic(() => import("@/components/ui/etheral-shadow").then(mod => mod.EtheralShadow), { ssr: false })
+const SkillsMarquee = dynamic(() => import("@/components/ui/marquee").then(mod => mod.SkillsMarquee), { ssr: false })
+const DisplayCards = dynamic(() => import("@/components/ui/display-cards").then(mod => mod.DisplayCards), { ssr: false })
+const PulseBeamsDemo = dynamic(() => import("@/components/ui/pulse-beams").then(mod => mod.PulseBeamsDemo), { ssr: false })
+const AnimatedTabs = dynamic(() => import("@/components/ui/animated-tabs").then(mod => mod.AnimatedTabs), { ssr: false })
 
 export default function PortfolioPage() {
   return (
@@ -29,6 +32,8 @@ export default function PortfolioPage() {
           className="opacity-30"
         />
       </div>
+
+      <AIAssistant />
 
       {/* Custom Cursor - Desktop Only */}
       <Cursor size={60} />
@@ -45,11 +50,11 @@ export default function PortfolioPage() {
       <section id="home" className="relative h-screen flex items-center justify-center">
         <div className="text-center z-10 space-y-6">
           <div className="relative inline-block">
-          <h1 className="text-7xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter leading-none bg-clip-text text-transparent bg-gradient-to-b from-foreground via-foreground/90 to-foreground/40 drop-shadow-2xl cursor-default">
+          <h1 className="text-7xl md:text-8xl lg:text-[10rem] font-extrabold tracking-tighter leading-none bg-clip-text text-transparent bg-gradient-to-b from-foreground via-foreground/90 to-slate-400 drop-shadow-2xl cursor-default">
               Shaik Mohammed Suhaib
             </h1>
           </div>
-          <p className="text-slate-400 text-lg md:text-xl font-light tracking-[0.4em] uppercase opacity-80">
+          <p className="text-slate-400 text-lg md:text-xl font-light tracking-[0.6em] md:tracking-[0.8em] uppercase opacity-80">
             Product Engineering <span className="text-cyan-500/50 mx-2">·</span> AI Systems
           </p>
         </div>
@@ -62,7 +67,7 @@ export default function PortfolioPage() {
         <section id="about" className="px-4 scroll-mt-32">
           <FadeUp>
             <Spotlight>
-              <div className="max-w-5xl mx-auto backdrop-blur-3xl bg-foreground/[0.05] border border-foreground/15 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative overflow-hidden group">
+              <div className="max-w-5xl mx-auto backdrop-blur-3xl bg-foreground/[0.02] border border-foreground/10 border-t-foreground/20 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-violet-500/5 opacity-50 dark:opacity-30" />
                 
                 <div className="relative z-10">
@@ -123,7 +128,7 @@ export default function PortfolioPage() {
               
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Education */}
-                <div className="backdrop-blur-3xl bg-foreground/[0.03] border border-foreground/10 rounded-[2.5rem] p-8 md:p-10 shadow-xl space-y-8">
+                <div className="backdrop-blur-3xl bg-foreground/[0.02] border border-foreground/10 border-t-foreground/20 rounded-[2.5rem] p-8 md:p-10 shadow-xl space-y-8">
                   <div className="flex items-center gap-4 text-cyan-500">
                     <GraduationCap className="w-8 h-8" />
                     <h3 className="text-2xl font-bold text-foreground">Education</h3>
@@ -141,7 +146,7 @@ export default function PortfolioPage() {
                 </div>
 
                 {/* Experience / Projects Highlights */}
-                <div className="backdrop-blur-3xl bg-foreground/[0.03] border border-foreground/10 rounded-[2.5rem] p-8 md:p-10 shadow-xl space-y-8">
+                <div className="backdrop-blur-3xl bg-foreground/[0.02] border border-foreground/10 border-t-foreground/20 rounded-[2.5rem] p-8 md:p-10 shadow-xl space-y-8">
                   <div className="flex items-center gap-4 text-violet-500">
                     <Briefcase className="w-8 h-8" />
                     <h3 className="text-2xl font-bold text-foreground">Experience</h3>
@@ -165,7 +170,7 @@ export default function PortfolioPage() {
         {/* 3. SKILLS Section with Lamp */}
         <section id="skills" className="relative px-4 scroll-mt-32">
           <FadeUp>
-            <div className="max-w-6xl mx-auto backdrop-blur-2xl bg-foreground/[0.03] border border-foreground/10 rounded-[2.5rem] py-20 overflow-hidden shadow-inner">
+            <div className="max-w-6xl mx-auto backdrop-blur-2xl bg-foreground/[0.02] border border-foreground/10 border-t-foreground/20 rounded-[2.5rem] py-20 overflow-hidden shadow-inner">
               <h2 className="text-4xl font-bold text-center mb-16">
                 <SpecialText inView>Skills & Technologies</SpecialText>
               </h2>
@@ -181,7 +186,7 @@ export default function PortfolioPage() {
         {/* 4. PROJECTS Section */}
         <section id="projects" className="px-4 scroll-mt-32">
           <FadeUp>
-            <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.06] border border-foreground/15 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative">
+            <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.02] border border-foreground/10 border-t-foreground/20 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative">
               <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
                 <SpecialText inView>Featured Projects</SpecialText>
               </h2>
@@ -198,33 +203,33 @@ export default function PortfolioPage() {
           </FadeUp>
         </section>
 
-        {/* 5. BLOG Section */}
+        {/* 5. LEARNING PATH Section */}
         <section id="blog" className="px-4 scroll-mt-32">
           <FadeUp>
-            <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.06] border border-foreground/15 rounded-[2.5rem] p-12 md:p-16 shadow-2xl">
+            <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.02] border border-foreground/10 border-t-foreground/20 rounded-[2.5rem] p-12 md:p-16 shadow-2xl">
               <h2 className="text-4xl font-bold text-center mb-16">
-                <SpecialText inView>Blog & Research</SpecialText>
+                <SpecialText inView>Learning Path & Research</SpecialText>
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {[
                   {
                     title: "Recommendation Systems: The Math Behind Discovery",
-                    description: "Exploring the algorithms that power modern content discovery and personalization.",
-                    date: "Mar 2026",
+                    description: "Currently researching the algorithms that power modern content discovery and personalization.",
+                    date: "In Progress",
                     tag: "AI/ML",
                     url: "https://medium.com/@shaiksuhaib360"
                   },
                   {
                     title: "Network Theory: The Science of Connections",
-                    description: "The invisible threads that bind our world through mathematical relationships.",
-                    date: "Sep 2025",
+                    description: "Studying the invisible threads that bind our world through mathematical relationships.",
+                    date: "Drafting",
                     tag: "Math",
                     url: "https://medium.com/@shaiksuhaib360"
                   },
                   {
                     title: "Chaos Theory & The Butterfly Effect",
-                    description: "Why small changes can lead to dramatically different and unpredictable outcomes.",
-                    date: "Sep 2025",
+                    description: "Exploring why small changes can lead to dramatically different and unpredictable outcomes.",
+                    date: "Drafting",
                     tag: "Science",
                     url: "https://medium.com/@shaiksuhaib360"
                   }
@@ -234,7 +239,7 @@ export default function PortfolioPage() {
                   href={blog.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative rounded-2xl border border-foreground/10 bg-white/40 dark:bg-foreground/5 p-8 backdrop-blur-xl hover:bg-white/60 dark:hover:bg-foreground/10 hover:border-cyan-400/30 transition-all duration-500 overflow-hidden shadow-xl shadow-black/5 dark:shadow-none"
+                  className="group relative rounded-2xl border border-foreground/10 border-t-foreground/20 bg-white/40 dark:bg-foreground/5 p-8 backdrop-blur-xl hover:bg-white/60 dark:hover:bg-foreground/10 hover:border-cyan-400/30 hover:border-t-cyan-400/50 transition-all duration-500 overflow-hidden shadow-xl shadow-black/5 dark:shadow-none"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   <div className="flex items-center justify-between mb-6">
@@ -269,7 +274,7 @@ export default function PortfolioPage() {
                 </h2>
                 
                 <div className="grid lg:grid-cols-2 gap-12 items-start">
-                  <div className="backdrop-blur-3xl bg-foreground/[0.04] border border-foreground/15 rounded-[2.5rem] shadow-2xl relative overflow-hidden group h-full flex items-center justify-center min-h-[400px]">
+                  <div className="backdrop-blur-3xl bg-foreground/[0.02] border border-foreground/10 border-t-foreground/20 rounded-[2.5rem] shadow-2xl relative overflow-hidden group h-full flex items-center justify-center min-h-[400px]">
                     <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/5 to-transparent opacity-30" />
                     <PulseBeamsDemo />
                   </div>
@@ -301,10 +306,14 @@ export default function PortfolioPage() {
       </div>
 
       {/* Footer */}
-      <footer className="w-full py-12 backdrop-blur-3xl border-t border-foreground/5 bg-foreground/5 dark:bg-black/20">
+      <footer className="w-full relative py-12 backdrop-blur-3xl border-t border-foreground/10 bg-foreground/5 dark:bg-black/20 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent shadow-[0_0_15px_rgba(34,211,238,0.5)]" />
         <div className="container mx-auto px-4 text-center">
-          <p className="text-muted-foreground font-mono text-xs tracking-[0.2em] uppercase">
-            © {new Date().getFullYear()} Shaik Mohammed Suhaib · Built for the Future
+          <p className="text-muted-foreground font-mono text-xs tracking-[0.2em] uppercase mb-4">
+            Built for the Future
+          </p>
+          <p className="text-foreground/40 font-mono text-[10px] tracking-[0.3em] uppercase">
+            © {new Date().getFullYear()} Shaik Mohammed Suhaib
           </p>
         </div>
       </footer>
