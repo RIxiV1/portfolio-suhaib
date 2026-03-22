@@ -1,6 +1,5 @@
-"use client"
-
-import { useState, useEffect, useCallback } from "react"
+import { useEffect, useState } from "react"
+import { motion, useMotionValue, useSpring } from "motion/react"
 import { cn } from "@/lib/utils"
 
 interface CursorProps {
@@ -9,52 +8,58 @@ interface CursorProps {
 }
 
 export function Cursor({ size = 60, className }: CursorProps) {
-  const [position, setPosition] = useState({ x: 0, y: 0 })
   const [isVisible, setIsVisible] = useState(false)
   const [isTouchDevice, setIsTouchDevice] = useState(false)
+  
+  const cursorX = useMotionValue(-100)
+  const cursorY = useMotionValue(-100)
 
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    setPosition({
-      x: e.clientX,
-      y: e.clientY,
-    })
-  }, [])
-
-  const handleMouseEnter = useCallback(() => setIsVisible(true), [])
-  const handleMouseLeave = useCallback(() => setIsVisible(false), [])
+  // Add a slight spring for "premium" feel and performance shielding
+  const springConfig = { damping: 25, stiffness: 250 }
+  const edgeX = useSpring(cursorX, springConfig)
+  const edgeY = useSpring(cursorY, springConfig)
 
   useEffect(() => {
-    // Skip on touch devices
     if ('ontouchstart' in window) {
       setIsTouchDevice(true)
       return
     }
 
-    window.addEventListener("mousemove", handleMouseMove)
-    document.body.addEventListener("mouseenter", handleMouseEnter)
-    document.body.addEventListener("mouseleave", handleMouseLeave)
+    const moveCursor = (e: MouseEvent) => {
+      cursorX.set(e.clientX - size / 2)
+      cursorY.set(e.clientY - size / 2)
+      if (!isVisible) setIsVisible(true)
+    }
+
+    const hideCursor = () => setIsVisible(false)
+    const showCursor = () => setIsVisible(true)
+
+    window.addEventListener("mousemove", moveCursor)
+    document.addEventListener("mouseleave", hideCursor)
+    document.addEventListener("mouseenter", showCursor)
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove)
-      document.body.removeEventListener("mouseenter", handleMouseEnter)
-      document.body.removeEventListener("mouseleave", handleMouseLeave)
+      window.removeEventListener("mousemove", moveCursor)
+      document.removeEventListener("mouseleave", hideCursor)
+      document.removeEventListener("mouseenter", showCursor)
     }
-  }, [handleMouseMove, handleMouseEnter, handleMouseLeave])
+  }, [size, isVisible, cursorX, cursorY])
 
   if (isTouchDevice) return null
 
   return (
-    <div
+    <motion.div
       className={cn(
-        "pointer-events-none fixed z-[9999] rounded-full bg-white mix-blend-difference transition-transform duration-100 ease-out",
-        !isVisible && "opacity-0",
+        "pointer-events-none fixed z-[9999] rounded-full bg-white mix-blend-difference hidden md:block",
         className
       )}
       style={{
         width: size,
         height: size,
-        left: position.x - size / 2,
-        top: position.y - size / 2,
+        x: edgeX,
+        y: edgeY,
+        opacity: isVisible ? 1 : 0,
+        willChange: "transform, opacity",
       }}
     />
   )

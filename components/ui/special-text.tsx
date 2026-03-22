@@ -22,8 +22,6 @@ export function SpecialText({
   const inViewHook = useInView(containerRef, { once: true, margin: "-10%" })
   const isInView = inViewProp !== undefined ? inViewProp : inViewHook
   const prefersReduced = useReducedMotion()
-
-  const mouse = useMouseMove(containerRef)
   
   const letters = children.split("")
 
@@ -32,7 +30,7 @@ export function SpecialText({
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.03,
+        staggerChildren: 0.02, // Slightly faster stagger for better feel
         delayChildren: delay,
       },
     },
@@ -41,8 +39,8 @@ export function SpecialText({
   const letterVariants = {
     hidden: { 
       opacity: 0, 
-      y: 20, 
-      filter: "blur(10px)",
+      y: 15, 
+      filter: "blur(8px)",
     },
     visible: { 
       opacity: 1, 
@@ -50,8 +48,8 @@ export function SpecialText({
       filter: "blur(0px)",
       transition: {
         type: "spring",
-        stiffness: 150,
-        damping: 12,
+        stiffness: 200,
+        damping: 15,
       },
     },
   }
@@ -74,6 +72,7 @@ export function SpecialText({
         "relative inline-flex flex-wrap justify-center py-4 px-2 cursor-default group/text",
         className
       )}
+      style={{ willChange: "opacity" }}
     >
       {/* Light Scan Effect */}
       <motion.div
@@ -81,44 +80,43 @@ export function SpecialText({
           left: ["-100%", "200%"],
         }}
         transition={{
-          duration: 4,
+          duration: 5,
           repeat: Infinity,
           ease: "easeInOut",
-          repeatDelay: 3
+          repeatDelay: 4
         }}
-        className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent w-1/3 -skew-x-12 pointer-events-none"
+        className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-cyan-400/5 to-transparent w-1/3 -skew-x-12 pointer-events-none"
+        style={{ willChange: "left" }}
       />
 
       {letters.map((char, i) => {
-        const mouseX = mouse.x
-        const mouseY = mouse.y
+        if (char === " ") {
+          return <span key={`space-${i}`} className="w-[0.3em]" />
+        }
         
         return (
           <motion.span
             key={`${char}-${i}`}
             variants={letterVariants}
             whileHover={{
-              y: -5,
-              scale: 1.2,
-              color: "#22d3ee", // Explicit color on hover for visual feedback
-            }}
-            style={{
-              x: mouseX ? (mouseX - 200) * 0.01 : 0,
-              y: mouseY ? (mouseY - 50) * 0.01 : 0,
+              y: -4,
+              scale: 1.15,
+              color: "#22d3ee",
+              transition: { type: "spring", stiffness: 300, damping: 10 }
             }}
             className={cn(
-              "inline-block relative text-white transition-all duration-500 ease-out",
-              char === " " ? "w-[0.3em]" : ""
+              "inline-block relative text-white transition-colors duration-300",
             )}
+            style={{ willChange: "transform, opacity, filter" }}
           >
             {/* Subtle Glow Layer */}
             <motion.span
               animate={{ 
-                opacity: [0, 0.4, 0],
-                scale: [1, 1.5, 1],
+                opacity: [0, 0.3, 0],
+                scale: [1, 1.3, 1],
               }}
               transition={{
-                duration: 4,
+                duration: 5,
                 repeat: Infinity,
                 delay: i * 0.15,
               }}

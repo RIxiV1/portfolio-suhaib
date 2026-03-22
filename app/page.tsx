@@ -13,6 +13,8 @@ import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button
 import { AnimatedTabs } from "@/components/ui/animated-tabs"
 import { FileText, GraduationCap, Briefcase } from "lucide-react"
 import { ContactForm } from "@/components/ui/contact-form"
+import { FadeUp } from "@/components/ui/fade-up"
+import { Spotlight } from "@/components/ui/spotlight"
 
 export default function PortfolioPage() {
   return (
@@ -20,11 +22,11 @@ export default function PortfolioPage() {
       {/* Background Layer - Fixed and Persistent */}
       <div className="fixed inset-0 -z-50 bg-background transition-colors duration-500">
         <EtheralShadow 
-          animation={{ scale: 70, speed: 40 }}
-          noise={{ opacity: 0.3, scale: 1.0 }}
+          animation={{ scale: 50, speed: 20 }} // Optmized for background performance
+          noise={{ opacity: 0.2, scale: 1.0 }}
           sizing="fill"
-          title="" // Hide title in the universal background
-          className="opacity-40"
+          title=""
+          className="opacity-30"
         />
       </div>
 
@@ -58,164 +60,175 @@ export default function PortfolioPage() {
         
         {/* 2. ABOUT Section */}
         <section id="about" className="px-4 scroll-mt-32">
-          <div className="max-w-5xl mx-auto backdrop-blur-3xl bg-foreground/[0.05] border border-foreground/15 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-violet-500/5 opacity-50 dark:opacity-30" />
-            
-            <div className="relative z-10">
-              <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-                <SpecialText inView>About Me</SpecialText>
-              </h2>
-              <div className="grid md:grid-cols-2 gap-16 items-center">
-                <div className="space-y-8">
-                  <p className="text-xl text-foreground font-light leading-relaxed">
-                    {`I'm an IT student focused on building AI-powered systems and real-world products.`}
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed text-lg">
-                    Currently exploring agentic AI, recommendation systems, and web-based AI tools — combining product thinking with engineering to turn ideas into functional, user-focused applications.
-                  </p>
-                  <div className="flex gap-6 pt-6">
-                    {["GitHub", "LinkedIn", "Twitter"].map((label) => (
-                      <a
-                        key={label}
-                        href={label === "GitHub" ? "https://github.com/RIxiV1" : label === "LinkedIn" ? "https://www.linkedin.com/in/shaiksuhaib" : "https://x.com/suhaibX0"}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Visit my ${label} profile`}
-                        className="text-cyan-400 hover:text-white transition-all duration-300 border-b border-transparent hover:border-cyan-400 pb-1 font-mono text-sm uppercase tracking-wider"
-                      >
-                        {label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-                <div className="relative group/card">
-                  <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/30 to-violet-500/30 rounded-2xl blur-3xl opacity-20 group-hover/card:opacity-40 transition-opacity duration-500" />
-                  <div className="relative bg-foreground/8 border border-foreground/15 backdrop-blur-2xl rounded-3xl p-8 space-y-6 shadow-xl transition-transform duration-500 group-hover/card:-translate-y-2">
-                    <div className="flex items-center gap-3 text-sm text-cyan-500 dark:text-cyan-400 font-mono">
-                      <span className="w-2 h-2 bg-cyan-500 dark:bg-cyan-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
-                      Status: Open to Work
+          <FadeUp>
+            <Spotlight>
+              <div className="max-w-5xl mx-auto backdrop-blur-3xl bg-foreground/[0.05] border border-foreground/15 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-violet-500/5 opacity-50 dark:opacity-30" />
+                
+                <div className="relative z-10">
+                  <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
+                    <SpecialText inView>About Me</SpecialText>
+                  </h2>
+                  <div className="grid md:grid-cols-2 gap-16 items-center">
+                    <div className="space-y-8">
+                      <p className="text-xl text-foreground font-light leading-relaxed">
+                        {`I'm an IT student focused on building AI-powered systems and real-world products.`}
+                      </p>
+                      <p className="text-muted-foreground leading-relaxed text-lg">
+                        Currently exploring agentic AI, recommendation systems, and web-based AI tools — combining product thinking with engineering to turn ideas into functional, user-focused applications.
+                      </p>
+                      <div className="flex gap-6 pt-6">
+                        {["GitHub", "LinkedIn", "Twitter"].map((label) => (
+                          <a
+                            key={label}
+                            href={label === "GitHub" ? "https://github.com/RIxiV1" : label === "LinkedIn" ? "https://www.linkedin.com/in/shaiksuhaib" : "https://x.com/suhaibX0"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Visit my ${label} profile`}
+                            className="text-cyan-400 hover:text-white transition-all duration-300 border-b border-transparent hover:border-cyan-400 pb-1 font-mono text-sm uppercase tracking-wider"
+                          >
+                            {label}
+                          </a>
+                        ))}
+                      </div>
                     </div>
-                    <div className="space-y-4">
-                      <p className="text-foreground/80 flex justify-between"><span className="text-muted-foreground font-mono uppercase text-xs">Location</span> Tirupati, India</p>
-                      <p className="text-foreground/80 flex justify-between"><span className="text-muted-foreground font-mono uppercase text-xs">Focus</span> AI Systems, Full Stack</p>
-                      <p className="text-foreground/80 flex justify-between truncate gap-4"><span className="text-muted-foreground font-mono uppercase text-xs shrink-0">Email</span> shaiksuhaib360@gmail.com</p>
+                    <div className="relative group/card">
+                      <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/30 to-violet-500/30 rounded-2xl blur-3xl opacity-20 group-hover/card:opacity-40 transition-opacity duration-500" />
+                      <div className="relative bg-foreground/8 border border-foreground/15 backdrop-blur-2xl rounded-3xl p-8 space-y-6 shadow-xl transition-transform duration-500 group-hover/card:-translate-y-2">
+                        <div className="flex items-center gap-3 text-sm text-cyan-500 dark:text-cyan-400 font-mono">
+                          <span className="w-2 h-2 bg-cyan-500 dark:bg-cyan-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
+                          Status: Open to Work
+                        </div>
+                        <div className="space-y-4">
+                          <p className="text-foreground/80 flex justify-between"><span className="text-muted-foreground font-mono uppercase text-xs">Location</span> Tirupati, India</p>
+                          <p className="text-foreground/80 flex justify-between"><span className="text-muted-foreground font-mono uppercase text-xs">Focus</span> AI Systems, Full Stack</p>
+                          <p className="text-foreground/80 flex justify-between truncate gap-4"><span className="text-muted-foreground font-mono uppercase text-xs shrink-0">Email</span> shaiksuhaib360@gmail.com</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </Spotlight>
+          </FadeUp>
         </section>
         
         {/* 2.5 EDUCATION & EXPERIENCE Section */}
         <section id="experience" className="px-4 scroll-mt-32">
-          <div className="max-w-5xl mx-auto space-y-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-              <SpecialText inView>Education & Experience</SpecialText>
-            </h2>
-            
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Education */}
-              <div className="backdrop-blur-3xl bg-foreground/[0.03] border border-foreground/10 rounded-[2.5rem] p-8 md:p-10 shadow-xl space-y-8">
-                <div className="flex items-center gap-4 text-cyan-500">
-                  <GraduationCap className="w-8 h-8" />
-                  <h3 className="text-2xl font-bold text-foreground">Education</h3>
-                </div>
-                <div className="space-y-6">
-                  <div className="relative pl-6 border-l border-cyan-500/30">
-                    <div className="absolute left-[-5px] top-2 w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
-                    <h4 className="font-bold text-lg text-foreground">B.Tech in Information Technology</h4>
-                    <p className="text-muted-foreground text-sm font-mono mt-1">2024 — 2028</p>
-                    <p className="text-foreground/70 mt-3 text-sm leading-relaxed">
-                      Vel Tech Rangarajan Dr. Sagunthala R&D Institute of Science and Technology, Chennai. Core focus on AI, algorithms, and intelligent systems development.
-                    </p>
+          <FadeUp>
+            <div className="max-w-5xl mx-auto space-y-12">
+              <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
+                <SpecialText inView>Education & Experience</SpecialText>
+              </h2>
+              
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Education */}
+                <div className="backdrop-blur-3xl bg-foreground/[0.03] border border-foreground/10 rounded-[2.5rem] p-8 md:p-10 shadow-xl space-y-8">
+                  <div className="flex items-center gap-4 text-cyan-500">
+                    <GraduationCap className="w-8 h-8" />
+                    <h3 className="text-2xl font-bold text-foreground">Education</h3>
+                  </div>
+                  <div className="space-y-6">
+                    <div className="relative pl-6 border-l border-cyan-500/30">
+                      <div className="absolute left-[-5px] top-2 w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
+                      <h4 className="font-bold text-lg text-foreground">B.Tech in Information Technology</h4>
+                      <p className="text-muted-foreground text-sm font-mono mt-1">2024 — 2028</p>
+                      <p className="text-foreground/70 mt-3 text-sm leading-relaxed">
+                        Vel Tech Rangarajan Dr. Sagunthala R&D Institute of Science and Technology, Chennai. Core focus on AI, algorithms, and intelligent systems development.
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Experience / Projects Highlights */}
-              <div className="backdrop-blur-3xl bg-foreground/[0.03] border border-foreground/10 rounded-[2.5rem] p-8 md:p-10 shadow-xl space-y-8">
-                <div className="flex items-center gap-4 text-violet-500">
-                  <Briefcase className="w-8 h-8" />
-                  <h3 className="text-2xl font-bold text-foreground">Experience</h3>
-                </div>
-                <div className="space-y-6">
-                  <div className="relative pl-6 border-l border-violet-500/30">
-                    <div className="absolute left-[-5px] top-2 w-2 h-2 rounded-full bg-violet-500 shadow-[0_0_10px_rgba(139,92,246,0.8)]" />
-                    <h4 className="font-bold text-lg text-foreground">Independent Developer & AI Researcher</h4>
-                    <p className="text-muted-foreground text-sm font-mono mt-1">2024 — Present</p>
-                    <p className="text-foreground/70 mt-3 text-sm leading-relaxed">
-                      Building agentic AI tools and recommendation systems. Focused on turning complex math into functional, user-centric software.
-                    </p>
+                {/* Experience / Projects Highlights */}
+                <div className="backdrop-blur-3xl bg-foreground/[0.03] border border-foreground/10 rounded-[2.5rem] p-8 md:p-10 shadow-xl space-y-8">
+                  <div className="flex items-center gap-4 text-violet-500">
+                    <Briefcase className="w-8 h-8" />
+                    <h3 className="text-2xl font-bold text-foreground">Experience</h3>
+                  </div>
+                  <div className="space-y-6">
+                    <div className="relative pl-6 border-l border-violet-500/30">
+                      <div className="absolute left-[-5px] top-2 w-2 h-2 rounded-full bg-violet-500 shadow-[0_0_10px_rgba(139,92,246,0.8)]" />
+                      <h4 className="font-bold text-lg text-foreground">Independent Developer & AI Researcher</h4>
+                      <p className="text-muted-foreground text-sm font-mono mt-1">2024 — Present</p>
+                      <p className="text-foreground/70 mt-3 text-sm leading-relaxed">
+                        Building agentic AI tools and recommendation systems. Focused on turning complex math into functional, user-centric software.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </FadeUp>
         </section>
 
         {/* 3. SKILLS Section with Lamp */}
         <section id="skills" className="relative px-4 scroll-mt-32">
-          <div className="max-w-6xl mx-auto backdrop-blur-2xl bg-foreground/[0.03] border border-foreground/10 rounded-[2.5rem] py-20 overflow-hidden shadow-inner">
-            <h2 className="text-4xl font-bold text-center mb-16">
-              <SpecialText inView>Skills & Technologies</SpecialText>
-            </h2>
-            <div className="relative">
-              <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-background/80 to-transparent z-10" />
-              <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-background/80 to-transparent z-10" />
-              <SkillsMarquee />
+          <FadeUp>
+            <div className="max-w-6xl mx-auto backdrop-blur-2xl bg-foreground/[0.03] border border-foreground/10 rounded-[2.5rem] py-20 overflow-hidden shadow-inner">
+              <h2 className="text-4xl font-bold text-center mb-16">
+                <SpecialText inView>Skills & Technologies</SpecialText>
+              </h2>
+              <div className="relative">
+                <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-background/80 to-transparent z-10" />
+                <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-background/80 to-transparent z-10" />
+                <SkillsMarquee />
+              </div>
             </div>
-          </div>
+          </FadeUp>
         </section>
 
         {/* 4. PROJECTS Section */}
         <section id="projects" className="px-4 scroll-mt-32">
-          <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.06] border border-foreground/15 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative">
-            <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-              <SpecialText inView>Featured Projects</SpecialText>
-            </h2>
-            
-            <div className="flex justify-center mb-20">
-              <DisplayCards />
-            </div>
+          <FadeUp>
+            <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.06] border border-foreground/15 rounded-[2.5rem] p-12 md:p-16 shadow-2xl relative">
+              <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
+                <SpecialText inView>Featured Projects</SpecialText>
+              </h2>
+              
+              <div className="flex justify-center mb-20">
+                <DisplayCards />
+              </div>
 
-            <div className="relative">
-              <div className="absolute -inset-10 bg-cyan-500/5 blur-[100px] opacity-20 pointer-events-none" />
-              <AnimatedTabs />
+              <div className="relative">
+                <div className="absolute -inset-10 bg-cyan-500/5 blur-[100px] opacity-20 pointer-events-none" />
+                <AnimatedTabs />
+              </div>
             </div>
-          </div>
+          </FadeUp>
         </section>
 
         {/* 5. BLOG Section */}
         <section id="blog" className="px-4 scroll-mt-32">
-          <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.06] border border-foreground/15 rounded-[2.5rem] p-12 md:p-16 shadow-2xl">
-            <h2 className="text-4xl font-bold text-center mb-16">
-              <SpecialText inView>Blog & Research</SpecialText>
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  title: "Recommendation Systems: The Math Behind Discovery",
-                  description: "Exploring the algorithms that power modern content discovery and personalization.",
-                  date: "Mar 2026",
-                  tag: "AI/ML",
-                  url: "https://medium.com/@shaiksuhaib360"
-                },
-                {
-                  title: "Network Theory: The Science of Connections",
-                  description: "The invisible threads that bind our world through mathematical relationships.",
-                  date: "Sep 2025",
-                  tag: "Math",
-                  url: "https://medium.com/@shaiksuhaib360"
-                },
-                {
-                  title: "Chaos Theory & The Butterfly Effect",
-                  description: "Why small changes can lead to dramatically different and unpredictable outcomes.",
-                  date: "Sep 2025",
-                  tag: "Science",
-                  url: "https://medium.com/@shaiksuhaib360"
-                }
-              ].map((blog) => (
+          <FadeUp>
+            <div className="max-w-6xl mx-auto backdrop-blur-3xl bg-foreground/[0.06] border border-foreground/15 rounded-[2.5rem] p-12 md:p-16 shadow-2xl">
+              <h2 className="text-4xl font-bold text-center mb-16">
+                <SpecialText inView>Blog & Research</SpecialText>
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {[
+                  {
+                    title: "Recommendation Systems: The Math Behind Discovery",
+                    description: "Exploring the algorithms that power modern content discovery and personalization.",
+                    date: "Mar 2026",
+                    tag: "AI/ML",
+                    url: "https://medium.com/@shaiksuhaib360"
+                  },
+                  {
+                    title: "Network Theory: The Science of Connections",
+                    description: "The invisible threads that bind our world through mathematical relationships.",
+                    date: "Sep 2025",
+                    tag: "Math",
+                    url: "https://medium.com/@shaiksuhaib360"
+                  },
+                  {
+                    title: "Chaos Theory & The Butterfly Effect",
+                    description: "Why small changes can lead to dramatically different and unpredictable outcomes.",
+                    date: "Sep 2025",
+                    tag: "Science",
+                    url: "https://medium.com/@shaiksuhaib360"
+                  }
+                ].map((blog) => (
                 <a
                   key={blog.title}
                   href={blog.url}
@@ -243,23 +256,28 @@ export default function PortfolioPage() {
               ))}
             </div>
           </div>
-        </section>
+        </FadeUp>
+      </section>
 
         {/* 6. CONTACT Section */}
         <section id="contact" className="px-4 scroll-mt-32">
-          <div className="max-w-6xl mx-auto space-y-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-center">
-              <SpecialText inView>Get In Touch</SpecialText>
-            </h2>
-            
-            <div className="grid lg:grid-cols-2 gap-12 items-start">
-              <div className="backdrop-blur-3xl bg-foreground/[0.04] border border-foreground/15 rounded-[2.5rem] shadow-2xl relative overflow-hidden group h-full flex items-center justify-center min-h-[400px]">
-                <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/5 to-transparent opacity-30" />
-                <PulseBeamsDemo />
+          <FadeUp>
+            <Spotlight color="rgba(139, 92, 246, 0.05)">
+              <div className="max-w-6xl mx-auto space-y-16">
+                <h2 className="text-4xl md:text-5xl font-bold text-center">
+                  <SpecialText inView>Get In Touch</SpecialText>
+                </h2>
+                
+                <div className="grid lg:grid-cols-2 gap-12 items-start">
+                  <div className="backdrop-blur-3xl bg-foreground/[0.04] border border-foreground/15 rounded-[2.5rem] shadow-2xl relative overflow-hidden group h-full flex items-center justify-center min-h-[400px]">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/5 to-transparent opacity-30" />
+                    <PulseBeamsDemo />
+                  </div>
+                  <ContactForm />
+                </div>
               </div>
-              <ContactForm />
-            </div>
-          </div>
+            </Spotlight>
+          </FadeUp>
         </section>
 
         {/* 7. RESUME Section */}

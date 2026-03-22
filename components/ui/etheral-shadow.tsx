@@ -134,13 +134,15 @@ export function EtheralShadow({
                 style={{
                     position: "absolute",
                     inset: -displacementScale,
-                    filter: animationEnabled ? `url(#${id}) blur(4px)` : "none"
+                    filter: animationEnabled ? `url(#${id}) blur(4px)` : "none",
+                    willChange: "filter, transform",
+                    transform: "translateZ(0)",
                 }}
             >
                 {animationEnabled && (
-                    <svg style={{ position: "absolute", width: 0, height: 0 }}>
+                    <svg style={{ position: "absolute", width: 0, height: 0, pointerEvents: "none" }}>
                         <defs>
-                            <filter id={id}>
+                            <filter id={id} colorInterpolationFilters="sRGB">
                                 <feTurbulence
                                     result="undulation"
                                     numOctaves="2"
@@ -185,7 +187,9 @@ export function EtheralShadow({
                         maskPosition: "center",
                         width: "100%",
                         height: "100%",
-                        transition: "background-color 1s ease-in-out"
+                        transition: "background-color 1s ease-in-out",
+                        transform: "translateZ(0)",
+                        willChange: "background-color"
                     }}
                 />
             </div>
