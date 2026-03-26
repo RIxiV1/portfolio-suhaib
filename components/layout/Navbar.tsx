@@ -85,7 +85,7 @@ export default function Navbar() {
           <a
             href="mailto:shaiksuhaib360@gmail.com"
             className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all"
-            style={{ background: 'var(--primary)', color: '#fff' }}
+            style={{ background: 'var(--primary)', color: 'var(--primary-foreground)' }}
           >
             Hire me
           </a>

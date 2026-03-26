@@ -92,8 +92,8 @@ export default function Hero() {
         <motion.div variants={item} className="flex flex-wrap items-center gap-4 justify-center">
           <a
             href="#projects"
-            className="px-8 py-3.5 rounded-full font-semibold text-white transition-all hover:scale-[1.03] active:scale-[0.97]"
-            style={{ background: 'var(--primary)', boxShadow: '0 0 40px var(--primary-glow)' }}
+            className="px-8 py-3.5 rounded-full font-semibold transition-all hover:scale-[1.03] active:scale-[0.97]"
+            style={{ background: 'var(--primary)', color: 'var(--primary-foreground)', boxShadow: '0 0 40px var(--primary-glow)' }}
           >
             View my work
           </a>

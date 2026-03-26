@@ -48,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth dark">
       <body
         className={`${inter.variable} ${jetbrains.variable} antialiased`}
         style={{ background: "var(--bg)", color: "var(--foreground)" }}

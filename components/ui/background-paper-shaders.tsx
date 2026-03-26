@@ -4,116 +4,98 @@ import { useRef, useMemo } from "react"
 import { useFrame } from "@react-three/fiber"
 import * as THREE from "three"
 
-// Custom shader material for advanced effects
+// Smoother, fluid vertex movement
 const vertexShader = `
   uniform float time;
-  uniform float intensity;
   varying vec2 vUv;
-  varying vec3 vPosition;
   
   void main() {
     vUv = uv;
-    vPosition = position;
-    
     vec3 pos = position;
-    pos.y += sin(pos.x * 10.0 + time) * 0.1 * intensity;
-    pos.x += cos(pos.y * 8.0 + time * 1.5) * 0.05 * intensity;
+    
+    // Slow, subtle wave motion
+    pos.z += sin(pos.x * 2.0 + time * 0.2) * 0.1;
+    pos.z += cos(pos.y * 2.0 + time * 0.3) * 0.1;
     
     gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
   }
 `
 
+// High-tech, smooth gradient fragment shader
 const fragmentShader = `
   uniform float time;
-  uniform float intensity;
-  uniform vec3 color1;
-  uniform vec3 color2;
+  uniform vec3 colorPrimary;
+  uniform vec3 colorSecondary;
+  uniform vec3 colorBackground;
   varying vec2 vUv;
-  varying vec3 vPosition;
   
+  // Basic noise function for organic blending
+  float noise(vec2 p) {
+    return sin(p.x * 10.0 + time * 0.1) * cos(p.y * 10.0 + time * 0.15);
+  }
+
   void main() {
     vec2 uv = vUv;
     
-    // Create animated noise pattern
-    float noise = sin(uv.x * 20.0 + time) * cos(uv.y * 15.0 + time * 0.8);
-    noise += sin(uv.x * 35.0 - time * 2.0) * cos(uv.y * 25.0 + time * 1.2) * 0.5;
+    // Create soft, fluid moving coordinates
+    vec2 p1 = uv + vec2(sin(time * 0.05), cos(time * 0.08));
+    vec2 p2 = uv + vec2(cos(time * 0.07), sin(time * 0.06));
     
-    // Mix colors based on noise and position
-    vec3 color = mix(color1, color2, noise * 0.5 + 0.5);
-    color = mix(color, vec3(1.0), pow(abs(noise), 2.0) * intensity);
+    // Generate organic mixing values
+    float mix1 = (noise(p1) + 1.0) * 0.5;
+    float mix2 = (noise(p2 * 1.5) + 1.0) * 0.5;
     
-    // Add glow effect
-    float glow = 1.0 - length(uv - 0.5) * 2.0;
-    glow = pow(glow, 2.0);
+    // Blend colors to create a "glowing nebula" effect
+    vec3 finalColor = mix(colorBackground, colorPrimary, mix1 * 0.4);
+    finalColor = mix(finalColor, colorSecondary, mix2 * 0.3);
     
-    gl_FragColor = vec4(color * glow, glow * 0.8);
+    // Add a subtle vignette (darker edges, brighter center)
+    float vignette = length(uv - 0.5);
+    finalColor = mix(finalColor, colorBackground, vignette * 1.5);
+    
+    gl_FragColor = vec4(finalColor, 1.0);
   }
 `
 
 export function ShaderPlane({
-  position,
-  color1 = "#ff5722",
-  color2 = "#ffffff",
+  position = [0, 0, -1],
+  colorPrimary = "#00ED64",    // Vibrant Neon Green
+  colorSecondary = "#00684A",  // Deep Emerald
+  colorBackground = "#020B14", // Very Dark Slate/Blue
 }: {
-  position: [number, number, number]
-  color1?: string
-  color2?: string
+  position?: [number, number, number]
+  colorPrimary?: string
+  colorSecondary?: string
+  colorBackground?: string
 }) {
   const mesh = useRef<THREE.Mesh>(null)
 
   const uniforms = useMemo(
     () => ({
       time: { value: 0 },
-      intensity: { value: 1.0 },
-      color1: { value: new THREE.Color(color1) },
-      color2: { value: new THREE.Color(color2) },
+      colorPrimary: { value: new THREE.Color(colorPrimary) },
+      colorSecondary: { value: new THREE.Color(colorSecondary) },
+      colorBackground: { value: new THREE.Color(colorBackground) },
     }),
-    [color1, color2],
+    [colorPrimary, colorSecondary, colorBackground]
   )
 
   useFrame((state) => {
     if (mesh.current) {
-      uniforms.time.value = state.clock.elapsedTime
-      uniforms.intensity.value = 1.0 + Math.sin(state.clock.elapsedTime * 2) * 0.3
+      uniforms.time.value = state.clock.elapsedTime;
     }
   })
 
   return (
-    <mesh ref={mesh} position={position}>
-      <planeGeometry args={[2, 2, 32, 32]} />
+    // Scaled up to cover the full background smoothly
+    <mesh ref={mesh} position={position} scale={[15, 15, 1]}>
+      <planeGeometry args={[1, 1, 64, 64]} />
       <shaderMaterial
         uniforms={uniforms}
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
-        transparent
-        side={THREE.DoubleSide}
+        depthWrite={false}
       />
-    </mesh>
-  )
-}
-
-export function EnergyRing({
-  radius = 1,
-  position = [0, 0, 0],
-}: {
-  radius?: number
-  position?: [number, number, number]
-}) {
-  const mesh = useRef<THREE.Mesh>(null)
-
-  useFrame((state) => {
-    if (mesh.current) {
-      mesh.current.rotation.z = state.clock.elapsedTime
-      if (mesh.current.material instanceof THREE.MeshBasicMaterial) {
-        mesh.current.material.opacity = 0.5 + Math.sin(state.clock.elapsedTime * 3) * 0.3
-      }
-    }
-  })
-
-  return (
-    <mesh ref={mesh} position={position}>
-      <ringGeometry args={[radius * 0.8, radius, 32]} />
-      <meshBasicMaterial color="#ff5722" transparent opacity={0.6} side={THREE.DoubleSide} />
     </mesh>
   )
 }

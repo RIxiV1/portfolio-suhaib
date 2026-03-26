@@ -61,7 +61,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
             <div className="flex gap-3">
               <a href={project.link} target="_blank" rel="noopener noreferrer"
                 className="flex-1 py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all hover:scale-[1.02]"
-                style={{ background: 'var(--primary)', color: '#fff' }}>
+                style={{ background: 'var(--primary)', color: 'var(--primary-foreground)' }}>
                 <ExternalLink className="w-4 h-4" /> View Project
               </a>
               <a href={project.link} target="_blank" rel="noopener noreferrer"
@@ -132,7 +132,7 @@ export default function Projects() {
               <button key={c} onClick={() => setCategory(c)}
                 className="px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider border transition-all"
                 style={category === c
-                  ? { background: 'var(--primary)', borderColor: 'var(--primary)', color: '#fff', boxShadow: '0 0 20px var(--primary-glow)' }
+                  ? { background: 'var(--primary)', borderColor: 'var(--primary)', color: 'var(--primary-foreground)', boxShadow: '0 0 20px var(--primary-glow)' }
                   : { background: 'var(--surface)', borderColor: 'var(--border)', color: 'var(--muted)' }
                 }
               >
