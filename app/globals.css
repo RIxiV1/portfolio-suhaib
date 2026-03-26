@@ -1,19 +1,90 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  --color-destructive-foreground: var(--destructive-foreground);
+}
+
 @layer base {
   :root {
+    /* New Variables from request */
+    --background: oklch(0 0 0);
+    --foreground: oklch(1 0 0);
+    --card: oklch(0.1 0 0 / 0.1);
+    --card-foreground: oklch(1 0 0);
+    --popover: oklch(0 0 0 / 0.8);
+    --popover-foreground: oklch(1 0 0);
+    --primary: oklch(1 0 0);
+    --primary-foreground: oklch(0 0 0);
+    --secondary: oklch(0.65 0.25 25);
+    --secondary-foreground: oklch(1 0 0);
+    --muted: oklch(1 0 0 / 0.5);
+    --muted-foreground: oklch(0.7 0 0);
+    --accent: oklch(0.65 0.25 25);
+    --accent-foreground: oklch(1 0 0);
+    --destructive: oklch(0.6 0.25 15);
+    --destructive-foreground: oklch(1 0 0);
+    --border: oklch(1 0 0 / 0.2);
+    --input: oklch(1 0 0 / 0.1);
+    --ring: oklch(1 0 0 / 0.3);
+    --chart-1: oklch(0.65 0.25 25);
+    --chart-2: oklch(0.8 0.15 85);
+    --chart-3: oklch(0.7 0.2 140);
+    --chart-4: oklch(0.7 0.2 240);
+    --chart-5: oklch(0.6 0.25 300);
+    --radius: 0.5rem;
+    --sidebar: oklch(0 0 0 / 0.9);
+    --sidebar-foreground: oklch(1 0 0);
+    --sidebar-primary: oklch(0.65 0.25 25);
+    --sidebar-primary-foreground: oklch(1 0 0);
+    --sidebar-accent: oklch(0.65 0.25 25);
+    --sidebar-accent-foreground: oklch(1 0 0);
+    --sidebar-border: oklch(1 0 0 / 0.2);
+    --sidebar-ring: oklch(1 0 0 / 0.3);
+
+    /* Original Variables (preserved for layout) */
     --bg: #050505;
     --surface: rgba(255,255,255,0.04);
-    --border: rgba(255,255,255,0.08);
-    --border-hover: rgba(255,255,255,0.16);
-    --primary: #256af4;
     --primary-glow: rgba(37,106,244,0.25);
-    --accent: #8b5cf6;
     --accent-glow: rgba(139,92,246,0.25);
-    --muted: rgba(255,255,255,0.4);
-    --foreground: rgba(255,255,255,0.92);
-    --font-sans: var(--font-inter);
-    --font-mono: var(--font-jetbrains);
+    --border-hover: rgba(255,255,255,0.16);
+  }
+
+  .dark {
+    --background: oklch(0 0 0);
+    --foreground: oklch(1 0 0);
+    --card: oklch(0.1 0 0 / 0.1);
+    --card-foreground: oklch(1 0 0);
+    --popover: oklch(0 0 0 / 0.8);
+    --popover-foreground: oklch(1 0 0);
+    --primary: oklch(1 0 0);
+    --primary-foreground: oklch(0 0 0);
+    --secondary: oklch(0.65 0.25 25);
+    --secondary-foreground: oklch(1 0 0);
+    --muted: oklch(1 0 0 / 0.5);
+    --muted-foreground: oklch(0.7 0 0);
+    --accent: oklch(0.65 0.25 25);
+    --accent-foreground: oklch(1 0 0);
+    --destructive: oklch(0.6 0.25 15);
+    --destructive-foreground: oklch(1 0 0);
+    --border: oklch(1 0 0 / 0.2);
+    --input: oklch(1 0 0 / 0.1);
+    --ring: oklch(1 0 0 / 0.3);
+    --chart-1: oklch(0.65 0.25 25);
+    --chart-2: oklch(0.8 0.15 85);
+    --chart-3: oklch(0.7 0.2 140);
+    --chart-4: oklch(0.7 0.2 240);
+    --chart-5: oklch(0.6 0.25 300);
+    --sidebar: oklch(0 0 0 / 0.9);
+    --sidebar-foreground: oklch(1 0 0);
+    --sidebar-primary: oklch(0.65 0.25 25);
+    --sidebar-primary-foreground: oklch(1 0 0);
+    --sidebar-accent: oklch(0.65 0.25 25);
+    --sidebar-accent-foreground: oklch(1 0 0);
+    --sidebar-border: oklch(1 0 0 / 0.2);
+    --sidebar-ring: oklch(1 0 0 / 0.3);
   }
 
   *, *::before, *::after { box-sizing: border-box; }
@@ -21,23 +92,23 @@
   html { scroll-behavior: smooth; }
   
   body {
-    background-color: var(--bg);
+    background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans), sans-serif;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
-
-  ::selection {
-    background: var(--primary);
-    color: #fff;
-  }
-
-  /* Custom scrollbar */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 999px; }
 }
+
+::selection {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 999px; }
 
 @layer utilities {
   .glass {
