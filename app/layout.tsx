@@ -23,9 +23,12 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Suhaib — Developer Portfolio",
-  description: "Junior developer based in India. I build (and break) things for the web. Open to internships and freelance.",
-  keywords: ["developer", "portfolio", "React", "Next.js", "TypeScript", "Python", "AI"],
+  title: "Suhaib — Software Engineer",
+  description: "Software Engineer specializing in Product & AI Systems. Minimalist, high-performance architecture.",
+  icons: {
+    icon: "/favicon.png",
+  },
+  keywords: ["developer", "portfolio", "React", "Next.js", "TypeScript", "Python", "AI", "Software Engineer"],
   authors: [{ name: "Suhaib" }],
   creator: "Suhaib",
   openGraph: {

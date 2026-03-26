@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { Menu, X, Command } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -45,8 +46,15 @@ export default function Navbar() {
           animate={{ opacity: 1, x: 0 }}
           className="flex items-center gap-2.5 group"
         >
-          <div className="w-8 h-8 rounded-lg bg-[var(--primary)] flex items-center justify-center font-bold text-white text-sm">S</div>
-          <span className="hidden sm:block font-semibold tracking-tight">suhaib.dev</span>
+          <div className="relative w-9 h-9 overflow-hidden rounded-lg border border-[var(--border)] group-hover:border-[var(--primary)] transition-colors">
+            <Image
+              src="/logo.png"
+              alt="Suhaib Logo"
+              fill
+              className="object-contain p-1 scale-150 rotate-[-15deg] group-hover:rotate-0 transition-transform duration-500 bg-black"
+            />
+          </div>
+          <span className="hidden sm:block font-bold tracking-tight text-white/90 group-hover:text-white transition-colors">suhaib.dev</span>
         </motion.a>
 
         {/* Desktop nav */}
