@@ -31,12 +31,18 @@ export default function Experience() {
 
       <div className="relative">
         {/* Vertical neon line */}
-        <div className="absolute left-6 top-0 bottom-0 w-px" style={{ background: 'linear-gradient(to bottom, var(--primary), var(--accent), rgba(255,255,255,0.05))' }} />
+        <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-[var(--primary)] via-[var(--accent)] to-transparent opacity-20" />
 
         <div className="space-y-8">
           {experience.map((exp, i) => {
             const Icon = icons[exp.type];
             const color = colors[exp.type];
+            const styleObj = { 
+              backgroundColor: `${color}15`, 
+              borderColor: `${color}40`, 
+              color 
+            };
+
             return (
               <motion.div
                 key={exp.id}
@@ -48,8 +54,8 @@ export default function Experience() {
               >
                 {/* Node */}
                 <div
-                  className="absolute left-0 w-12 h-12 rounded-2xl flex items-center justify-center border"
-                  style={{ background: `${color}15`, borderColor: `${color}40`, color }}
+                  className="absolute left-0 w-12 h-12 rounded-2xl flex items-center justify-center border transition-colors"
+                  style={styleObj}
                 >
                   <Icon className="w-5 h-5" />
                 </div>

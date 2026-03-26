@@ -7,18 +7,20 @@ import * as THREE from 'three';
 import { graphData, GraphNode } from '@/data/graphData';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const getPos = (id: string): [number, number, number] => {
+  const seed = id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return [
+    Math.sin(seed * 0.1) * 10,
+    Math.cos(seed * 0.2) * 10,
+    Math.sin(seed * 0.3) * 10,
+  ];
+};
+
 function Node({ node, isHovered, onHover }: { node: GraphNode; isHovered: boolean; onHover: (id: string | null) => void }) {
   const meshRef = useRef<THREE.Mesh>(null);
   
   // Random initial position based on node ID to keep it consistent
-  const pos = useMemo(() => {
-    const seed = node.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    return [
-      (Math.sin(seed * 0.1) * 10),
-      (Math.cos(seed * 0.2) * 10),
-      (Math.sin(seed * 0.3) * 10)
-    ] as [number, number, number];
-  }, [node.id]);
+  const pos = useMemo(() => getPos(node.id), [node.id]);
 
   useFrame((state) => {
     if (meshRef.current) {
@@ -61,21 +63,12 @@ function Node({ node, isHovered, onHover }: { node: GraphNode; isHovered: boolea
 
 function Connections({ hoveredNode }: { hoveredNode: string | null }) {
   const lines = useMemo(() => {
-    return (graphData.links as unknown as any[]).map(link => {
-      const sourceNode = (graphData.nodes as unknown as GraphNode[]).find(n => n.id === link.source)!;
-      const targetNode = (graphData.nodes as unknown as GraphNode[]).find(n => n.id === link.target)!;
+    return (graphData.links).map(link => {
+      const sourceNode = (graphData.nodes).find(n => n.id === link.source)!;
+      const targetNode = (graphData.nodes).find(n => n.id === link.target)!;
       
-      const getPos = (node: GraphNode) => {
-        const seed = node.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-        return [
-          (Math.sin(seed * 0.1) * 10),
-          (Math.cos(seed * 0.2) * 10),
-          (Math.sin(seed * 0.3) * 10)
-        ] as [number, number, number];
-      };
-
-      const start = getPos(sourceNode);
-      const end = getPos(targetNode);
+      const start = getPos(sourceNode.id);
+      const end = getPos(targetNode.id);
       
       const isActive = hoveredNode === link.source || hoveredNode === link.target;
       
@@ -112,7 +105,7 @@ export default function NexusGraph() {
         
         <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
           <Connections hoveredNode={hoveredNode} />
-          {(graphData.nodes as unknown as GraphNode[]).map((node) => (
+          {(graphData.nodes).map((node) => (
             <Node 
               key={node.id} 
               node={node} 

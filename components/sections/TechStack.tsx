@@ -19,7 +19,7 @@ const techs = [
 
 export default function TechStack() {
   return (
-    <section className="py-24 overflow-hidden" style={{ background: 'rgba(255,255,255,0.02)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+    <section className="py-24 overflow-hidden bg-white/[0.02] border-y border-[var(--border)]">
       <div className="container-narrow mb-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -40,8 +40,8 @@ export default function TechStack() {
           style={{ background: 'linear-gradient(to left, var(--bg), transparent)' }} />
 
         <motion.div
-          animate={{ x: [0, -(techs.length * 192) / 2] }}
-          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+          animate={{ x: [0, -50 + '%'] }}
+          transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
           className="flex gap-6 py-4 whitespace-nowrap"
         >
           {[...techs, ...techs].map((tech, i) => (

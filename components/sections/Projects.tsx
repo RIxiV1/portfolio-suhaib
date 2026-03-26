@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { projects, Project } from '@/data/projects';
 import { ExternalLink, Github, X, Code2, Eye } from 'lucide-react';
 
@@ -9,91 +10,95 @@ const CATEGORIES = ['All', 'AI', 'Frontend'];
 
 function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
   return (
-    <AnimatePresence>
-      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+        className="absolute inset-0"
+        style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(16px)' }}
+      />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.94, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.94, y: 20 }}
+        className="relative w-full max-w-5xl max-h-[88vh] overflow-y-auto glass rounded-[2rem] border"
+        style={{ borderColor: 'var(--border-hover)' }}
+      >
+        <button
           onClick={onClose}
-          className="absolute inset-0"
-          style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(16px)' }}
-        />
-        <motion.div
-          initial={{ opacity: 0, scale: 0.94, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.94, y: 20 }}
-          className="relative w-full max-w-5xl max-h-[88vh] overflow-y-auto glass rounded-[2rem] border"
-          style={{ borderColor: 'var(--border-hover)' }}
+          className="absolute top-5 right-5 p-2.5 glass glass-hover rounded-full z-10"
         >
-          <button
-            onClick={onClose}
-            className="absolute top-5 right-5 p-2.5 glass glass-hover rounded-full z-10"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          <X className="w-5 h-5" />
+        </button>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2">
-            {/* Left */}
-            <div className="p-8 md:p-10 border-b lg:border-b-0 lg:border-r" style={{ borderColor: 'rgba(255,255,255,0.05)' }}>
-              <div className="aspect-video rounded-2xl overflow-hidden mb-8 border" style={{ borderColor: 'var(--border)' }}>
-                <img src={project.thumbnail} alt={project.title} className="w-full h-full object-cover" />
-              </div>
-              <h2 className="text-3xl font-bold mb-2">{project.title}</h2>
-              <p className="text-sm font-mono text-[var(--muted)] mb-5">{project.tagline}</p>
-              <p className="text-[var(--muted)] leading-relaxed mb-6">{project.description}</p>
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+          {/* Left */}
+          <div className="p-8 md:p-10 border-b lg:border-b-0 lg:border-r" style={{ borderColor: 'rgba(255,255,255,0.05)' }}>
+            <div className="aspect-video rounded-2xl overflow-hidden mb-8 border relative" style={{ borderColor: 'var(--border)' }}>
+              <Image 
+                src={project.thumbnail} 
+                alt={project.title} 
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+            <h2 className="text-3xl font-bold mb-2">{project.title}</h2>
+            <p className="text-sm font-mono text-[var(--muted)] mb-5">{project.tagline}</p>
+            <p className="text-[var(--muted)] leading-relaxed mb-6">{project.description}</p>
 
-              <div className="flex flex-wrap gap-2 mb-8">
-                {project.tags.map(t => (
-                  <span key={t} className="px-3 py-1.5 rounded-full text-[10px] font-mono uppercase tracking-widest border"
-                    style={{ background: 'rgba(37,106,244,0.1)', borderColor: 'rgba(37,106,244,0.3)', color: 'var(--primary)' }}>
-                    {t}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex gap-3">
-                <a href={project.link} target="_blank" rel="noopener noreferrer"
-                  className="flex-1 py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all hover:scale-[1.02]"
-                  style={{ background: 'var(--primary)', color: '#fff' }}>
-                  <ExternalLink className="w-4 h-4" /> View Project
-                </a>
-                <a href={project.link} target="_blank" rel="noopener noreferrer"
-                  className="px-5 py-3.5 glass glass-hover rounded-xl flex items-center justify-center transition-all">
-                  <Github className="w-5 h-5" />
-                </a>
-              </div>
+            <div className="flex flex-wrap gap-2 mb-8">
+              {project.tags.map(t => (
+                <span key={t} className="px-3 py-1.5 rounded-full text-[10px] font-mono uppercase tracking-widest border"
+                  style={{ background: 'rgba(37,106,244,0.1)', borderColor: 'rgba(37,106,244,0.3)', color: 'var(--primary)' }}>
+                  {t}
+                </span>
+              ))}
             </div>
 
-            {/* Right: Code preview */}
-            <div className="p-8 md:p-10" style={{ background: 'rgba(255,255,255,0.02)' }}>
-              <div className="flex items-center gap-2 text-[var(--primary)] mb-6">
-                <Code2 className="w-5 h-5" />
-                <span className="font-mono text-xs uppercase tracking-widest font-bold">Architecture Preview</span>
-              </div>
-              {project.codeSnippet && (
-                <div className="relative rounded-2xl overflow-hidden border mb-6"
-                  style={{ background: '#0d0d11', borderColor: 'var(--border)' }}>
-                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-transparent opacity-60" />
-                  <div className="flex items-center gap-1.5 px-4 py-3 border-b" style={{ borderColor: 'var(--border)' }}>
-                    {['#ff5f57', '#febc2e', '#28c840'].map(c => (
-                      <div key={c} className="w-3 h-3 rounded-full" style={{ background: c }} />
-                    ))}
-                  </div>
-                  <pre className="p-5 text-xs md:text-sm leading-relaxed overflow-x-auto" style={{ color: '#a9b1d6', fontFamily: 'var(--font-jetbrains), monospace' }}>
-                    <code>{project.codeSnippet}</code>
-                  </pre>
-                </div>
-              )}
-              <div className="glass p-5 rounded-2xl">
-                <p className="text-xs font-mono uppercase tracking-widest text-[var(--muted)] mb-2">Status</p>
-                <p className="text-sm">Production-ready. Built following industrial patterns.</p>
-              </div>
+            <div className="flex gap-3">
+              <a href={project.link} target="_blank" rel="noopener noreferrer"
+                className="flex-1 py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all hover:scale-[1.02]"
+                style={{ background: 'var(--primary)', color: '#fff' }}>
+                <ExternalLink className="w-4 h-4" /> View Project
+              </a>
+              <a href={project.link} target="_blank" rel="noopener noreferrer"
+                className="px-5 py-3.5 glass glass-hover rounded-xl flex items-center justify-center transition-all">
+                <Github className="w-5 h-5" />
+              </a>
             </div>
           </div>
-        </motion.div>
-      </div>
-    </AnimatePresence>
+
+          {/* Right: Code preview */}
+          <div className="p-8 md:p-10" style={{ background: 'rgba(255,255,255,0.02)' }}>
+            <div className="flex items-center gap-2 text-[var(--primary)] mb-6">
+              <Code2 className="w-5 h-5" />
+              <span className="font-mono text-xs uppercase tracking-widest font-bold">Architecture Preview</span>
+            </div>
+            {project.codeSnippet && (
+              <div className="relative rounded-2xl overflow-hidden border mb-6"
+                style={{ background: '#0d0d11', borderColor: 'var(--border)' }}>
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-transparent opacity-60" />
+                <div className="flex items-center gap-1.5 px-4 py-3 border-b" style={{ borderColor: 'var(--border)' }}>
+                  {['#ff5f57', '#febc2e', '#28c840'].map(c => (
+                    <div key={c} className="w-3 h-3 rounded-full" style={{ background: c }} />
+                  ))}
+                </div>
+                <pre className="p-5 text-xs md:text-sm leading-relaxed overflow-x-auto" style={{ color: '#a9b1d6', fontFamily: 'var(--font-jetbrains), monospace' }}>
+                  <code>{project.codeSnippet}</code>
+                </pre>
+              </div>
+            )}
+            <div className="glass p-5 rounded-2xl">
+              <p className="text-xs font-mono uppercase tracking-widest text-[var(--muted)] mb-2">Status</p>
+              <p className="text-sm">Production-ready. Built following industrial patterns.</p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
   );
 }
 
@@ -152,8 +157,13 @@ export default function Projects() {
               >
                 {/* Image */}
                 <div className="relative aspect-video overflow-hidden">
-                  <img src={project.thumbnail} alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <Image 
+                    src={project.thumbnail} 
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105" 
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
                   {/* Preview icon */}
@@ -204,7 +214,9 @@ export default function Projects() {
       </section>
 
       {/* Modal */}
-      {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}
+      <AnimatePresence>
+        {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}
+      </AnimatePresence>
     </>
   );
 }

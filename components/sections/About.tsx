@@ -2,6 +2,7 @@
 
 import { motion, type Transition, type Variants } from 'framer-motion';
 import { MapPin, Code2, Coffee, Rocket, Github, Briefcase } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const fadeUpVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -26,7 +27,7 @@ function BentoCard({
     <motion.div
       whileHover={{ scale: 1.01, y: -2 }}
       transition={{ duration: 0.2 }}
-      className={`glass glass-hover rounded-3xl p-6 ${className}`}
+      className={cn("glass glass-hover rounded-3xl p-6", className)}
     >
       {children}
     </motion.div>

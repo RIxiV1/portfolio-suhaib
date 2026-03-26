@@ -11,7 +11,7 @@ export interface GraphLink {
   target: string;
 }
 
-export const graphData = {
+export const graphData: { nodes: GraphNode[], links: GraphLink[] } = {
   nodes: [
     { id: 'me', label: 'Suhaib', type: 'core', color: '#ffffff', val: 20 },
     
@@ -31,7 +31,7 @@ export const graphData = {
     // Articles
     { id: 'art-network', label: 'Network Theory', type: 'article', color: '#ffffff', val: 10 },
     { id: 'art-chaos', label: 'Chaos Theory', type: 'article', color: '#ffffff', val: 10 },
-  ] as const,
+  ],
   links: [
     // Core connections
     { source: 'me', target: 'skill-ai' },
@@ -54,5 +54,5 @@ export const graphData = {
     { source: 'me', target: 'art-chaos' },
     { source: 'art-network', target: 'proj-infoblend' }, // Connections binding everything
     { source: 'art-chaos', target: 'skill-ai' },
-  ] as const
+  ]
 };
