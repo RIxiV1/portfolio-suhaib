@@ -10,78 +10,58 @@ const icons = {
   project: FolderGit2,
 };
 
-const colors = {
-  work: 'var(--primary)',
-  education: 'var(--accent)',
-  project: '#10b981',
-};
-
 export default function Experience() {
   return (
     <section id="experience" className="section-padding container-narrow">
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         className="flex flex-col mb-14"
       >
-        <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--muted)] mb-3">Journey</span>
-        <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-gradient">My Story.</h2>
+        <span className="font-mono text-xs uppercase tracking-[0.2em] text-neutral-500 mb-3">Journey</span>
+        <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">My Story.</h2>
       </motion.div>
 
       <div className="relative">
-        {/* Vertical neon line */}
-        <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-[var(--primary)] via-[var(--accent)] to-transparent opacity-20" />
+        <div className="absolute left-6 top-0 bottom-0 w-px bg-white/10" />
 
         <div className="space-y-8">
           {experience.map((exp, i) => {
             const Icon = icons[exp.type];
-            const color = colors[exp.type];
-            const styleObj = { 
-              backgroundColor: `${color}15`, 
-              borderColor: `${color}40`, 
-              color 
-            };
 
             return (
               <motion.div
                 key={exp.id}
-                initial={{ opacity: 0, x: -30 }}
+                initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="relative pl-16"
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                className="relative pl-16 group"
               >
                 {/* Node */}
-                <div
-                  className="absolute left-0 w-12 h-12 rounded-2xl flex items-center justify-center border transition-colors"
-                  style={styleObj}
-                >
+                <div className="absolute left-0 w-12 h-12 rounded-2xl flex items-center justify-center bg-black border border-white/20 text-white group-hover:border-white transition-colors">
                   <Icon className="w-5 h-5" />
                 </div>
 
                 {/* Card */}
-                <motion.div
-                  whileHover={{ scale: 1.01, y: -2 }}
-                  className="glass glass-hover rounded-2xl p-6"
-                >
+                <div className="bg-[#0a0a0a] border border-white/10 rounded-2xl p-6 group-hover:border-white/30 transition-colors">
                   <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
                     <div>
-                      <h3 className="text-lg font-bold">{exp.role}</h3>
-                      <p className="text-sm font-mono" style={{ color }}>{exp.org}</p>
+                      <h3 className="text-lg font-bold text-white mb-1">{exp.role}</h3>
+                      <p className="text-sm font-mono text-neutral-400">{exp.org}</p>
                     </div>
-                    <span className="text-xs font-mono text-[var(--muted)] px-3 py-1.5 glass rounded-full">{exp.period}</span>
+                    <span className="text-xs font-mono text-neutral-500 px-3 py-1.5 bg-white/5 rounded-full border border-white/5">{exp.period}</span>
                   </div>
-                  <p className="text-sm text-[var(--muted)] leading-relaxed mb-4">{exp.description}</p>
-                  <div className="flex flex-wrap gap-1.5">
+                  <p className="text-sm text-neutral-300 leading-relaxed mb-4">{exp.description}</p>
+                  <div className="flex flex-wrap gap-2">
                     {exp.tags.map(t => (
-                      <span key={t} className="px-2.5 py-1 rounded-full text-[9px] font-mono uppercase tracking-wider border"
-                        style={{ background: 'var(--surface)', borderColor: 'var(--border)', color: 'var(--muted)' }}>
+                      <span key={t} className="px-2.5 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-white/5 border border-white/10 text-neutral-400">
                         {t}
                       </span>
                     ))}
                   </div>
-                </motion.div>
+                </div>
               </motion.div>
             );
           })}

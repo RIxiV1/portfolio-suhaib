@@ -1,9 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import CustomCursor from "@/components/ui/CustomCursor";
 import Navbar from "@/components/layout/Navbar";
-import GlobalBackground from "@/components/ui/GlobalBackground";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -18,7 +16,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#050505",
+  themeColor: "#000000",
   width: "device-width",
   initialScale: 1,
 };
@@ -51,12 +49,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth dark">
       <body
-        className={`${inter.variable} ${jetbrains.variable} antialiased`}
-        style={{ background: "var(--background)", color: "var(--foreground)" }}
+        className={`${inter.variable} ${jetbrains.variable} antialiased bg-black text-white`}
       >
-        <GlobalBackground />
-        <div className="noise-overlay" />
-        <CustomCursor />
         <Navbar />
         {children}
       </body>
