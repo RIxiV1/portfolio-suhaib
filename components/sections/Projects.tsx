@@ -60,7 +60,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
 
             <div className="flex gap-3">
               <a href={project.link} target="_blank" rel="noopener noreferrer"
-                className="flex-1 py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all hover:scale-[1.02]"
+                className="flex-1 py-3.5 rounded-xl font-mono uppercase tracking-wider text-xs font-bold flex items-center justify-center gap-2 transition-all hover:scale-[1.02] active:scale-[0.98]"
                 style={{ background: 'var(--primary)', color: 'var(--primary-foreground)' }}>
                 <ExternalLink className="w-4 h-4" /> View Project
               </a>
@@ -152,6 +152,8 @@ export default function Projects() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.35 }}
+                whileHover={{ y: -5, boxShadow: '0 10px 40px -10px var(--primary-glow)' }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setSelected(project)}
                 className="group glass glass-hover rounded-2xl overflow-hidden cursor-pointer"
               >
@@ -195,7 +197,7 @@ export default function Projects() {
                 </div>
 
                 {/* Info */}
-                <div className="p-6">
+                <div className="p-8">
                   <h3 className="text-lg font-bold mb-1 group-hover:text-[var(--primary)] transition-colors">{project.title}</h3>
                   <p className="text-xs font-mono text-[var(--muted)] mb-4">{project.tagline}</p>
                   <div className="flex flex-wrap gap-1.5">

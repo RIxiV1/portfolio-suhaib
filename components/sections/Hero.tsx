@@ -34,13 +34,7 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* Background orbs */}
-      <FloatingOrb className="w-[600px] h-[600px] -top-40 -left-40 opacity-10"
-        style={{ background: 'radial-gradient(circle, #256af4, transparent)' } as React.CSSProperties}
-      />
-      <FloatingOrb className="w-[500px] h-[500px] -bottom-20 -right-20 opacity-10"
-        style={{ background: 'radial-gradient(circle, #8b5cf6, transparent)' } as React.CSSProperties}
-      />
+      {/* Legacy background orbs removed in favor of global shader */}
 
       {/* Static grid pattern */}
       <div
@@ -92,14 +86,14 @@ export default function Hero() {
         <motion.div variants={item} className="flex flex-wrap items-center gap-4 justify-center">
           <a
             href="#projects"
-            className="px-8 py-3.5 rounded-full font-semibold transition-all hover:scale-[1.03] active:scale-[0.97]"
+            className="px-8 py-3.5 rounded-full font-mono uppercase tracking-wider text-sm font-bold transition-all hover:scale-[1.03] active:scale-[0.97]"
             style={{ background: 'var(--primary)', color: 'var(--primary-foreground)', boxShadow: '0 0 40px var(--primary-glow)' }}
           >
             View my work
           </a>
           <a
             href="#contact"
-            className="px-8 py-3.5 rounded-full font-semibold glass glass-hover transition-all hover:scale-[1.03] active:scale-[0.97]"
+            className="px-8 py-3.5 rounded-full font-mono uppercase tracking-wider text-sm font-bold glass glass-hover transition-all hover:scale-[1.03] active:scale-[0.97]"
           >
             Get in touch
           </a>

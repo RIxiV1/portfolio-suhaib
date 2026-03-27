@@ -133,7 +133,7 @@ export default function Contact() {
             </div>
             <button
               type="submit"
-              className="flex items-center justify-center gap-2 py-4 rounded-xl font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="flex items-center justify-center gap-2 py-4 rounded-xl font-mono uppercase tracking-wider text-sm font-bold transition-all hover:scale-[1.02] active:scale-[0.98]"
               style={{ background: sent ? '#10b981' : 'var(--primary)', color: sent ? '#fff' : 'var(--primary-foreground)', boxShadow: '0 0 30px var(--primary-glow)' }}
             >
               <Send className="w-4 h-4" />

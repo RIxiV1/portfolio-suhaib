@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/ui/CustomCursor";
 import Navbar from "@/components/layout/Navbar";
+import GlobalBackground from "@/components/ui/GlobalBackground";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -51,8 +52,9 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth dark">
       <body
         className={`${inter.variable} ${jetbrains.variable} antialiased`}
-        style={{ background: "var(--bg)", color: "var(--foreground)" }}
+        style={{ background: "var(--background)", color: "var(--foreground)" }}
       >
+        <GlobalBackground />
         <div className="noise-overlay" />
         <CustomCursor />
         <Navbar />

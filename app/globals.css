@@ -4,74 +4,48 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-accent: var(--accent);
+  --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
 }
 
 @layer base {
-  :root {
-    /* Minimalist Vanilla Light Theme */
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.15 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.15 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.15 0 0);
-    --primary: oklch(0.15 0 0);
-    --primary-foreground: oklch(1 0 0);
-    --secondary: oklch(0.95 0 0);
-    --secondary-foreground: oklch(0.15 0 0);
-    --muted: oklch(0.4 0 0);
-    --muted-foreground: oklch(0.4 0 0);
-    --accent: oklch(0.95 0 0);
-    --accent-foreground: oklch(0.15 0 0);
-    --destructive: oklch(0.5 0.2 25);
-    --destructive-foreground: oklch(1 0 0);
-    --border: oklch(0.9 0 0);
-    --input: oklch(0.9 0 0);
-    --ring: oklch(0.4 0 0);
+  :root, .dark {
+    /* Phase 1: Deep-Tech Aesthetic Base Variables */
+    --background: #060606;
+    --foreground: #EDEDED;
+    --muted: rgba(255, 255, 255, 0.05);
+    --muted-foreground: #888888;
+    
+    --card: rgba(255, 255, 255, 0.02);
+    --card-foreground: #EDEDED;
+    --surface: rgba(255, 255, 255, 0.03);
+    
+    --border: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 255, 255, 0.15);
+    
+    --primary: #00ED64;
+    --primary-foreground: #000000;
+    
+    --accent: #00E5FF;
+    --accent-foreground: #000000;
+    
+    /* Legacy variables preserved for existing UI compatibility until Phase 3 */
+    --bg: #060606;
+    --primary-glow: rgba(0, 237, 100, 0.15);
+    --accent-glow: rgba(0, 229, 255, 0.15);
     --radius: 0.75rem;
-
-    /* Original Variables (preserved for layout) */
-    --bg: #050505;
-    --surface: rgba(255,255,255,0.04);
-    --primary-glow: rgba(37,106,244,0.25);
-    --accent-glow: rgba(139,92,246,0.25);
-    --border-hover: rgba(255,255,255,0.16);
-  }
-
-  .dark {
-    --background: oklch(0 0 0);
-    --foreground: oklch(1 0 0);
-    --card: oklch(0.1 0 0 / 0.1);
-    --card-foreground: oklch(1 0 0);
-    --popover: oklch(0 0 0 / 0.8);
-    --popover-foreground: oklch(1 0 0);
-    --primary: oklch(1 0 0);
-    --primary-foreground: oklch(0 0 0);
-    --secondary: oklch(0.65 0.25 25);
-    --secondary-foreground: oklch(1 0 0);
-    --muted: oklch(1 0 0 / 0.5);
-    --muted-foreground: oklch(0.7 0 0);
-    --accent: oklch(0.65 0.25 25);
-    --accent-foreground: oklch(1 0 0);
-    --destructive: oklch(0.6 0.25 15);
-    --destructive-foreground: oklch(1 0 0);
-    --border: oklch(1 0 0 / 0.2);
-    --input: oklch(1 0 0 / 0.1);
-    --ring: oklch(1 0 0 / 0.3);
-    --chart-1: oklch(0.65 0.25 25);
-    --chart-2: oklch(0.8 0.15 85);
-    --chart-3: oklch(0.7 0.2 140);
-    --chart-4: oklch(0.7 0.2 240);
-    --chart-5: oklch(0.6 0.25 300);
-    --sidebar: oklch(0 0 0 / 0.9);
-    --sidebar-foreground: oklch(1 0 0);
-    --sidebar-primary: oklch(0.65 0.25 25);
-    --sidebar-primary-foreground: oklch(1 0 0);
-    --sidebar-accent: oklch(0.65 0.25 25);
-    --sidebar-accent-foreground: oklch(1 0 0);
-    --sidebar-border: oklch(1 0 0 / 0.2);
-    --sidebar-ring: oklch(1 0 0 / 0.3);
   }
 
   *, *::before, *::after { box-sizing: border-box; }
@@ -101,8 +75,8 @@
   .glass {
     background: var(--surface);
     border: 1px solid var(--border);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
   }
   
   .glass-hover {
