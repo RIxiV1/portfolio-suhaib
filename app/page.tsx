@@ -9,7 +9,9 @@ import Footer from '@/components/layout/Footer';
 
 export default function Page() {
   return (
-    <main className="flex flex-col min-h-screen bg-black text-white">
+    <main className="relative flex flex-col min-h-screen bg-black text-white">
+      {/* Subtle grid background */}
+      <div className="fixed inset-0 grid-bg pointer-events-none z-0" />
       <Hero />
       <About />
       <Projects />
