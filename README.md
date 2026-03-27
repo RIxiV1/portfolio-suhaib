@@ -18,12 +18,12 @@
 This portfolio has undergone a comprehensive **Principal Software Engineer-level audit and optimization**, resulting in:
 - **Zero TypeScript Errors**: Strict type safety across the entire codebase.
 - **Architectural Excellence**: SOLID/DRY compliant component architecture and extracted business logic.
-- **Performance Optimized**: Next.js `Image` optimizations, throttled event listeners, and efficient 3D rendering.
+- **Performance Optimized**: Removed heavy 3D and animation libraries for a lightning-fast, minimalist aesthetic.
 - **Production Ready**: Verified 100% stable production builds.
 
 ## Overview
 
-A cinematic, high-end developer portfolio built with a **dark-mode-first** aesthetic inspired by Linear, Vercel, and Apple. Features smooth Framer Motion animations, a bento-grid About section, animated project modals with code previews, and a neon-path experience timeline.
+A premium, minimalist developer portfolio built with a **dark-mode-first** aesthetic inspired by Linear, Vercel, and Apple. Focuses on clean typography, subtle scroll-based entry animations, and a high-performance, distraction-free user experience.
 
 ---
 
@@ -34,8 +34,7 @@ A cinematic, high-end developer portfolio built with a **dark-mode-first** aesth
 | **Framework** | Next.js 15 (App Router) |
 | **Language** | TypeScript |
 | **Styling** | Tailwind CSS 4 |
-| **Animations** | Framer Motion · GSAP · Lenis |
-| **3D** | React Three Fiber · Three.js |
+| **Animations** | Framer Motion (Lightweight Scroll Reveals) |
 | **Icons** | Lucide React |
 | **Fonts** | Inter · JetBrains Mono |
 
@@ -45,12 +44,12 @@ A cinematic, high-end developer portfolio built with a **dark-mode-first** aesth
 
 | Section | Description |
 |---|---|
-| 🎬 **Hero** | Cinematic entrance with neon glow orbs, gradient headline, and scroll-based parallax |
-| 🧩 **About** | Interactive bento-grid with stats, bio, focus, and availability status |
-| 🗂 **Projects** | Animated category filtering, glassmorphic cards, and clickable code-preview modals |
-| ⚡ **Tech Stack** | Infinite auto-scrolling marquee of glassmorphic tech icon cards |
-| 📍 **Experience** | Neon-path vertical timeline with type-based icons for work, education, and projects |
-| 📬 **Contact** | Glow-focus form with social links and mailto integration |
+| 🎬 **Hero** | Clean typography, confident messaging, and subtle scroll-based parallax. |
+| 🧩 **About** | Structured, simple grid with stats, bio, focus, and availability status. |
+| 🗂 **Projects** | Clean category filtering, modern project cards, and clickable code-preview modals. |
+| ⚡ **Tech Stack** | Symmetrical bento-style grid of technology tags with graceful fade-ins. |
+| 📍 **Experience** | Structured timeline layout with neutral dark tones and crisp typography. |
+| 📬 **Contact** | Minimalist, functional form with social links and robust mailto integration. |
 
 ---
 
@@ -77,16 +76,17 @@ Open [http://localhost:3000](http://localhost:3000) to view.
 portfolio-v3/
 ├── app/
 │   ├── layout.tsx        # Root layout — fonts, SEO, global components
-│   ├── page.tsx          # Page assembler
-│   └── globals.css       # Design system tokens + utilities
+│   ├── page.tsx          # Main assembly page
+│   └── globals.css       # Clean design system tokens + minimalist utilities
 ├── components/
 │   ├── layout/           # Navbar, Footer
-│   ├── sections/         # Hero, About, Projects, TechStack, Experience, Contact
-│   └── ui/               # CustomCursor, ProjectModal
+│   ├── sections/         # Hero, About, Projects, TechStack, Experience, Writing, Contact
+│   └── ui/               # ProjectModal
 ├── data/
 │   ├── projects.ts       # Project definitions + code snippets
-│   └── experience.ts     # Career timeline data
-|── public/               # Static assets
+│   ├── experience.ts     # Career timeline data
+│   └── writing.ts        # Article entries
+├── public/               # Static assets
 └── lib/
     └── utils.ts          # clsx + tailwind-merge helper
 ```
