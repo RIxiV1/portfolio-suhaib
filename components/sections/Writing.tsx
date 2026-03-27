@@ -56,7 +56,7 @@ export default function Writing() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="flex flex-col mb-14"
+        className="flex flex-col mb-10"
       >
         <span className="font-mono text-xs uppercase tracking-[0.2em] text-neutral-500 mb-3 flex items-center gap-2">
           <BookOpen className="w-3 h-3" />

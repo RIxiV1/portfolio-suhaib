@@ -49,12 +49,12 @@
 
 @layer utilities {
   .section-padding {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
   }
 
   .container-narrow {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 1.5rem;
   }

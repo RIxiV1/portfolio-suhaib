@@ -19,33 +19,43 @@ const techs = [
 
 export default function TechStack() {
   return (
-    <section className="py-24 border-y border-white/10 bg-[#050505]">
-      <div className="container-narrow">
+    <section className="py-24 md:py-32 border-y border-white/10 bg-[#020202] overflow-hidden">
+      <div className="container-narrow mb-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12"
+          className="flex flex-col"
         >
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-neutral-500 mb-3 block">Toolkit</span>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white">Tools of the trade.</h2>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-6">Tools of the trade.</h2>
+          <p className="text-neutral-400 max-w-xl md:text-lg leading-relaxed">
+            A look at the languages, frameworks, and libraries I use to build robust, scalable applications and seamless user experiences.
+          </p>
         </motion.div>
+      </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {techs.map((tech, i) => (
-            <motion.div
-              key={tech.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className="flex flex-col items-center justify-center gap-3 p-6 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-colors"
+      {/* Infinite scroll track */}
+      <div className="relative flex overflow-x-hidden">
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-r from-[#020202] to-transparent pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-l from-[#020202] to-transparent pointer-events-none" />
+
+        <motion.div
+          animate={{ x: [0, -50 + '%'] }}
+          transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+          className="flex gap-4 py-4 whitespace-nowrap"
+        >
+          {[...techs, ...techs].map((tech, i) => (
+            <div
+              key={`${tech.name}-${i}`}
+              className="group flex items-center justify-center gap-3 px-8 py-5 bg-[#0a0a0a] border border-white/10 rounded-2xl min-w-[200px] hover:border-white/30 hover:bg-white/5 transition-all duration-300"
             >
-              <span className="text-3xl">{tech.icon}</span>
-              <span className="font-medium text-sm text-neutral-300">{tech.name}</span>
-            </motion.div>
+              <span className="text-2xl grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 transition-all duration-300">{tech.icon}</span>
+              <span className="font-medium text-sm text-neutral-400 group-hover:text-white transition-colors duration-300">{tech.name}</span>
+            </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

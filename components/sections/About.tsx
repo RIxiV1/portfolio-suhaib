@@ -16,7 +16,7 @@ export default function About() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="flex flex-col mb-14"
+        className="flex flex-col mb-10"
       >
         <span className="font-mono text-xs uppercase tracking-[0.2em] text-neutral-500 mb-3">
           About

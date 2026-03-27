@@ -28,7 +28,7 @@ export default function Contact() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="flex flex-col mb-14"
+        className="flex flex-col mb-10"
       >
         <span className="font-mono text-xs uppercase tracking-[0.2em] text-neutral-500 mb-3">Say Hello</span>
         <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">Let's connect.</h2>
