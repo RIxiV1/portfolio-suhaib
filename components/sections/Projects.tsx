@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { projects, Project } from '@/data/projects';
-import { ExternalLink, Github, X, Code2, Eye } from 'lucide-react';
+import { ExternalLink, Github, X, Code2, Eye, ArrowUpRight } from 'lucide-react';
 
 const CATEGORIES = ['All', 'AI', 'Frontend'];
 
@@ -76,9 +76,9 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
             {project.codeSnippet && (
               <div className="relative rounded-2xl overflow-hidden border border-white/10 mb-6 bg-black">
                 <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/10">
-                  <div className="w-3 h-3 rounded-full bg-red-500" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                  <div className="w-3 h-3 rounded-full bg-green-500" />
+                  <div className="w-3 h-3 rounded-full bg-red-500/60" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
+                  <div className="w-3 h-3 rounded-full bg-green-500/60" />
                 </div>
                 <pre className="p-5 text-xs md:text-sm leading-relaxed overflow-x-auto text-neutral-300 font-mono">
                   <code>{project.codeSnippet}</code>
@@ -96,113 +96,159 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
   );
 }
 
+/* Featured project — full-width hero card */
+function FeaturedCard({ project, onClick }: { project: Project; onClick: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      onClick={onClick}
+      className="group relative bg-[#0a0a0a] border border-white/10 hover:border-white/25 rounded-3xl overflow-hidden cursor-pointer transition-all duration-500"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-2">
+        {/* Image */}
+        <div className="relative aspect-[16/10] lg:aspect-auto overflow-hidden">
+          <Image
+            src={project.thumbnail}
+            alt={project.title}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0a0a0a]/60 hidden lg:block" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent lg:hidden" />
+          
+          {/* Featured badge */}
+          <div className="absolute top-5 left-5">
+            <span className="px-3 py-1.5 rounded-full text-[9px] font-mono uppercase tracking-widest bg-white text-black font-bold">
+              Featured
+            </span>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-8 lg:p-10 flex flex-col justify-center">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-500 mb-4 block">{project.category}</span>
+          <h3 className="text-3xl md:text-4xl font-bold mb-3 text-white tracking-tight">{project.title}</h3>
+          <p className="text-neutral-400 leading-relaxed mb-6 max-w-md">{project.description}</p>
+
+          <div className="flex flex-wrap gap-2 mb-8">
+            {project.tags.map(t => (
+              <span key={t} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-[10px] font-mono uppercase tracking-wider text-neutral-400">
+                {t}
+              </span>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center gap-2 text-sm font-bold text-white group-hover:gap-3 transition-all">
+              View Project <ArrowUpRight className="w-4 h-4" />
+            </span>
+            <a href={project.link} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
+              className="p-2.5 bg-white/5 border border-white/10 rounded-full text-neutral-400 hover:bg-white hover:text-black hover:border-white transition-all">
+              <Github className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* Standard project card */
+function ProjectCard({ project, index, onClick }: { project: Project; index: number; onClick: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      onClick={onClick}
+      className="group bg-[#0a0a0a] border border-white/10 hover:border-white/25 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500"
+    >
+      {/* Image */}
+      <div className="relative aspect-video overflow-hidden">
+        <Image 
+          src={project.thumbnail} 
+          alt={project.title}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-105" 
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+
+        {/* Hover overlay */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40">
+          <div className="p-3 rounded-full bg-white text-black">
+            <Eye className="w-5 h-5" />
+          </div>
+        </div>
+
+        {/* GitHub link */}
+        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all z-10" onClick={e => e.stopPropagation()}>
+          <a href={project.link} target="_blank" rel="noopener noreferrer"
+            className="p-2 bg-black/60 backdrop-blur-md rounded-full text-white hover:bg-white hover:text-black transition-colors border border-white/10 block">
+            <Github className="w-3.5 h-3.5" />
+          </a>
+        </div>
+      </div>
+
+      {/* Info */}
+      <div className="p-6">
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <div>
+            <h3 className="text-lg font-bold text-white mb-1">{project.title}</h3>
+            <p className="text-xs font-mono text-neutral-500">{project.tagline}</p>
+          </div>
+          <ArrowUpRight className="w-4 h-4 text-neutral-600 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 mt-1" />
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          {project.tags.slice(0, 3).map(t => (
+            <span key={t} className="px-2 py-0.5 rounded-full text-[9px] font-mono uppercase tracking-wider bg-white/5 border border-white/10 text-neutral-500">
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Projects() {
-  const [category, setCategory] = useState('All');
   const [selected, setSelected] = useState<Project | null>(null);
 
-  const filtered = projects.filter(p => category === 'All' || p.tags.includes(category));
+  const featured = projects.filter(p => p.featured);
+  const rest = projects.filter(p => !p.featured);
 
   return (
     <>
       <section id="projects" className="section-padding container-narrow">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-neutral-500 mb-3 block">Selected Works</span>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">What I've built.</h2>
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-10"
+        >
+          <span className="font-mono text-xs uppercase tracking-[0.2em] text-neutral-500 mb-3 block">Selected Works</span>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">What I've built.</h2>
+        </motion.div>
 
-          {/* Filter */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex gap-2 flex-wrap"
-          >
-            {CATEGORIES.map(c => (
-              <button key={c} onClick={() => setCategory(c)}
-                className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider border transition-colors ${
-                  category === c 
-                    ? 'bg-white text-black border-white' 
-                    : 'bg-transparent text-neutral-400 border-white/10 hover:border-white/30 hover:text-white'
-                }`}
-              >
-                {c}
-              </button>
-            ))}
-          </motion.div>
+        {/* Featured projects — full width */}
+        <div className="space-y-6 mb-6">
+          {featured.map(project => (
+            <FeaturedCard key={project.id} project={project} onClick={() => setSelected(project)} />
+          ))}
         </div>
 
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((project, i) => (
-              <motion.div
-                layout
-                key={project.id}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3 }}
-                onClick={() => setSelected(project)}
-                className="group bg-[#0a0a0a] border border-white/10 hover:border-white/20 rounded-2xl overflow-hidden cursor-pointer transition-colors"
-              >
-                {/* Image */}
-                <div className="relative aspect-video overflow-hidden">
-                  <Image 
-                    src={project.thumbnail} 
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105" 
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-                  {/* Preview icon */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="p-4 rounded-full bg-white text-black">
-                      <Eye className="w-5 h-5" />
-                    </div>
-                  </div>
-
-                  {/* Top-right links */}
-                  <div className="absolute top-4 right-4 flex gap-2 translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all z-10"
-                    onClick={e => e.stopPropagation()}>
-                    <a href={project.link} target="_blank" rel="noopener noreferrer"
-                      className="p-2 bg-black/50 backdrop-blur-md rounded-full text-white hover:text-black hover:bg-white transition-colors border border-white/10">
-                      <Github className="w-4 h-4" />
-                    </a>
-                  </div>
-
-                  {/* Featured tag */}
-                  {project.featured && (
-                    <div className="absolute top-4 left-4">
-                      <span className="px-2.5 py-1 rounded-full text-[9px] font-mono uppercase tracking-widest bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                        featured
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Info */}
-                <div className="p-8">
-                  <h3 className="text-xl font-bold mb-1 text-white group-hover:text-neutral-300 transition-colors">{project.title}</h3>
-                  <p className="text-xs font-mono text-neutral-500 mb-4">{project.tagline}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.slice(0, 3).map(t => (
-                      <span key={t} className="px-2.5 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-white/5 border border-white/10 text-neutral-400">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+        {/* Rest of projects — 3 column (or 2 on smaller) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {rest.map((project, i) => (
+            <ProjectCard key={project.id} project={project} index={i} onClick={() => setSelected(project)} />
+          ))}
+        </div>
       </section>
 
       {/* Modal */}
