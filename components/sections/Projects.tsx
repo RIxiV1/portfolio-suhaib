@@ -5,8 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { projects, Project } from '@/data/projects';
 import { ExternalLink, Github, X, Code2, Eye, ArrowUpRight } from 'lucide-react';
+import { useScrollReveal, useStaggerReveal } from '@/lib/useScrollReveal';
 
-const CATEGORIES = ['All', 'AI', 'Frontend'];
+/* ─── Modal ─── */
 
 function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
   return (
@@ -35,9 +36,9 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
           {/* Left */}
           <div className="p-8 md:p-10 border-b lg:border-b-0 lg:border-r border-white/5">
             <div className="aspect-video rounded-2xl overflow-hidden mb-8 border border-white/10 relative">
-              <Image 
-                src={project.thumbnail} 
-                alt={project.title} 
+              <Image
+                src={project.thumbnail}
+                alt={project.title}
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -48,20 +49,31 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
             <p className="text-neutral-300 leading-relaxed mb-6">{project.description}</p>
 
             <div className="flex flex-wrap gap-2 mb-8">
-              {project.tags.map(t => (
-                <span key={t} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-mono uppercase tracking-widest text-neutral-300">
+              {project.tags.map((t) => (
+                <span
+                  key={t}
+                  className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-mono uppercase tracking-widest text-neutral-300"
+                >
                   {t}
                 </span>
               ))}
             </div>
 
             <div className="flex gap-3">
-              <a href={project.link} target="_blank" rel="noopener noreferrer"
-                className="flex-1 py-3.5 rounded-xl font-mono uppercase tracking-wider text-xs font-bold flex items-center justify-center gap-2 bg-white text-black transition-transform hover:scale-105">
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 py-3.5 rounded-xl font-mono uppercase tracking-wider text-xs font-bold flex items-center justify-center gap-2 bg-white text-black transition-transform hover:scale-105"
+              >
                 <ExternalLink className="w-4 h-4" /> View Project
               </a>
-              <a href={project.link} target="_blank" rel="noopener noreferrer"
-                className="px-5 py-3.5 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl flex items-center justify-center transition-colors text-white">
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-3.5 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl flex items-center justify-center transition-colors text-white"
+              >
                 <Github className="w-5 h-5" />
               </a>
             </div>
@@ -71,7 +83,9 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
           <div className="p-8 md:p-10 bg-black/40">
             <div className="flex items-center gap-2 text-white mb-6">
               <Code2 className="w-5 h-5" />
-              <span className="font-mono text-xs uppercase tracking-widest font-bold">Architecture Preview</span>
+              <span className="font-mono text-xs uppercase tracking-widest font-bold">
+                Architecture Preview
+              </span>
             </div>
             {project.codeSnippet && (
               <div className="relative rounded-2xl overflow-hidden border border-white/10 mb-6 bg-black">
@@ -86,8 +100,12 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
               </div>
             )}
             <div className="bg-white/5 border border-white/10 p-5 rounded-2xl">
-              <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-2">Status</p>
-              <p className="text-sm text-neutral-300">Production-ready. Built following industrial patterns.</p>
+              <p className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-2">
+                Status
+              </p>
+              <p className="text-sm text-neutral-300">
+                Production-ready. Built following industrial patterns.
+              </p>
             </div>
           </div>
         </div>
@@ -96,85 +114,99 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
   );
 }
 
-/* Featured project — full-width hero card */
+/* ─── Featured Card ─── */
+
 function FeaturedCard({ project, onClick }: { project: Project; onClick: () => void }) {
+  const ref = useScrollReveal();
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      onClick={onClick}
-      className="group relative bg-[#0a0a0a] border border-white/10 hover:border-white/25 rounded-3xl overflow-hidden cursor-pointer transition-all duration-500"
+    <div
+      ref={ref}
+      className="reveal-scale"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2">
-        {/* Image */}
-        <div className="relative aspect-[16/10] lg:aspect-auto overflow-hidden">
-          <Image
-            src={project.thumbnail}
-            alt={project.title}
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0a0a0a]/60 hidden lg:block" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent lg:hidden" />
-          
-          {/* Featured badge */}
-          <div className="absolute top-5 left-5">
-            <span className="px-3 py-1.5 rounded-full text-[9px] font-mono uppercase tracking-widest bg-white text-black font-bold">
-              Featured
-            </span>
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="p-8 lg:p-10 flex flex-col justify-center">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-500 mb-4 block">{project.category}</span>
-          <h3 className="text-3xl md:text-4xl font-bold mb-3 text-white tracking-tight">{project.title}</h3>
-          <p className="text-neutral-400 leading-relaxed mb-6 max-w-md">{project.description}</p>
-
-          <div className="flex flex-wrap gap-2 mb-8">
-            {project.tags.map(t => (
-              <span key={t} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-[10px] font-mono uppercase tracking-wider text-neutral-400">
-                {t}
+      <div
+        onClick={onClick}
+        className="group relative bg-[#0a0a0a] border border-white/10 hover:border-white/25 rounded-3xl overflow-hidden cursor-pointer transition-all duration-500"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+          {/* Image */}
+          <div className="relative aspect-[16/10] lg:aspect-auto overflow-hidden">
+            <Image
+              src={project.thumbnail}
+              alt={project.title}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0a0a0a]/60 hidden lg:block" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent lg:hidden" />
+            <div className="absolute top-5 left-5">
+              <span className="px-3 py-1.5 rounded-full text-[9px] font-mono uppercase tracking-widest bg-white text-black font-bold">
+                Featured
               </span>
-            ))}
+            </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span className="inline-flex items-center gap-2 text-sm font-bold text-white group-hover:gap-3 transition-all">
-              View Project <ArrowUpRight className="w-4 h-4" />
+          {/* Content */}
+          <div className="p-8 lg:p-10 flex flex-col justify-center">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-500 mb-4 block">
+              {project.category}
             </span>
-            <a href={project.link} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
-              className="p-2.5 bg-white/5 border border-white/10 rounded-full text-neutral-400 hover:bg-white hover:text-black hover:border-white transition-all">
-              <Github className="w-4 h-4" />
-            </a>
+            <h3 className="text-3xl md:text-4xl font-bold mb-3 text-white tracking-tight">
+              {project.title}
+            </h3>
+            <p className="text-neutral-400 leading-relaxed mb-6 max-w-md">
+              {project.description}
+            </p>
+
+            <div className="flex flex-wrap gap-2 mb-8">
+              {project.tags.map((t) => (
+                <span
+                  key={t}
+                  className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-[10px] font-mono uppercase tracking-wider text-neutral-400"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+
+            <div className="flex items-center gap-3">
+              <span className="inline-flex items-center gap-2 text-sm font-bold text-white group-hover:gap-3 transition-all">
+                View Project <ArrowUpRight className="w-4 h-4" />
+              </span>
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="p-2.5 bg-white/5 border border-white/10 rounded-full text-neutral-400 hover:bg-white hover:text-black hover:border-white transition-all"
+              >
+                <Github className="w-4 h-4" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
-/* Standard project card */
-function ProjectCard({ project, index, onClick }: { project: Project; index: number; onClick: () => void }) {
+/* ─── Project Card ─── */
+
+function ProjectCard({ project, onClick }: { project: Project; onClick: () => void }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+    <div
+      data-reveal
       onClick={onClick}
       className="group bg-[#0a0a0a] border border-white/10 hover:border-white/25 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500"
     >
       {/* Image */}
       <div className="relative aspect-video overflow-hidden">
-        <Image 
-          src={project.thumbnail} 
+        <Image
+          src={project.thumbnail}
           alt={project.title}
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-105" 
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
@@ -187,9 +219,16 @@ function ProjectCard({ project, index, onClick }: { project: Project; index: num
         </div>
 
         {/* GitHub link */}
-        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all z-10" onClick={e => e.stopPropagation()}>
-          <a href={project.link} target="_blank" rel="noopener noreferrer"
-            className="p-2 bg-black/60 backdrop-blur-md rounded-full text-white hover:bg-white hover:text-black transition-colors border border-white/10 block">
+        <div
+          className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all z-10"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 bg-black/60 backdrop-blur-md rounded-full text-white hover:bg-white hover:text-black transition-colors border border-white/10 block"
+          >
             <Github className="w-3.5 h-3.5" />
           </a>
         </div>
@@ -205,55 +244,73 @@ function ProjectCard({ project, index, onClick }: { project: Project; index: num
           <ArrowUpRight className="w-4 h-4 text-neutral-600 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 mt-1" />
         </div>
         <div className="flex flex-wrap gap-1.5">
-          {project.tags.slice(0, 3).map(t => (
-            <span key={t} className="px-2 py-0.5 rounded-full text-[9px] font-mono uppercase tracking-wider bg-white/5 border border-white/10 text-neutral-500">
+          {project.tags.slice(0, 3).map((t) => (
+            <span
+              key={t}
+              className="px-2 py-0.5 rounded-full text-[9px] font-mono uppercase tracking-wider bg-white/5 border border-white/10 text-neutral-500"
+            >
               {t}
             </span>
           ))}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
+/* ─── Projects Section ─── */
+
 export default function Projects() {
   const [selected, setSelected] = useState<Project | null>(null);
+  const headerRef = useScrollReveal();
+  const gridRef = useStaggerReveal<HTMLDivElement>({ staggerMs: 120 });
 
-  const featured = projects.filter(p => p.featured);
-  const rest = projects.filter(p => !p.featured);
+  const featured = projects.filter((p) => p.featured);
+  const rest = projects.filter((p) => !p.featured);
 
   return (
     <>
       <section id="projects" className="section-padding container-narrow">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-10"
-        >
-          <span className="font-mono text-xs uppercase tracking-[0.2em] text-neutral-500 mb-3 block">Selected Works</span>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">What I've built.</h2>
-        </motion.div>
+        <div ref={headerRef} className="reveal-up mb-10">
+          <span className="font-mono text-xs uppercase tracking-[0.2em] text-neutral-500 mb-3 block">
+            Selected Works
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
+            What I've built.
+          </h2>
+        </div>
 
-        {/* Featured projects — full width */}
+        {/* Featured — full width */}
         <div className="space-y-6 mb-6">
-          {featured.map(project => (
-            <FeaturedCard key={project.id} project={project} onClick={() => setSelected(project)} />
+          {featured.map((project) => (
+            <FeaturedCard
+              key={project.id}
+              project={project}
+              onClick={() => setSelected(project)}
+            />
           ))}
         </div>
 
-        {/* Rest of projects — 3 column (or 2 on smaller) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {rest.map((project, i) => (
-            <ProjectCard key={project.id} project={project} index={i} onClick={() => setSelected(project)} />
+        {/* Rest — staggered grid */}
+        <div
+          ref={gridRef}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+        >
+          {rest.map((project) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              onClick={() => setSelected(project)}
+            />
           ))}
         </div>
       </section>
 
       {/* Modal */}
       <AnimatePresence>
-        {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}
+        {selected && (
+          <ProjectModal project={selected} onClose={() => setSelected(null)} />
+        )}
       </AnimatePresence>
     </>
   );
