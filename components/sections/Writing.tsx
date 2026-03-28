@@ -1,17 +1,17 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { ArrowRight, BookOpen, Clock, Calendar } from 'lucide-react';
 import { articles, Article } from '@/data/writing';
+import { useScrollReveal, useStaggerReveal } from '@/lib/useScrollReveal';
 
 function WritingCard({ article, featured }: { article: Article; featured?: boolean }) {
   return (
-    <motion.a
+    <a
       href={article.href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group relative bg-[#0a0a0a] border border-white/10 hover:border-white/30 rounded-3xl p-8 flex flex-col h-full overflow-hidden transition-colors ${
-        featured ? 'lg:p-10' : 'p-6'
+      className={`group relative bg-[#0a0a0a] border border-white/10 hover:border-white/30 rounded-3xl flex flex-col h-full overflow-hidden transition-colors ${
+        featured ? 'p-8 lg:p-10' : 'p-6'
       }`}
     >
       <div className="flex flex-wrap items-center gap-3 mb-6">
@@ -24,11 +24,19 @@ function WritingCard({ article, featured }: { article: Article; featured?: boole
         </div>
       </div>
 
-      <h3 className={`${featured ? 'text-2xl md:text-3xl' : 'text-xl'} font-bold mb-4 text-white group-hover:text-neutral-300 transition-colors leading-tight`}>
+      <h3
+        className={`${
+          featured ? 'text-2xl md:text-3xl' : 'text-xl'
+        } font-bold mb-4 text-white group-hover:text-neutral-300 transition-colors leading-tight`}
+      >
         {article.title}
       </h3>
 
-      <p className={`text-neutral-400 leading-relaxed mb-8 flex-grow ${featured ? 'text-base' : 'text-sm'}`}>
+      <p
+        className={`text-neutral-400 leading-relaxed mb-8 flex-grow ${
+          featured ? 'text-base' : 'text-sm'
+        }`}
+      >
         {article.excerpt}
       </p>
 
@@ -42,22 +50,21 @@ function WritingCard({ article, featured }: { article: Article; featured?: boole
           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
         </div>
       </div>
-    </motion.a>
+    </a>
   );
 }
 
 export default function Writing() {
-  const featuredArticle = articles.find(a => a.featured) || articles[0];
-  const otherArticles = articles.filter(a => a.id !== featuredArticle.id);
+  const headerRef = useScrollReveal();
+  const featuredRef = useScrollReveal();
+  const stackRef = useStaggerReveal<HTMLDivElement>({ staggerMs: 120 });
+
+  const featuredArticle = articles.find((a) => a.featured) || articles[0];
+  const otherArticles = articles.filter((a) => a.id !== featuredArticle.id);
 
   return (
     <section id="writing" className="section-padding container-narrow relative">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="flex flex-col mb-10"
-      >
+      <div ref={headerRef} className="reveal-up flex flex-col mb-10">
         <span className="font-mono text-xs uppercase tracking-[0.2em] text-neutral-500 mb-3 flex items-center gap-2">
           <BookOpen className="w-3 h-3" />
           Thoughts
@@ -66,53 +73,36 @@ export default function Writing() {
           What I write.
         </h2>
         <p className="mt-4 text-neutral-400 max-w-xl">
-          Essays, tutorials, and rants from the browser console. Sharing what I learn while building and breaking things.
+          Essays, tutorials, and rants from the browser console. Sharing what I learn while
+          building and breaking things.
         </p>
-      </motion.div>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Featured - Left */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
+        {/* Featured — Left */}
+        <div ref={featuredRef} className="reveal-left">
           <WritingCard article={featuredArticle} featured />
-        </motion.div>
+        </div>
 
-        {/* Stacked - Right */}
-        <div className="flex flex-col gap-6">
-          {otherArticles.map((article, i) => (
-            <motion.div
-              key={article.id}
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="flex-1"
-            >
+        {/* Stacked — Right */}
+        <div ref={stackRef} className="flex flex-col gap-6">
+          {otherArticles.map((article) => (
+            <div key={article.id} data-reveal className="flex-1">
               <WritingCard article={article} />
-            </motion.div>
+            </div>
           ))}
-          
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="flex justify-end mt-2"
-          >
-            <a 
-              href="https://medium.com/@shaiksuhaib360" 
-              target="_blank" 
+
+          <div data-reveal className="flex justify-end mt-2">
+            <a
+              href="https://medium.com/@shaiksuhaib360"
+              target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-2 text-sm font-mono uppercase tracking-widest text-neutral-500 hover:text-white transition-colors"
             >
               View all writing
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </a>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
