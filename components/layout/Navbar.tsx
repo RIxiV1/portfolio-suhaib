@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -34,18 +34,17 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className={cn(
-      "fixed top-0 left-0 w-full z-50 transition-all duration-500",
-      scrolled ? "py-3 bg-[#050505]/80 backdrop-blur-md border-b border-white/10" : "py-6"
-    )}>
+    <header
+      className={cn(
+        'fixed top-0 left-0 w-full z-50 transition-all duration-500',
+        scrolled
+          ? 'py-3 bg-[#050505]/80 backdrop-blur-md border-b border-white/10'
+          : 'py-6'
+      )}
+    >
       <nav className="container-narrow py-0 flex items-center justify-between">
         {/* Logo */}
-        <motion.a
-          href="#"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-2.5 group"
-        >
+        <a href="#" className="flex items-center gap-2.5 group">
           <div className="relative w-9 h-9 overflow-hidden rounded-lg border border-white/10 group-hover:border-white/30 transition-colors">
             <Image
               src="/logo.png"
@@ -54,34 +53,27 @@ export default function Navbar() {
               className="object-contain p-1 scale-150 rotate-[-15deg] group-hover:rotate-0 transition-transform duration-500 bg-black"
             />
           </div>
-          <span className="hidden sm:block font-bold tracking-tight text-white/90 group-hover:text-white transition-colors">suhaib.dev</span>
-        </motion.a>
+          <span className="hidden sm:block font-bold tracking-tight text-white/90 group-hover:text-white transition-colors">
+            suhaib.dev
+          </span>
+        </a>
 
         {/* Desktop nav */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="hidden md:flex items-center bg-white/5 border border-white/10 px-6 py-2.5 rounded-full gap-8"
-        >
-            {navLinks.map(link => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-sm font-medium text-neutral-400 hover:text-white transition-colors relative group"
-              >
-                {link.name}
-                <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-white transition-all group-hover:w-full" />
-              </a>
-            ))}
-        </motion.div>
+        <div className="hidden md:flex items-center bg-white/5 border border-white/10 px-6 py-2.5 rounded-full gap-8">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="text-sm font-medium text-neutral-400 hover:text-white transition-colors relative group"
+            >
+              {link.name}
+              <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-white transition-all group-hover:w-full" />
+            </a>
+          ))}
+        </div>
 
         {/* Actions */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-3"
-        >
+        <div className="flex items-center gap-3">
           <a
             href="mailto:shaiksuhaib360@gmail.com"
             className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold bg-white text-black transition-transform hover:scale-[1.02] active:scale-[0.98]"
@@ -91,11 +83,11 @@ export default function Navbar() {
 
           <button
             className="p-2.5 bg-white/5 border border-white/10 rounded-xl md:hidden text-white hover:bg-white/10 transition-colors"
-            onClick={() => setMenuOpen(v => !v)}
+            onClick={() => setMenuOpen((v) => !v)}
           >
             {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
-        </motion.div>
+        </div>
       </nav>
 
       {/* Mobile menu */}
@@ -108,7 +100,7 @@ export default function Navbar() {
             className="md:hidden overflow-hidden bg-[#0a0a0a] border-y border-white/10 mt-4"
           >
             <div className="container-narrow py-8 flex flex-col gap-6">
-              {navLinks.map(link => (
+              {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
