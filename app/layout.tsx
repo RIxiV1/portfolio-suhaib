@@ -16,6 +16,8 @@ const jetbrains = JetBrains_Mono({
   display: "swap",
 });
 
+import { siteConfig } from "@/data/site";
+
 export const viewport: Viewport = {
   themeColor: "#000000",
   width: "device-width",
@@ -23,22 +25,22 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Suhaib — Software Engineer",
-  description: "Software Engineer specializing in Product & AI Systems. Minimalist, high-performance architecture.",
+  title: siteConfig.metadata.title,
+  description: siteConfig.metadata.description,
   icons: {
     icon: "/favicon.png",
   },
-  keywords: ["developer", "portfolio", "React", "Next.js", "TypeScript", "Python", "AI", "Software Engineer"],
-  authors: [{ name: "Suhaib" }],
-  creator: "Suhaib",
+  keywords: siteConfig.metadata.keywords,
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
   openGraph: {
-    title: "Suhaib — Developer Portfolio",
-    description: "Junior developer. I build (and break) things for the web.",
+    title: siteConfig.metadata.ogTitle,
+    description: siteConfig.metadata.ogDescription,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    creator: "@suhaibX0",
+    creator: siteConfig.metadata.twitterHandle,
   },
 };
 

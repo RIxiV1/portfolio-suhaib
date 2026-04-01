@@ -4,12 +4,9 @@ import { useState } from 'react';
 import { Mail, Github, Linkedin, Twitter, BookOpen, Send } from 'lucide-react';
 import { useScrollReveal } from '@/lib/useScrollReveal';
 
-const socials = [
-  { icon: Github, href: 'https://github.com/RIxiV1', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://www.linkedin.com/in/shaiksuhaib', label: 'LinkedIn' },
-  { icon: Twitter, href: 'https://x.com/suhaibX0', label: 'Twitter/X' },
-  { icon: BookOpen, href: 'https://medium.com/@shaiksuhaib360', label: 'Medium' },
-];
+import { siteConfig } from '@/data/site';
+
+const socials = siteConfig.socials;
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
@@ -20,7 +17,7 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const mailto = `mailto:shaiksuhaib360@gmail.com?subject=Portfolio inquiry from ${form.name}&body=${encodeURIComponent(form.message)}`;
+    const mailto = `mailto:${siteConfig.email}?subject=Portfolio inquiry from ${form.name}&body=${encodeURIComponent(form.message)}`;
     window.open(mailto);
     setSent(true);
   };
@@ -49,10 +46,10 @@ export default function Contact() {
               </span>
             </div>
             <a
-              href="mailto:shaiksuhaib360@gmail.com"
+              href={`mailto:${siteConfig.email}`}
               className="text-lg font-medium text-white hover:text-neutral-300 transition-colors"
             >
-              shaiksuhaib360@gmail.com
+              {siteConfig.email}
             </a>
           </div>
 

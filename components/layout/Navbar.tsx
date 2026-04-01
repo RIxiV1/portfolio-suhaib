@@ -6,13 +6,9 @@ import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const navLinks = [
-  { name: 'Work', href: '#projects' },
-  { name: 'About', href: '#about' },
-  { name: 'Journey', href: '#experience' },
-  { name: 'Writing', href: '#writing' },
-  { name: 'Contact', href: '#contact' },
-];
+import { siteConfig } from '@/data/site';
+
+const navLinks = siteConfig.navLinks;
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -54,7 +50,7 @@ export default function Navbar() {
             />
           </div>
           <span className="hidden sm:block font-bold tracking-tight text-white/90 group-hover:text-white transition-colors">
-            suhaib.dev
+            {siteConfig.name.toLowerCase()}.dev
           </span>
         </a>
 
@@ -75,7 +71,7 @@ export default function Navbar() {
         {/* Actions */}
         <div className="flex items-center gap-3">
           <a
-            href="mailto:shaiksuhaib360@gmail.com"
+            href={`mailto:${siteConfig.email}`}
             className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold bg-white text-black transition-transform hover:scale-[1.02] active:scale-[0.98]"
           >
             Hire me
@@ -111,10 +107,10 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="mailto:shaiksuhaib360@gmail.com"
+                href={`mailto:${siteConfig.email}`}
                 className="text-neutral-500 hover:text-white transition-colors"
               >
-                shaiksuhaib360@gmail.com
+                {siteConfig.email}
               </a>
             </div>
           </motion.div>

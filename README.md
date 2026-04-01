@@ -1,8 +1,8 @@
 <div align="center">
 
-# Suhaib Shaik — Developer Portfolio
+# Suhaib Shaik — Product Engineering Portfolio
 
-**Software Engineer · Product & AI Systems · India**
+**Software Engineer · AI Systems · India**
 
 [![GitHub](https://img.shields.io/badge/GitHub-RIxiV1-181717?style=flat-square&logo=github)](https://github.com/RIxiV1)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-shaiksuhaib-0A66C2?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/shaiksuhaib)
@@ -15,9 +15,9 @@
 
 ## 🚀 Overview
 
-Welcome to my personal slice of the internet. This is a premium, minimalist developer portfolio built with a **dark-mode-first** aesthetic inspired by Linear, Vercel, and Apple. 
+This is a premium, high-density developer portfolio built with a **dark-themed dashboard aesthetic**. Inspired by executive summary panels and administrative interfaces, it prioritizes clarity, hierarchy, and a professional "Product Engineering" feel.
 
-I designed this space to focus on clean typography, subtle interactions, and a high-performance, distraction-free user experience. No heavy 3D libraries or bloated animations—just strict type safety, solid architecture, and lightning-fast load times.
+I designed this space to focus on clean typography, data-driven layouts, and a high-performance user experience. All site constants are centralized in `data/site.ts` for rapid maintenance.
 
 ---
 
@@ -27,29 +27,24 @@ I designed this space to focus on clean typography, subtle interactions, and a h
 |---|---|
 | **Framework** | Next.js 15 (App Router) |
 | **Language** | TypeScript |
-| **Styling** | Tailwind CSS 4 |
-| **Animations** | Framer Motion (Lightweight Scroll Reveals) |
+| **Styling** | Tailwind CSS 4 (Dashboard Design System) |
+| **Animations** | Framer Motion (Optimized Reveals) |
 | **Icons** | Lucide React |
 | **Fonts** | Inter · JetBrains Mono |
 
 ---
 
-## 🧩 Sections
+## 🏗️ Architecture
 
-| Section | Description |
-|---|---|
-| 🎬 **Hero** | Clean typography, confident messaging, and subtle scroll-based parallax. |
-| 🧩 **About** | Structured, simple bento-grid with stats, bio, focus, and availability status. |
-| 🗂 **Projects** | Modern project cards with category filtering and clickable code-preview modals. |
-| ⚡ **Tech Stack** | Symmetrical bento-style grid of technology tags with graceful fade-ins. |
-| 📍 **Experience** | Structured timeline layout highlighting my career journey with crisp typography. |
-| 📬 **Contact** | Minimalist, functional form with social links and automated mailto integration. |
+The project follows a modular, dashboard-inspired structure:
+
+- **Centralized Config**: `data/site.ts` manages all personal and SEO metadata.
+- **Unified Design System**: `globals.css` defines `.card` and `.badge` utilities for consistent dashboard styling.
+- **Scroll-Driven Interactive Panels**: Sections use optimized intersection-based reveals.
 
 ---
 
 ## 🛠 Getting Started
-
-Want to run this locally? 
 
 ```bash
 # Clone the repository
@@ -63,46 +58,20 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
----
-
-## 📂 Project Structure
-
-```
-portfolio-v3/
-├── app/
-│   ├── layout.tsx        # Root layout — fonts, SEO, global components
-│   ├── page.tsx          # Main assembly page
-│   └── globals.css       # Clean design system tokens + minimalist utilities
-├── components/
-│   ├── layout/           # Navbar, Footer
-│   ├── sections/         # Hero, About, Projects, TechStack, Experience, Writing, Contact
-│   └── ui/               # Reusable UI elements like modals and buttons
-├── data/
-│   ├── projects.ts       # Project definitions + code snippets
-│   ├── experience.ts     # Career timeline data
-│   └── writing.ts        # Article entries
-├── public/               # Static assets
-└── lib/
-    └── utils.ts          # Utility functions (clsx, tailwind-merge, etc.)
-```
+Open [http://localhost:3000](http://localhost:3000) to view it.
 
 ---
 
 ## 🌟 Featured Projects
 
-Here are a few things I've built that I'm particularly proud of:
-
-- **InfoBlend** — Chrome extension (Manifest V3) for AI-powered in-page intelligence
-- **SubSentry** — Subscription tracker that alerts you before renewals hit
-- **Jarvis** — Voice-activated AI assistant built in Python + OpenAI
-- **Resume Screening Agent** — n8n + LLM pipeline for automated applicant scoring
+- **InfoBlend** — Chrome extension (Manifest V3) for AI-powered in-page intelligence.
+- **SubSentry** — Subscription tracker that alerts you before renewals hit.
+- **Jarvis** — Voice-activated AI assistant built in Python + OpenAI.
 
 ---
 
 <div align="center">
 
-*Built with a lot of caffeine and curiosity.*
+*Built with precision and curiosity.*
 
 </div>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { siteConfig } from '@/data/site';
 
 export default function Loader() {
   const [loading, setLoading] = useState(true);
@@ -29,9 +30,9 @@ export default function Loader() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-4xl md:text-6xl font-bold tracking-tighter text-white"
+              className="text-4xl md:text-6xl font-bold tracking-tighter text-white uppercase"
             >
-              SUHAIB<span className="text-neutral-600">.</span>
+              {siteConfig.name}<span className="text-neutral-600">.</span>
             </motion.h1>
 
             {/* Loading bar */}

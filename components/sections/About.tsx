@@ -2,6 +2,7 @@
 
 import { MapPin, Code2, Coffee, Rocket } from 'lucide-react';
 import { useScrollReveal, useStaggerReveal } from '@/lib/useScrollReveal';
+import { siteConfig } from '@/data/site';
 
 const focusAreas = ['Full-stack web apps', 'AI tooling & automation', 'Chrome extensions'];
 
@@ -33,13 +34,11 @@ export default function About() {
             <span className="font-mono text-[10px] uppercase tracking-widest">Who I am</span>
           </div>
           <p className="text-xl md:text-2xl leading-relaxed font-light mb-5 text-white">
-            CS student & developer. Based in India. I like to{' '}
+            CS student & developer. Based in {siteConfig.location}. I like to{' '}
             <span className="font-medium">build and break stuff</span>.
           </p>
           <p className="text-sm leading-relaxed text-neutral-400">
-            I write code that solves real problems — Chrome extensions, AI-powered tools, and
-            full-stack web apps. I care about good UX, clean architecture, and shipping things
-            that actually work. Currently open to internships, full-time roles, and freelance.
+            {siteConfig.bio}
           </p>
         </div>
 
@@ -53,7 +52,7 @@ export default function About() {
             <span className="font-mono text-[10px] uppercase tracking-widest">Location</span>
           </div>
           <div>
-            <p className="text-2xl font-bold mb-1 text-white">India</p>
+            <p className="text-2xl font-bold mb-1 text-white">{siteConfig.location}</p>
             <p className="text-sm text-neutral-400">Working remotely. Available worldwide.</p>
           </div>
         </div>

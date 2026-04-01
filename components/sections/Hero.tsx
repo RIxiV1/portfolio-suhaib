@@ -1,13 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Twitter } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
+import { siteConfig } from '@/data/site';
 
-const socials = [
-  { icon: Github, href: 'https://github.com/RIxiV1', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://www.linkedin.com/in/shaiksuhaib', label: 'LinkedIn' },
-  { icon: Twitter, href: 'https://x.com/suhaibX0', label: 'Twitter' },
-];
+const socials = siteConfig.socials;
 
 export default function Hero() {
   return (
@@ -33,18 +30,17 @@ export default function Hero() {
 
         {/* Heading */}
         <div className="flex flex-col gap-4">
-          <h1 className="text-6xl md:text-8xl font-bold tracking-tighter leading-none text-white">
-            SUHAIB
+          <h1 className="text-6xl md:text-8xl font-bold tracking-tighter leading-none text-white uppercase">
+            {siteConfig.name}
           </h1>
           <p className="text-xl md:text-2xl font-light text-neutral-400 tracking-tight">
-            I build <span className="font-medium text-white">(and break)</span> things for the web.
+            {siteConfig.tagline}
           </p>
         </div>
 
         {/* Tagline */}
-        <p className="max-w-lg text-sm md:text-base leading-relaxed text-neutral-400">
-          CS student & developer. Based in India. Open to internships, full-time roles & freelance.
-          Let's make something worth breaking.
+        <p className="max-w-xl text-sm md:text-base leading-relaxed text-neutral-400">
+          {siteConfig.bio}
         </p>
 
         {/* CTAs */}
