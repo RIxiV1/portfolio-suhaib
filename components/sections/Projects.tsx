@@ -23,7 +23,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        className="relative w-full max-w-5xl max-h-[88vh] overflow-y-auto bg-[#0a0a0a] rounded-3xl border border-white/10"
+        className="relative w-full max-w-5xl max-h-[88vh] overflow-y-auto card"
       >
         <button
           onClick={onClose}
@@ -52,7 +52,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
               {project.tags.map((t) => (
                 <span
                   key={t}
-                  className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-mono uppercase tracking-widest text-neutral-300"
+                  className="badge"
                 >
                   {t}
                 </span>
@@ -126,7 +126,7 @@ function FeaturedCard({ project, onClick }: { project: Project; onClick: () => v
     >
       <div
         onClick={onClick}
-        className="group relative bg-[#0a0a0a] border border-white/10 hover:border-white/25 rounded-3xl overflow-hidden cursor-pointer transition-all duration-500"
+        className="group relative card overflow-hidden cursor-pointer transition-all duration-500"
       >
         <div className="grid grid-cols-1 lg:grid-cols-2">
           {/* Image */}
@@ -139,7 +139,7 @@ function FeaturedCard({ project, onClick }: { project: Project; onClick: () => v
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0a0a0a]/60 hidden lg:block" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent lg:hidden" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--card)] to-transparent lg:hidden" />
             <div className="absolute top-5 left-5">
               <span className="px-3 py-1.5 rounded-full text-[9px] font-mono uppercase tracking-widest bg-white text-black font-bold">
                 Featured
@@ -163,7 +163,7 @@ function FeaturedCard({ project, onClick }: { project: Project; onClick: () => v
               {project.tags.map((t) => (
                 <span
                   key={t}
-                  className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-[10px] font-mono uppercase tracking-wider text-neutral-400"
+                  className="badge"
                 >
                   {t}
                 </span>
@@ -198,7 +198,7 @@ function ProjectCard({ project, onClick }: { project: Project; onClick: () => vo
     <div
       data-reveal
       onClick={onClick}
-      className="group bg-[#0a0a0a] border border-white/10 hover:border-white/25 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500"
+      className="group card overflow-hidden cursor-pointer transition-all duration-500"
     >
       {/* Image */}
       <div className="relative aspect-video overflow-hidden">
@@ -209,7 +209,7 @@ function ProjectCard({ project, onClick }: { project: Project; onClick: () => vo
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 33vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--card)] via-transparent to-transparent" />
 
         {/* Hover overlay */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40">
@@ -247,7 +247,7 @@ function ProjectCard({ project, onClick }: { project: Project; onClick: () => vo
           {project.tags.slice(0, 3).map((t) => (
             <span
               key={t}
-              className="px-2 py-0.5 rounded-full text-[9px] font-mono uppercase tracking-wider bg-white/5 border border-white/10 text-neutral-500"
+              className="badge text-[9px]"
             >
               {t}
             </span>

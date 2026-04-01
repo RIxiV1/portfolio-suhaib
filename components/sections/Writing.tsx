@@ -10,12 +10,12 @@ function WritingCard({ article, featured }: { article: Article; featured?: boole
       href={article.href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group relative bg-[#0a0a0a] border border-white/10 hover:border-white/30 rounded-3xl flex flex-col h-full overflow-hidden transition-colors ${
+      className={`group relative card flex flex-col h-full overflow-hidden transition-colors ${
         featured ? 'p-8 lg:p-10' : 'p-6'
       }`}
     >
       <div className="flex flex-wrap items-center gap-3 mb-6">
-        <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-mono uppercase tracking-widest text-neutral-300">
+        <span className="badge">
           {article.category}
         </span>
         <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-neutral-500">

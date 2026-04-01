@@ -39,7 +39,7 @@ export default function Contact() {
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
         {/* Left: info */}
         <div ref={leftRef} className="reveal-left lg:col-span-2 flex flex-col gap-6">
-          <div className="bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 hover:border-white/30 transition-colors">
+          <div className="card p-8">
             <div className="flex items-center gap-3 mb-5">
               <div className="p-2.5 rounded-xl bg-white/5 text-white border border-white/10">
                 <Mail className="w-5 h-5" />
@@ -56,7 +56,7 @@ export default function Contact() {
             </a>
           </div>
 
-          <div className="bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 hover:border-white/30 transition-colors">
+          <div className="card p-8">
             <p className="font-mono text-xs uppercase tracking-widest text-neutral-500 mb-5">
               Find me on
             </p>
@@ -81,7 +81,7 @@ export default function Contact() {
         <div ref={rightRef} className="reveal-right lg:col-span-3">
           <form
             onSubmit={handleSubmit}
-            className="bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 flex flex-col gap-5"
+            className="card p-8 flex flex-col gap-5"
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="flex flex-col gap-2">

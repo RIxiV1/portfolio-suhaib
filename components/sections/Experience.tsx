@@ -38,13 +38,13 @@ export default function Experience() {
                 </div>
 
                 {/* Card */}
-                <div className="bg-[#0a0a0a] border border-white/10 rounded-2xl p-6 group-hover:border-white/30 transition-colors">
+                <div className="card p-6">
                   <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
                     <div>
                       <h3 className="text-lg font-bold text-white mb-1">{exp.role}</h3>
                       <p className="text-sm font-mono text-neutral-400">{exp.org}</p>
                     </div>
-                    <span className="text-xs font-mono text-neutral-500 px-3 py-1.5 bg-white/5 rounded-full border border-white/5">
+                    <span className="badge text-[9px] border-transparent bg-white/5">
                       {exp.period}
                     </span>
                   </div>
@@ -55,7 +55,7 @@ export default function Experience() {
                     {exp.tags.map((t) => (
                       <span
                         key={t}
-                        className="px-2.5 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-white/5 border border-white/10 text-neutral-400"
+                        className="badge"
                       >
                         {t}
                       </span>

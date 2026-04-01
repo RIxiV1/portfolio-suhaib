@@ -26,7 +26,7 @@ export default function About() {
         {/* Main bio */}
         <div
           data-reveal
-          className="md:col-span-4 bg-[#0a0a0a] border border-white/10 rounded-3xl p-6 md:p-8 hover:bg-[#111] transition-colors"
+          className="md:col-span-4 card p-6 md:p-8"
         >
           <div className="flex items-center gap-2 mb-5 text-neutral-300">
             <Code2 className="w-4 h-4" />
@@ -46,7 +46,7 @@ export default function About() {
         {/* Location */}
         <div
           data-reveal
-          className="md:col-span-2 bg-[#0a0a0a] border border-white/10 rounded-3xl p-6 flex flex-col justify-between gap-4 hover:bg-[#111] transition-colors"
+          className="md:col-span-2 card p-6 flex flex-col justify-between gap-4"
         >
           <div className="flex items-center gap-2 text-neutral-300">
             <MapPin className="w-4 h-4" />
@@ -61,7 +61,7 @@ export default function About() {
         {/* Open to work */}
         <div
           data-reveal
-          className="md:col-span-2 bg-[#0a0a0a] border border-white/10 rounded-3xl p-6 flex flex-col items-center justify-center text-center gap-3 hover:bg-[#111] transition-colors"
+          className="md:col-span-2 card p-6 flex flex-col items-center justify-center text-center gap-3"
         >
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -78,7 +78,7 @@ export default function About() {
         {/* Focus */}
         <div
           data-reveal
-          className="md:col-span-2 bg-[#0a0a0a] border border-white/10 rounded-3xl p-6 hover:bg-[#111] transition-colors"
+          className="md:col-span-2 card p-6"
         >
           <div className="flex items-center gap-2 mb-4 text-neutral-300">
             <Rocket className="w-4 h-4" />
@@ -97,7 +97,7 @@ export default function About() {
         {/* Currently */}
         <div
           data-reveal
-          className="md:col-span-2 bg-[#0a0a0a] border border-white/10 rounded-3xl p-6 hover:bg-[#111] transition-colors"
+          className="md:col-span-2 card p-6"
         >
           <div className="flex items-center gap-2 mb-4">
             <Coffee className="w-4 h-4 text-amber-500" />

@@ -47,7 +47,7 @@ export default function TechStack() {
           {[...techs, ...techs].map((tech, i) => (
             <div
               key={`${tech.name}-${i}`}
-              className="group flex items-center justify-center gap-3 px-8 py-5 bg-[#0a0a0a] border border-white/10 rounded-2xl min-w-[200px] hover:border-white/30 hover:bg-white/5 transition-all duration-300"
+              className="group flex items-center justify-center gap-3 px-8 py-5 card min-w-[200px] transition-all duration-300"
             >
               <span className="text-2xl grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 transition-all duration-300">
                 {tech.icon}
