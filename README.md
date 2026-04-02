@@ -15,7 +15,7 @@
 
 ## 🚀 Overview
 
-This is a premium, high-density developer portfolio built with a **dark-themed dashboard aesthetic**. Inspired by executive summary panels and administrative interfaces, it prioritizes clarity, hierarchy, and a professional "Product Engineering" feel.
+This is a premium, high-density developer portfolio built with a **Deep-Tech Aurora aesthetic**. It prioritizes clarity, hierarchy, and a professional "Product Engineering" feel, featuring animated backgrounds and glassmorphism.
 
 I designed this space to focus on clean typography, data-driven layouts, and a high-performance user experience. All site constants are centralized in `data/site.ts` for rapid maintenance.
 
@@ -25,9 +25,9 @@ I designed this space to focus on clean typography, data-driven layouts, and a h
 
 | Layer | Tools |
 |---|---|
-| **Framework** | Next.js 15 (App Router) |
+| **Framework** | Next.js 16 (App Router) |
 | **Language** | TypeScript |
-| **Styling** | Tailwind CSS 4 (Dashboard Design System) |
+| **Styling** | Tailwind CSS 4 (Aurora Design System) |
 | **Animations** | Framer Motion (Optimized Reveals) |
 | **Icons** | Lucide React |
 | **Fonts** | Inter · JetBrains Mono |

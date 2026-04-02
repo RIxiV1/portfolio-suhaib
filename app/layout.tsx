@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   title: siteConfig.metadata.title,
   description: siteConfig.metadata.description,
   icons: {
-    icon: "/favicon.png",
+    icon: "/favicon.ico",
   },
   keywords: siteConfig.metadata.keywords,
   authors: [{ name: siteConfig.name }],
