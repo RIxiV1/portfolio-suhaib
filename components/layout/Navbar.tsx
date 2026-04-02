@@ -1,123 +1,159 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import Image from 'next/image';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Mail } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import ScrollProgress from '@/components/ui/ScrollProgress';
-
 import { siteConfig } from '@/data/site';
 
 const navLinks = siteConfig.navLinks;
 
 export default function Navbar() {
+  const [visible, setVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    let ticking = false;
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setScrolled(window.scrollY > 60);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    
+    // Scrolled state for styling
+    setScrolled(latest > 20);
+    
+    // Hide/Show on scroll direction
+    if (latest > 150 && latest > previous) {
+      setVisible(false);
+    } else {
+      setVisible(true);
+    }
+  });
 
   return (
-    <header
-      className={cn(
-        'fixed top-0 left-0 w-full z-50 transition-all duration-500',
-        scrolled
-          ? 'py-3 bg-[#050505]/80 backdrop-blur-md border-b border-white/10'
-          : 'py-6'
-      )}
-    >
-      <nav className="container-narrow py-0 flex items-center justify-between">
-        {/* Logo */}
-        <a href="#" className="flex items-center gap-2.5 group">
-          <div className="relative w-9 h-9 overflow-hidden rounded-lg border border-white/10 group-hover:border-white/30 transition-colors">
-            <Image
-              src="/logo.png"
-              alt="Suhaib Logo"
-              fill
-              className="object-contain p-1 scale-150 rotate-[-15deg] group-hover:rotate-0 transition-transform duration-500 bg-black"
-            />
-          </div>
-          <span className="hidden sm:block font-bold tracking-tight text-white/90 group-hover:text-white transition-colors">
-            {siteConfig.name.toLowerCase()}.dev
-          </span>
-        </a>
-
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center bg-white/5 border border-white/10 px-6 py-2.5 rounded-full gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-neutral-400 hover:text-white transition-colors relative group"
-            >
-              {link.name}
-              <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-white transition-all group-hover:w-full" />
-            </a>
-          ))}
-        </div>
-
-        {/* Actions */}
-        <div className="flex items-center gap-3">
-          <a
-            href={`mailto:${siteConfig.email}`}
-            className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold bg-white text-black transition-transform hover:scale-[1.02] active:scale-[0.98]"
-          >
-            Hire me
+    <AnimatePresence mode="wait">
+      <motion.header
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ 
+          y: visible ? 0 : -100, 
+          opacity: visible ? 1 : 0 
+        }}
+        transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
+        className="fixed top-0 left-0 w-full z-50 flex justify-center py-6 pointer-events-none"
+      >
+        <div 
+          className={cn(
+            "pointer-events-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]",
+            scrolled 
+              ? "glass-card px-4 py-2 w-[95%] max-w-4xl rounded-3xl" 
+              : "w-full container-narrow px-6 py-0 rounded-none border-transparent bg-transparent shadow-none"
+          )}
+        >
+          {/* Logo */}
+          <a href="#" className="flex items-center gap-2.5 group pl-1">
+            <div className="relative w-8 h-8 overflow-hidden rounded-xl border border-white/10 group-hover:border-white/30 transition-all duration-300">
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                fill
+                className="object-contain p-1.5 bg-black/40 group-hover:scale-110 transition-transform duration-500"
+              />
+              {/* Live indicator pulse */}
+              <div className="absolute top-0.5 right-0.5 w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+            </div>
+            <span className="hidden sm:block font-bold tracking-tight text-white/90 group-hover:text-white transition-colors">
+              {siteConfig.name.toLowerCase()}
+            </span>
           </a>
 
-          <button
-            className="p-2.5 bg-white/5 border border-white/10 rounded-xl md:hidden text-white hover:bg-white/10 transition-colors"
-            onClick={() => setMenuOpen((v) => !v)}
-          >
-            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden overflow-hidden bg-[#0a0a0a] border-y border-white/10 mt-4"
-          >
-            <div className="container-narrow py-8 flex flex-col gap-6">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="text-2xl font-bold tracking-tight text-neutral-300 hover:text-white transition-colors"
-                >
-                  {link.name}
-                </a>
-              ))}
+          {/* Desktop Nav - Floating Pill */}
+          <nav className="hidden md:flex items-center gap-1 p-1 bg-white/5 border border-white/5 rounded-2xl relative">
+            {navLinks.map((link) => (
               <a
-                href={`mailto:${siteConfig.email}`}
-                className="text-neutral-500 hover:text-white transition-colors"
+                key={link.name}
+                href={link.href}
+                className={cn(
+                  "relative px-4 py-1.5 text-sm font-medium transition-all duration-300",
+                  hoveredLink === link.name ? "text-white" : "text-neutral-400 hover:text-neutral-200"
+                )}
+                onMouseEnter={() => setHoveredLink(link.name)}
+                onMouseLeave={() => setHoveredLink(null)}
               >
-                {siteConfig.email}
+                {/* Background Pill Indicator */}
+                {hoveredLink === link.name && (
+                  <motion.div
+                    layoutId="nav-pill"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                    className="absolute inset-0 bg-white/10 rounded-xl -z-10"
+                  />
+                )}
+                {link.name}
               </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <ScrollProgress />
-    </header>
+            ))}
+          </nav>
+
+          {/* Action Button */}
+          <div className="flex items-center gap-2 pr-1">
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className={cn(
+                "hidden sm:flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-300",
+                scrolled
+                  ? "bg-white text-black hover:bg-neutral-200"
+                  : "bg-white/10 text-white border border-white/10 hover:bg-white/20"
+              )}
+            >
+              <Mail className="w-3.5 h-3.5" />
+              Get in touch
+            </a>
+
+            <button
+              className="p-2.5 bg-white/5 border border-white/10 rounded-2xl md:hidden text-white hover:bg-white/10 transition-colors"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+
+          <ScrollProgress />
+        </div>
+
+        {/* Mobile menu dropdown */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: -20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -20 }}
+              transition={{ duration: 0.2 }}
+              className="absolute top-[85px] left-[2.5%] right-[2.5%] md:hidden glass-card p-6 rounded-3xl z-[-1]"
+            >
+              <div className="flex flex-col gap-5">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="text-2xl font-bold tracking-tight text-neutral-400 hover:text-white transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+                <div className="h-px bg-white/10 my-2" />
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="flex items-center gap-3 text-lg font-medium text-emerald-400"
+                >
+                  <Mail className="w-5 h-5" />
+                  {siteConfig.email}
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.header>
+    </AnimatePresence>
   );
 }
