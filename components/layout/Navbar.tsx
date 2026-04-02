@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import ScrollProgress from '@/components/ui/ScrollProgress';
 
 import { siteConfig } from '@/data/site';
 
@@ -116,6 +117,7 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+      <ScrollProgress />
     </header>
   );
 }
