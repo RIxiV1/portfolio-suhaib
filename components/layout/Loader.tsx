@@ -8,7 +8,7 @@ export default function Loader() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1200);
+    const timer = setTimeout(() => setLoading(false), 1800);
     return () => clearTimeout(timer);
   }, []);
 
@@ -29,7 +29,7 @@ export default function Loader() {
             <motion.h1
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
               className="text-4xl md:text-6xl font-bold tracking-tighter text-white uppercase"
             >
               {siteConfig.name}<span className="text-neutral-600">.</span>
@@ -40,7 +40,7 @@ export default function Loader() {
               <motion.div
                 initial={{ width: '0%' }}
                 animate={{ width: '100%' }}
-                transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 className="h-full bg-white rounded-full"
               />
             </div>

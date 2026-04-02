@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Loader from "@/components/layout/Loader";
 import CustomCursor from "@/components/ui/CustomCursor";
+import ScrollProgress from "@/components/ui/ScrollProgress";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -55,6 +56,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrains.variable} antialiased bg-black text-white`}
       >
+        <ScrollProgress />
         <CustomCursor />
         <Loader />
         <Navbar />
