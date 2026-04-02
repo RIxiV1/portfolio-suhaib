@@ -23,7 +23,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        className="relative w-full max-w-5xl max-h-[88vh] overflow-y-auto card"
+        className="relative w-full max-w-5xl max-h-[88vh] overflow-y-auto glass-card"
       >
         <button
           onClick={onClose}
@@ -126,7 +126,7 @@ function FeaturedCard({ project, onClick }: { project: Project; onClick: () => v
     >
       <div
         onClick={onClick}
-        className="group relative card overflow-hidden cursor-pointer transition-all duration-500"
+        className="group relative glass-card overflow-hidden cursor-pointer transition-all duration-500"
       >
         <div className="grid grid-cols-1 lg:grid-cols-2">
           {/* Image */}
@@ -198,7 +198,7 @@ function ProjectCard({ project, onClick }: { project: Project; onClick: () => vo
     <div
       data-reveal
       onClick={onClick}
-      className="group card overflow-hidden cursor-pointer transition-all duration-500"
+      className="group glass-card overflow-hidden cursor-pointer transition-all duration-500"
     >
       {/* Image */}
       <div className="relative aspect-video overflow-hidden">
