@@ -6,12 +6,12 @@ import Experience from '@/components/sections/Experience';
 import Writing from '@/components/sections/Writing';
 import Contact from '@/components/sections/Contact';
 import Footer from '@/components/layout/Footer';
+import AuroraBackground from '@/components/ui/AuroraBackground';
 
 export default function Page() {
   return (
     <main className="relative flex flex-col min-h-screen bg-black text-white">
-      {/* Subtle grid background */}
-      <div className="fixed inset-0 grid-bg pointer-events-none z-0" />
+      <AuroraBackground />
       <Hero />
       <About />
       <Projects />
