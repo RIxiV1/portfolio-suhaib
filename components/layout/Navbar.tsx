@@ -48,7 +48,7 @@ export default function Navbar() {
           <a href="#" className="flex items-center gap-2.5 group pl-1">
             <div className="relative w-8 h-8 overflow-hidden rounded-xl border border-white/10 group-hover:border-white/30 transition-all duration-300">
               <Image
-                src="/logo.png?v=zen"
+                src="/logo-zen.png"
                 alt="Logo"
                 fill
                 className="object-contain p-1.5 bg-black/40 group-hover:scale-110 transition-transform duration-500"
