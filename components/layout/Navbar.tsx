@@ -15,7 +15,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
-  
+
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -29,18 +29,18 @@ export default function Navbar() {
     <AnimatePresence mode="wait">
       <motion.header
         initial={{ y: -100, opacity: 0 }}
-        animate={{ 
-          y: visible ? 0 : -100, 
-          opacity: visible ? 1 : 0 
+        animate={{
+          y: visible ? 0 : -100,
+          opacity: visible ? 1 : 0
         }}
         transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
         className="fixed top-0 left-0 w-full z-50 flex justify-center py-6 pointer-events-none"
       >
-        <div 
+        <div
           className={cn(
             "pointer-events-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]",
-            scrolled 
-              ? "glass-card px-4 py-2 w-[95%] max-w-4xl rounded-3xl" 
+            scrolled
+              ? "glass-card px-4 py-2 w-[95%] max-w-4xl rounded-3xl"
               : "w-full container-narrow px-6 py-0 rounded-none border-transparent bg-transparent shadow-none"
           )}
         >
@@ -48,7 +48,7 @@ export default function Navbar() {
           <a href="#" className="flex items-center gap-2.5 group pl-1">
             <div className="relative w-8 h-8 overflow-hidden rounded-xl border border-white/10 group-hover:border-white/30 transition-all duration-300">
               <Image
-                src="/logo.png"
+                src="/logo.png?v=zen"
                 alt="Logo"
                 fill
                 className="object-contain p-1.5 bg-black/40 group-hover:scale-110 transition-transform duration-500"
