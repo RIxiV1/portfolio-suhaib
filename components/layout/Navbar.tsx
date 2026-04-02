@@ -19,17 +19,10 @@ export default function Navbar() {
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious() ?? 0;
-    
     // Scrolled state for styling
     setScrolled(latest > 20);
-    
-    // Hide/Show on scroll direction
-    if (latest > 150 && latest > previous) {
-      setVisible(false);
-    } else {
-      setVisible(true);
-    }
+    // Navbar always visible as requested
+    setVisible(true);
   });
 
   return (
