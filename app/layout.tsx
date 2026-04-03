@@ -3,7 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Loader from "@/components/layout/Loader";
-import CustomCursor from "@/components/ui/CustomCursor";
+import ClickEffect from "@/components/ui/ClickEffect";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -55,7 +55,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrains.variable} antialiased bg-black text-white`}
       >
-        <CustomCursor />
+        <ClickEffect />
         <Loader />
         <Navbar />
         {children}
