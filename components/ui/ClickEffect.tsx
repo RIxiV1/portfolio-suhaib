@@ -3,65 +3,27 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-interface Particle {
-  id: string;
+interface Click {
+  id: number;
   x: number;
   y: number;
-  destX: number;
-  destY: number;
-  color: string;
-  size: number;
-  rotation: number;
 }
-
-interface ClickEvent {
-  id: number;
-  particles: Particle[];
-}
-
-const COLORS = [
-  '#ffffff', // absolute white
-  'rgba(255, 255, 255, 0.9)', // slightly transparent white
-  'rgba(255, 255, 255, 0.7)', // more transparent white (for depth)
-  '#f8fafc', // slate-50 (near white)
-  '#f1f5f9', // slate-100 (very light gray)
-];
 
 export default function ClickEffect() {
-  const [clickEvents, setClickEvents] = useState<ClickEvent[]>([]);
+  const [clicks, setClicks] = useState<Click[]>([]);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
-      const particleCount = 10;
-      const particles: Particle[] = [];
-      const timestamp = Date.now();
-
-      for (let i = 0; i < particleCount; i++) {
-        const angle = (Math.PI * 2 * i) / particleCount + (Math.random() - 0.5);
-        const distance = 35 + Math.random() * 55;
-        
-        particles.push({
-          id: `${timestamp}-${i}`,
-          x: e.clientX,
-          y: e.clientY,
-          destX: Math.cos(angle) * distance,
-          destY: Math.sin(angle) * distance,
-          color: COLORS[Math.floor(Math.random() * COLORS.length)],
-          size: 2 + Math.random() * 3.5,
-          rotation: Math.random() * 360,
-        });
-      }
-
-      const newEvent = {
-        id: timestamp,
-        particles,
+      const newClick = {
+        id: Date.now(),
+        x: e.clientX,
+        y: e.clientY,
       };
-
-      setClickEvents((prev) => [...prev, newEvent]);
+      setClicks((prev) => [...prev, newClick]);
       
-      // Remove the group of particles after animation
+      // Clear pulses after animation is complete
       setTimeout(() => {
-        setClickEvents((prev) => prev.filter((event) => event.id !== timestamp));
+        setClicks((prev) => prev.filter((c) => c.id !== newClick.id));
       }, 1000);
     };
 
@@ -70,42 +32,52 @@ export default function ClickEffect() {
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[100] overflow-hidden">
+    <div className="fixed inset-0 pointer-events-none z-[100]">
       <AnimatePresence>
-        {clickEvents.flatMap(event => 
-          event.particles.map(particle => (
+        {clicks.map((click) => (
+          <div key={click.id} style={{ position: 'fixed', left: click.x, top: click.y }}>
+            
+            {/* 1. Core Flash (Emerald Glow) */}
             <motion.div
-              key={particle.id}
-              initial={{
-                opacity: 1,
-                scale: 1,
-                x: particle.x,
-                y: particle.y,
-                rotate: 0
-              }}
-              animate={{
-                opacity: 0,
-                scale: 0.2,
-                x: particle.x + particle.destX,
-                y: particle.y + particle.destY,
-                rotate: particle.rotation
-              }}
-              transition={{
-                duration: 0.7,
-                ease: [0.23, 1, 0.32, 1] // easeOutQuart
-              }}
-              style={{
-                position: 'fixed',
-                width: particle.size,
-                height: particle.size,
-                backgroundColor: particle.color,
-                borderRadius: Math.random() > 0.4 ? '50%' : '1px',
-                left: 0,
-                top: 0,
-              }}
+              initial={{ scale: 0, opacity: 0.8 }}
+              animate={{ scale: 2.5, opacity: 0 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="absolute -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-emerald-500/30 blur-md"
             />
-          ))
-        )}
+
+            {/* 2. Primary Fast Ring */}
+            <motion.div
+              initial={{ scale: 0, opacity: 0.6 }}
+              animate={{ scale: 4, opacity: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} 
+              className="absolute -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full border border-white/40"
+            />
+
+            {/* 3. Tech Dashed Ring */}
+            <motion.div
+              initial={{ scale: 0.2, opacity: 0.4, rotate: 0 }}
+              animate={{ scale: 5.5, opacity: 0, rotate: 45 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="absolute -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full border border-dashed border-emerald-400/50"
+            />
+
+            {/* 4. Outer Subtle Shockwave */}
+            <motion.div
+              initial={{ scale: 1, opacity: 0.2 }}
+              animate={{ scale: 12, opacity: 0 }}
+              transition={{ duration: 1, ease: "circOut" }}
+              className="absolute -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full border border-white/5"
+            />
+
+            {/* 5. Center Point (Precise dot) */}
+            <motion.div
+              initial={{ scale: 0, opacity: 1 }}
+              animate={{ scale: [1.5, 0], opacity: [1, 0] }}
+              transition={{ duration: 0.5, times: [0, 1] }}
+              className="absolute -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-white rounded-full shadow-[0_0_10px_white]"
+            />
+          </div>
+        ))}
       </AnimatePresence>
     </div>
   );
