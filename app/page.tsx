@@ -5,7 +5,6 @@ import { ThemeToggle } from "@/components/ui/theme-toggle"
 import { Cursor } from "@/components/ui/inverted-cursor"
 import { SpecialText } from "@/components/ui/special-text"
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
-import { AIAssistant } from "@/components/ui/ai-assistant"
 import { FileText, GraduationCap, Briefcase } from "lucide-react"
 import { ContactForm } from "@/components/ui/contact-form"
 import { FadeUp } from "@/components/ui/fade-up"
@@ -32,8 +31,6 @@ export default function PortfolioPage() {
           className="opacity-30"
         />
       </div>
-
-      <AIAssistant />
 
       {/* Custom Cursor - Desktop Only */}
       <Cursor size={60} />
@@ -105,7 +102,7 @@ export default function PortfolioPage() {
                           Status: Open to Work
                         </div>
                         <div className="space-y-4">
-                          <p className="text-foreground/80 flex justify-between"><span className="text-muted-foreground font-mono uppercase text-xs">Location</span> Tirupati, India</p>
+                          <p className="text-foreground/80 flex justify-between"><span className="text-muted-foreground font-mono uppercase text-xs">Location</span> India</p>
                           <p className="text-foreground/80 flex justify-between"><span className="text-muted-foreground font-mono uppercase text-xs">Focus</span> AI Systems, Full Stack</p>
                           <p className="text-foreground/80 flex justify-between truncate gap-4"><span className="text-muted-foreground font-mono uppercase text-xs shrink-0">Email</span> shaiksuhaib360@gmail.com</p>
                         </div>
