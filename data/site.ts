@@ -81,11 +81,11 @@ export const siteConfig = {
           },
           {
             title: 'Built an eval instead of trusting the vibe',
-            body: '“The AI seems good” isn’t a metric. So there’s a labelled set — twelve resumes against one JD, balanced across interview / hold / reject with deliberately borderline cases — and a scorer that reports verdict agreement, Cohen’s kappa, and whether the 0–100 scores actually separate the classes. Early runs agree with my labels and the bands separate cleanly; the honest weak spot is Reject recall, which the set barely tests yet. Knowing that gap is the point.',
+            body: '“The AI seems good” isn’t a metric, so there’s a labelled set — twelve resumes against one JD, balanced across interview / hold / reject — scored on verdict agreement, Cohen’s kappa, and score separation. Two things matter more than the headline. First, the errors land the safe way: Reject recall and precision are both 100%, so nobody was wrongly filtered out — the single miss is a false positive, a wasted interview slot, not a person lost. Second, the sharper finding: two “hold” candidates scored identically at 75, but the model interviewed the one with *less* experience — it held the JD’s three-year bar against one and waived it for the other. So the verdict isn’t a stable function of the score; the boundary wobbles. The fix is to derive the verdict from the score with a fixed threshold instead of letting the model choose both.',
           },
         ],
         outcome:
-          'Live and self-contained at cvibe.lovable.app — React + Supabase (edge functions, Postgres, RLS, realtime, private storage), Gemini scoring behind a tool-call schema, and human-in-the-loop email via Resend. Ships with a labelled eval harness (verdict agreement, Cohen’s kappa, score separation), so the screening quality is measured, not assumed.',
+          'Live and self-contained at cvibe.lovable.app — React + Supabase (edge functions, Postgres, RLS, realtime, private storage), Gemini scoring behind a tool-call schema, and human-in-the-loop email via Resend. On the twelve-resume eval it agrees with my labels on 11 (Cohen’s kappa 0.87) and separates the score bands cleanly (interview 92 / hold 65 / reject 25); every model rationale is in eval/results.md. It’s small, synthetic, and labelled by one person — a single flip swings it eight points — so I read 91.7% as an optimistic ceiling, not a promise.',
       },
     },
     {
