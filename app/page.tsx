@@ -40,7 +40,7 @@ const GITHUB_URL = 'https://github.com/RIxiV1'
 const MEDIUM_URL = 'https://medium.com/@shaiksuhaib360'
 
 // Feature the published product (InfoBlend); then the two strongest builds.
-const PROJECT_ORDER = ['infoblend', 'resumescreen', 'subsentry']
+const PROJECT_ORDER = ['infoblend', 'caliber', 'subsentry']
 const orderedProjects = [...siteConfig.projects].sort(
   (a, b) => PROJECT_ORDER.indexOf(a.slug) - PROJECT_ORDER.indexOf(b.slug),
 )

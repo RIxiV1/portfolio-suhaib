@@ -47,9 +47,9 @@ export const siteConfig = {
 
   projects: [
     {
-      title: 'ResumeScreen',
+      title: 'Caliber',
       year: '2026',
-      slug: 'resumescreen',
+      slug: 'caliber',
       description:
         'First-pass resume screening, handed to a model — upload a resume and a job description, get a scored verdict with the reasons, and review everyone in a live HR dashboard. It started on a course as an n8n flow; I rebuilt it as a self-contained full-stack app I actually own.',
       tech: [
@@ -77,7 +77,7 @@ export const siteConfig = {
           },
           {
             title: 'The security is the actual product',
-            body: 'Anyone can hit a public form, so nothing public is trusted. The anon key can’t write candidate rows at all — only the edge function inserts, after validation and rate limiting. Row Level Security makes candidate data HR-admin-only, resumes sit in a private bucket opened through short-lived signed URLs, and the first sign-in claims admin while every later one is a no-op. It’s a demo, but it’s built like it holds real people’s resumes.',
+            body: 'Anyone can hit a public form, so nothing public is trusted. The anon key can’t write candidate rows at all — only the edge function inserts, after validation and rate limiting. Row Level Security makes candidate data HR-admin-only, resumes sit in a private bucket opened through short-lived signed URLs, and the first sign-in claims admin while every later one is a no-op. It’s a demo, but it’s built like it holds real people’s resumes — and where a corner is cut (the rate limiter is in-memory, so per-instance rather than a hard global cap) it’s written down in the README, not hidden.',
           },
           {
             title: 'Built an eval instead of trusting the vibe',
