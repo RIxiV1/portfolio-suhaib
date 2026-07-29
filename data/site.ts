@@ -48,33 +48,44 @@ export const siteConfig = {
   projects: [
     {
       title: 'ResumeScreen',
-      year: '2025',
+      year: '2026',
       slug: 'resumescreen',
       description:
-        'I wanted to see if I could hand the boring first pass of resume screening to an agent. Drop in a resume and a job description, get back a clear interview-or-reject with reasons, and the email sends itself. Built for the IIT Patna PM & Agentic AI cert.',
-      tech: ['n8n', 'Lovable', 'Gemini', 'Gmail API'],
-      href: 'https://github.com/RIxiV1/Resume-Screening-Agent',
-      liveUrl: 'https://talent-spotter-flow.lovable.app/',
+        'First-pass resume screening, handed to a model — upload a resume and a job description, get a scored verdict with the reasons, and review everyone in a live HR dashboard. It started on a course as an n8n flow; I rebuilt it as a self-contained full-stack app I actually own.',
+      tech: [
+        'React',
+        'Supabase',
+        'Postgres + RLS',
+        'Edge Functions',
+        'Gemini',
+        'Evals',
+      ],
+      href: 'https://github.com/RIxiV1/CVibe',
+      liveUrl: 'https://cvibe.lovable.app',
       accent: '#b0803f', // brass
       caseStudy: {
         tagline:
-          'Drop in a resume and a job description, get back a typed verdict — score, matched skills, interview or reject — and an email that sends itself. My project for the IIT Patna PM & Agentic AI cert.',
+          'Upload a resume and a job description; get a structured verdict — score, strengths, gaps, next steps — and review every candidate live in an HR dashboard. Self-contained: no n8n, no webhook, and an eval set that checks the model is actually right.',
         problem:
-          "The first pass of screening a resume is the same three checks every time: does this person have the skills, the years, and does the resume even match the role. It's repetitive and mechanical — exactly the kind of thing I'd rather not do by hand. So I tried handing just that part to an agent. Not the hiring call, just the triage in front of it.",
+          "The first pass of screening is the same three checks every time — skills, years, does the resume even match the role. It's mechanical, exactly the kind of thing worth handing to a model. My first version was an n8n flow behind a form, built on a course. It worked, but a hosted webhook that expires isn't something I could stand behind — so I rebuilt it as one app I own end to end.",
         approach:
-          'A form in Lovable (name, email, JD, resume PDF) posts to an n8n webhook. n8n pulls the text out of the PDF, hands it to a Gemini agent, and routes the result. My first version just asked Gemini to "summarise the candidate". That was useless — the answer came back different every run and the workflow had nothing to branch on. So I forced one fixed JSON shape: score, matched skills, years of experience, interview or reject, a short reason. Once the output was predictable, the IF + Gmail nodes could fire the interview or the rejection email on their own.',
+          'React + Vite on the front, everything else in Supabase. The public form calls one edge function that rate-limits by IP, runs a honeypot and input checks, extracts the real text from the PDF (unpdf), scores it against the JD with Gemini through a fixed tool-call schema, and writes the candidate row itself with the service role — so a screening is never lost even if the browser drops. Postgres streams new rows straight to a realtime HR dashboard. Sending the interview or rejection email is a separate, authenticated step: a human decides after seeing the score, it never fires on its own.',
         decisions: [
           {
-            title: 'Lovable for the form, real work on the pipeline',
-            body: 'I had about a week. Hand-coding a form and a results page that mostly shuffle JSON around would have eaten half of it, so I built the UI in Lovable in an afternoon and put the rest into the prompt and the n8n flow — the part that actually proves something.',
+            title: 'Killed the n8n dependency',
+            body: 'The course version leaned on a hosted n8n webhook. The moment it expired the whole thing was dead, and I couldn’t hand anyone a link that might not resolve. Rebuilding it self-contained — edge function plus Postgres — was more work up front and nothing to expire later. The old workflow JSON is still in the repo; the running product doesn’t need it.',
           },
           {
-            title: 'Email routing stays out of the prompt',
-            body: "I could have let the model write the emails too. I didn't. Interview-vs-rejection routing sits in the n8n nodes with plain templates, so the model only makes the call and a recruiter can edit the wording without touching a prompt.",
+            title: 'The security is the actual product',
+            body: 'Anyone can hit a public form, so nothing public is trusted. The anon key can’t write candidate rows at all — only the edge function inserts, after validation and rate limiting. Row Level Security makes candidate data HR-admin-only, resumes sit in a private bucket opened through short-lived signed URLs, and the first sign-in claims admin while every later one is a no-op. It’s a demo, but it’s built like it holds real people’s resumes.',
+          },
+          {
+            title: 'Built an eval instead of trusting the vibe',
+            body: '“The AI seems good” isn’t a metric. So there’s a labelled set — twelve resumes against one JD, balanced across interview / hold / reject with deliberately borderline cases — and a scorer that reports verdict agreement, Cohen’s kappa, and whether the 0–100 scores actually separate the classes. Early runs agree with my labels and the bands separate cleanly; the honest weak spot is Reject recall, which the set barely tests yet. Knowing that gap is the point.',
           },
         ],
         outcome:
-          'Built for the IIT Patna PM & Agentic AI cert. It ran end to end during the course — webhook, PDF text extraction, Gemini agent, optional Gmail. The interface is live to click through; the n8n agent behind it expired with the course, but the full workflow JSON is checked in, so the pipeline rebuilds from a fresh install.',
+          'Live and self-contained at cvibe.lovable.app — React + Supabase (edge functions, Postgres, RLS, realtime, private storage), Gemini scoring behind a tool-call schema, and human-in-the-loop email via Resend. Ships with a labelled eval harness (verdict agreement, Cohen’s kappa, score separation), so the screening quality is measured, not assumed.',
       },
     },
     {
@@ -180,14 +191,13 @@ export const siteConfig = {
       description:
         'Elite-track NPTEL course on distributed processing, Hadoop, and large-scale data systems.',
     },
-    {
-      role: 'B.Tech, Information Technology',
-      org: 'Vel Tech High Tech Engineering College, Chennai',
-      period: 'Jun 2024 — May 2028 (Expected)',
-      description:
-        "Where I'm doing my degree. Honestly most of what I've learned is in the projects — five public repos across web apps, browser extensions, and AI automation.",
-    },
   ],
+
+  education: {
+    degree: 'B.Tech, Information Technology',
+    school: 'Vel Tech High Tech Engineering College, Chennai',
+    period: 'Jun 2024 — May 2028 (Expected)',
+  },
 
   metadata: {
     description:

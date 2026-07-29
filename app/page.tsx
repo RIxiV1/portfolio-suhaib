@@ -39,8 +39,8 @@ function SectionAction({ href, children }: { href: string; children: string }) {
 const GITHUB_URL = 'https://github.com/RIxiV1'
 const MEDIUM_URL = 'https://medium.com/@shaiksuhaib360'
 
-// Feature the strongest, most on-identity build (InfoBlend); lightest last.
-const PROJECT_ORDER = ['infoblend', 'subsentry', 'resumescreen']
+// Feature the published product (InfoBlend); then the two strongest builds.
+const PROJECT_ORDER = ['infoblend', 'resumescreen', 'subsentry']
 const orderedProjects = [...siteConfig.projects].sort(
   (a, b) => PROJECT_ORDER.indexOf(a.slug) - PROJECT_ORDER.indexOf(b.slug),
 )
@@ -166,6 +166,23 @@ export default function Page() {
               <h2 className={sectionHeading}>Where I&apos;ve been.</h2>
             </header>
             <ExperienceTabs items={siteConfig.experience} />
+            <div className="flex flex-col gap-1 border-t border-foreground/[0.06] pt-6 text-sm sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+              <p>
+                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+                  Education
+                </span>{' '}
+                <span className="text-foreground">
+                  {siteConfig.education.degree}
+                </span>
+                <span className="text-muted-foreground">
+                  {' '}
+                  · {siteConfig.education.school}
+                </span>
+              </p>
+              <span className="shrink-0 font-mono text-[11px] tabular-nums text-muted-foreground">
+                {siteConfig.education.period}
+              </span>
+            </div>
           </div>
         </FadeUp>
       </section>
