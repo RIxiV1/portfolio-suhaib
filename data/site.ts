@@ -63,6 +63,8 @@ export const siteConfig = {
       href: 'https://github.com/RIxiV1/CVibe',
       liveUrl: 'https://cvibe.lovable.app',
       accent: '#b0803f', // brass
+      image: '/projects/caliber.png',
+      metric: 'Cohen’s κ 0.87 on a 12-resume eval',
       caseStudy: {
         tagline:
           'Upload a resume and a job description; get a structured verdict — score, strengths, gaps, next steps — and review every candidate live in an HR dashboard. Self-contained: no n8n, no webhook, and an eval set that checks the model is actually right.',
@@ -99,6 +101,8 @@ export const siteConfig = {
       href: 'https://github.com/RIxiV1/InfoBlend',
       liveUrl: 'https://addons.mozilla.org/en-US/firefox/addon/infoblend/',
       accent: '#59624b', // olive
+      image: '/projects/infoblend.png',
+      metric: 'Published on Firefox Add-ons · 17 languages',
       caseStudy: {
         tagline:
           'A reading toolkit I built for myself — define, translate, summarise, save. Works without an API key, better with one. Published on Firefox Add-ons; source is on GitHub.',
@@ -142,6 +146,8 @@ export const siteConfig = {
       href: 'https://github.com/RIxiV1/SubSentry',
       liveUrl: 'https://ssubsentry.lovable.app',
       accent: '#a45a3a', // rust
+      image: '/projects/subsentry.png',
+      metric: 'Live · per-user RLS isolation',
       caseStudy: {
         tagline:
           'A subscription tracker that never asks for your bank login. Per-user isolation in the database, warm copy instead of scolding, and a confetti burst every time you cancel a sub.',

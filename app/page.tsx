@@ -121,7 +121,7 @@ export default function Page() {
       </section>
 
       {/* WORK */}
-      <section id="work" className="mx-auto max-w-3xl scroll-mt-24 px-6 py-20">
+      <section id="work" className="mx-auto max-w-5xl scroll-mt-24 px-6 py-28">
         <FadeUp>
           <div className="space-y-10">
             <header className="space-y-3">
