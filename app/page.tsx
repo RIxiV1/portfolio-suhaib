@@ -200,28 +200,53 @@ export default function Page() {
       </section>
 
       {/* ABOUT — late, once you've decided you like the work */}
-      <section id="about" className="mx-auto max-w-3xl scroll-mt-24 px-6 py-28">
+      <section id="about" className="mx-auto max-w-4xl scroll-mt-24 px-6 py-28">
         <FadeUp>
           <div className="space-y-10">
             <header className="space-y-2">
               <SectionEyebrow index="03" label="About" />
               <h2 className={sectionHeading}>A little about me.</h2>
             </header>
-            <div className="grid gap-8 md:grid-cols-[200px_1fr] md:gap-10">
-              <Image
-                src="/portrait.png"
-                alt="Shaik Mohammed Suhaib"
-                width={200}
-                height={250}
-                className="aspect-[4/5] w-full max-w-[200px] rounded-2xl border border-foreground/[0.08] bg-foreground/[0.03] object-cover"
-              />
-              <div className="space-y-5">
-                <div className="space-y-4 text-base leading-relaxed text-foreground/75 md:text-lg">
+            <div className="grid gap-10 md:grid-cols-[280px_1fr] md:gap-14">
+              <div className="space-y-6">
+                <div className="overflow-hidden rounded-2xl border border-border bg-elevated">
+                  <Image
+                    src="/portrait.png"
+                    alt="Shaik Mohammed Suhaib"
+                    width={280}
+                    height={350}
+                    className="aspect-[4/5] w-full object-cover"
+                  />
+                </div>
+                <dl className="grid grid-cols-2 gap-x-4 gap-y-5 border-t border-border pt-5 text-sm">
+                  <div>
+                    <dt className="eyebrow text-subtle-foreground">Location</dt>
+                    <dd className="mt-1.5 text-foreground">
+                      {siteConfig.location}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="eyebrow text-subtle-foreground">Status</dt>
+                    <dd className="mt-1.5 inline-flex items-center gap-1.5 text-positive">
+                      <span className="h-1.5 w-1.5 rounded-full bg-positive" />
+                      Open
+                    </dd>
+                  </div>
+                  <div className="col-span-2">
+                    <dt className="eyebrow text-subtle-foreground">Focus</dt>
+                    <dd className="mt-1.5 text-foreground">
+                      {siteConfig.focus}
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+              <div className="space-y-6">
+                <div className="space-y-5 text-lg leading-relaxed text-foreground/80">
                   {siteConfig.bio.map((p, i) => (
                     <p key={i}>{p}</p>
                   ))}
                 </div>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-muted-foreground">
                   I also write the odd thing on{' '}
                   <a
                     href={MEDIUM_URL}
@@ -233,14 +258,6 @@ export default function Page() {
                   </a>{' '}
                   — usually maths I keep circling back to.
                 </p>
-                <dl className="grid grid-cols-[110px_1fr] gap-y-2 pt-4 text-sm">
-                  <dt className="text-muted-foreground">Location</dt>
-                  <dd>{siteConfig.location}</dd>
-                  <dt className="text-muted-foreground">Focus</dt>
-                  <dd>{siteConfig.focus}</dd>
-                  <dt className="text-muted-foreground">Status</dt>
-                  <dd className="text-positive">{siteConfig.status}</dd>
-                </dl>
               </div>
             </div>
           </div>
