@@ -12,8 +12,14 @@ const sectionHeading =
   'font-display text-3xl font-semibold tracking-tight md:text-4xl'
 const sectionIntro = 'max-w-xl leading-relaxed text-muted-foreground'
 
-function SectionLabel({ children }: { children: string }) {
-  return <span className="eyebrow text-accent">{children}</span>
+function SectionEyebrow({ index, label }: { index: string; label: string }) {
+  return (
+    <div className="flex items-center gap-3">
+      <span className="eyebrow text-accent">{index}</span>
+      <span className="h-px w-8 bg-border" aria-hidden="true" />
+      <span className="eyebrow text-muted-foreground">{label}</span>
+    </div>
+  )
 }
 
 function SectionAction({ href, children }: { href: string; children: string }) {
@@ -123,7 +129,7 @@ export default function Page() {
             <header className="space-y-3">
               <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
                 <div className="space-y-2">
-                  <SectionLabel>work</SectionLabel>
+                  <SectionEyebrow index="01" label="Work" />
                   <h2 className={sectionHeading}>Things I&apos;ve built.</h2>
                 </div>
                 <SectionAction href={GITHUB_URL}>All on GitHub</SectionAction>
@@ -149,7 +155,7 @@ export default function Page() {
         <FadeUp>
           <div className="space-y-8">
             <header className="space-y-2">
-              <SectionLabel>experience</SectionLabel>
+              <SectionEyebrow index="02" label="Experience" />
               <h2 className={sectionHeading}>Where I&apos;ve been.</h2>
             </header>
             <ExperienceTabs items={siteConfig.experience} />
@@ -179,7 +185,7 @@ export default function Page() {
         <FadeUp>
           <div className="space-y-10">
             <header className="space-y-2">
-              <SectionLabel>about</SectionLabel>
+              <SectionEyebrow index="03" label="About" />
               <h2 className={sectionHeading}>A little about me.</h2>
             </header>
             <div className="grid gap-8 md:grid-cols-[200px_1fr] md:gap-10">
@@ -230,7 +236,7 @@ export default function Page() {
         <FadeUp>
           <div className="space-y-8">
             <header className="space-y-4">
-              <SectionLabel>contact</SectionLabel>
+              <SectionEyebrow index="04" label="Contact" />
               <h2 className={sectionHeading}>Say hi.</h2>
               <p className={sectionIntro}>
                 I&apos;m looking for internships, and I&apos;m always up for a
