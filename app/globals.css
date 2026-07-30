@@ -2,67 +2,84 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Editorial (light) — warm paper, walnut, moss. The default. */
+/* ── Design system ───────────────────────────────────────────────────────
+   Near-monochrome neutrals + one restrained indigo signal. Dark-first,
+   premium, high-contrast. Apple / Linear / Vercel / Stripe register. */
+
+/* Light */
 :root {
-  --background: #f5f1ea;
-  --foreground: #1d1b18;
-  --muted: #ece5da;
-  --muted-foreground: #6b665e;
-  --border: #d7cdbf;
-  --ring: #7a5a36;
-  --radius: 0.625rem;
-  --accent: #7a5a36;
-  --accent-secondary: #5f6f52;
-  --positive: #5f6f52;
-  --grain-opacity: 0.05;
-  --selection: rgba(122, 90, 54, 0.22);
-  /* Gilt masthead — darker on paper so the name reads against it. */
-  --gilt-lo: #6f5330;
-  --gilt-mid: #8a6a3e;
-  --gilt-hi: #b89152;
+  --background: #ffffff;
+  --elevated: #fafafa;
+  --muted: #f4f4f5;
+  --muted-foreground: #52525b;
+  --subtle-foreground: #71717a;
+  --border: #e6e6e9;
+  --foreground: #09090b;
+  --ring: #4f46e5;
+  --accent: #4f46e5;
+  --accent-strong: #4338ca;
+  --accent-foreground: #ffffff;
+  --accent-secondary: #52525b;
+  --positive: #059669;
+  --success: #059669;
+  --warning: #b45309;
+  --error: #dc2626;
+  --radius: 0.75rem;
+  --selection: rgba(79, 70, 229, 0.14);
 }
 
-/* Dark editorial — Leica charcoal, brass. Opt-in via `.dark`. */
+/* Dark */
 .dark {
-  --background: #111111;
-  --foreground: #f3f1ec;
-  --muted: #181818;
-  --muted-foreground: #b4ada3;
-  --border: #2d2d2d;
-  --ring: #c49a63;
-  --accent: #c49a63;
-  --accent-secondary: #8c6844;
-  --positive: #8a9a76;
-  --grain-opacity: 0.08;
-  --selection: rgba(196, 154, 99, 0.24);
-  /* Gilt masthead — lighter, warmer on charcoal. */
-  --gilt-lo: #a97c3e;
-  --gilt-mid: #c49a63;
-  --gilt-hi: #f0d8ac;
+  --background: #09090b;
+  --elevated: #101013;
+  --muted: #18181b;
+  --muted-foreground: #a1a1aa;
+  --subtle-foreground: #71717a;
+  --border: #26262b;
+  --foreground: #fafafa;
+  --ring: #818cf8;
+  --accent: #818cf8;
+  --accent-strong: #6366f1;
+  --accent-foreground: #0a0a0b;
+  --accent-secondary: #a1a1aa;
+  --positive: #34d399;
+  --success: #34d399;
+  --warning: #fbbf24;
+  --error: #f87171;
+  --radius: 0.75rem;
+  --selection: rgba(129, 140, 248, 0.26);
 }
 
 @theme inline {
   --font-sans: var(--font-geist-sans), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
-  --font-display: var(--font-fraunces), Georgia, 'Times New Roman', serif;
+  --font-display: var(--font-geist-sans), system-ui, sans-serif;
   --color-background: var(--background);
+  --color-elevated: var(--elevated);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
   --color-border: var(--border);
   --color-ring: var(--ring);
   --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-foreground: var(--accent-foreground);
   --color-accent-secondary: var(--accent-secondary);
   --color-positive: var(--positive);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring/60;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -73,71 +90,71 @@
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: 'cv01', 'ss03';
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   ::selection {
     background-color: var(--selection);
-    color: var(--foreground);
   }
 
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
   }
-
   ::-webkit-scrollbar-track {
     background: transparent;
   }
-
   ::-webkit-scrollbar-thumb {
-    background: color-mix(in srgb, var(--foreground) 22%, transparent);
-    border-radius: 4px;
+    background: color-mix(in srgb, var(--foreground) 16%, transparent);
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
   }
-
   ::-webkit-scrollbar-thumb:hover {
-    background: color-mix(in srgb, var(--foreground) 38%, transparent);
+    background: color-mix(in srgb, var(--foreground) 28%, transparent);
+    background-clip: padding-box;
+    border: 3px solid transparent;
   }
 }
 
 @layer utilities {
-  /* Printed-paper grain — you only notice it after a while. */
-  .paper-grain {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 140px 140px;
-    opacity: var(--grain-opacity, 0.05);
+  /* Eyebrow / mono label. */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
   }
 
-  /* A hairline underline that wipes in from the left on hover/focus. */
+  /* Underline that wipes in from the left on hover/focus. */
   .link-underline {
     background-image: linear-gradient(currentColor, currentColor);
     background-position: 0 100%;
     background-repeat: no-repeat;
     background-size: 0% 1px;
-    transition: background-size 0.3s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+    transition: background-size 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
   .link-underline:hover,
   .link-underline:focus-visible {
     background-size: 100% 1px;
   }
 
+  /* Ambient spotlight behind the hero — barely-there depth, no banding. */
+  .spotlight {
+    background: radial-gradient(
+      60% 50% at 50% 0%,
+      color-mix(in srgb, var(--accent) 14%, transparent),
+      transparent 70%
+    );
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .link-underline {
       transition: none;
     }
-  }
-
-  /* Gold-leaf masthead: a warm vertical gradient fill (per-letter safe) —
-     reads like foil-stamped print, not a hollow neon outline. */
-  .name-gilt {
-    background-image: linear-gradient(
-      180deg,
-      var(--gilt-hi) 0%,
-      var(--gilt-mid) 48%,
-      var(--gilt-lo) 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
   }
 }

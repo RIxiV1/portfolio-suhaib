@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono, Fraunces } from 'next/font/google'
+import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { Nav } from '@/components/ui/nav'
 import { siteConfig } from '@/data/site'
@@ -9,12 +9,6 @@ const geist = Geist({ subsets: ['latin'], variable: '--font-geist-sans' })
 const geistMono = Geist_Mono({
   subsets: ['latin'],
   variable: '--font-geist-mono',
-})
-// Editorial serif, used only for display moments (headings, the statement).
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  variable: '--font-fraunces',
-  display: 'swap',
 })
 
 const title = `${siteConfig.name} — ${siteConfig.role}`
@@ -80,7 +74,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
-        className={`${geist.variable} ${geistMono.variable} ${fraunces.variable} font-sans antialiased`}
+        className={`${geist.variable} ${geistMono.variable} font-sans antialiased`}
       >
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script
@@ -94,7 +88,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <div className="fixed inset-0 -z-50 bg-background" />
-        <div className="pointer-events-none fixed inset-0 -z-40 paper-grain" />
+        <div className="spotlight pointer-events-none fixed inset-x-0 top-0 -z-40 h-[70vh]" />
         <Nav />
         {children}
         <Analytics />

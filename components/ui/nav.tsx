@@ -5,7 +5,6 @@ import { Menu, X } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { siteConfig } from '@/data/site'
 import { cn } from '@/lib/utils'
-import { Logo } from '@/components/ui/logo'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 
 export function Nav() {
@@ -71,13 +70,13 @@ export function Nav() {
         <a
           href="#home"
           onClick={() => setOpen(false)}
-          className="flex items-center gap-2 text-sm font-medium tracking-tight text-foreground transition-opacity hover:opacity-70"
+          className="group flex items-center gap-2.5 text-sm font-semibold tracking-tight text-foreground"
           aria-label="Home"
         >
-          <Logo size={26} />
-          <span>
-            Shaik<span className="text-accent">.</span>dev
+          <span className="flex h-6 w-6 items-center justify-center rounded-md bg-foreground text-[11px] font-bold leading-none text-background transition-transform duration-300 group-hover:rotate-[-8deg]">
+            S
           </span>
+          <span>Shaik Suhaib</span>
         </a>
 
         <div className="flex items-center gap-2">

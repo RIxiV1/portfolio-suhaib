@@ -1,13 +1,10 @@
 import Image from 'next/image'
-import { ArrowUpRight, ChevronDown, FileText, Sparkles } from 'lucide-react'
+import { ArrowUpRight, ArrowDown } from 'lucide-react'
 import { siteConfig } from '@/data/site'
 import { FadeUp } from '@/components/ui/fade-up'
-import { Stagger, StaggerItem, WordReveal } from '@/components/ui/reveal'
-import { KineticName } from '@/components/ui/kinetic-name'
+import { Stagger, StaggerItem } from '@/components/ui/reveal'
 import { ContactForm } from '@/components/ui/contact-form'
 import { ExperienceTabs } from '@/components/ui/experience-tabs'
-import { StatusPill } from '@/components/ui/status-pill'
-import { CtaButton } from '@/components/ui/cta-button'
 import { FeaturedProject, ProjectsList } from '@/components/ui/work-stack-link'
 
 const sectionHeading =
@@ -51,82 +48,75 @@ export default function Page() {
       {/* HERO */}
       <section
         id="home"
-        className="relative mx-auto flex min-h-svh max-w-3xl flex-col justify-center px-6 pt-32 pb-16"
+        className="relative mx-auto flex min-h-svh max-w-5xl flex-col justify-center px-6 pt-32 pb-24"
       >
-        <Stagger className="space-y-8">
+        <Stagger className="space-y-7">
           <StaggerItem>
-            <StatusPill>Available for internships · Chennai</StatusPill>
+            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-elevated/60 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inset-0 animate-ping rounded-full bg-positive/60" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-positive" />
+              </span>
+              Available for internships
+            </span>
           </StaggerItem>
 
           <StaggerItem>
-            <KineticName />
+            <h1 className="font-display text-5xl font-semibold leading-[1.0] tracking-[-0.03em] sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+              Shaik Suhaib
+            </h1>
           </StaggerItem>
 
-          <StaggerItem className="max-w-xl space-y-4 text-lg leading-relaxed text-muted-foreground md:text-xl">
-            <p className="text-foreground">
-              I&apos;m a software engineer who likes making confusing things
-              easy to understand.
-            </p>
-            <p>
-              Lately that&apos;s health tools — most recently an app that turns
-              a blood report into plain English.
+          <StaggerItem className="max-w-2xl">
+            <p className="text-pretty text-lg leading-relaxed text-muted-foreground md:text-xl">
+              Software engineer building tools that turn complexity into{' '}
+              <span className="text-foreground">clarity</span> — most recently
+              an AI app that reads a blood report and explains it in plain
+              English.
             </p>
           </StaggerItem>
 
-          <StaggerItem className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:gap-4">
-            <CtaButton href="#contact" variant="primary">
-              <Sparkles className="h-3.5 w-3.5" />
+          <StaggerItem className="flex flex-wrap items-center gap-3 pt-2">
+            <a
+              href="#contact"
+              className="group inline-flex items-center gap-1.5 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground shadow-sm transition-all duration-300 hover:bg-accent-strong hover:shadow-[0_10px_30px_-10px_var(--accent)]"
+            >
               Get in touch
-            </CtaButton>
-            <CtaButton href={siteConfig.resumeUrl} variant="secondary" external>
-              <FileText className="h-3.5 w-3.5" />
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+            <a
+              href={siteConfig.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-colors duration-300 hover:bg-muted"
+            >
               Résumé
-            </CtaButton>
-          </StaggerItem>
-
-          <StaggerItem className="flex items-center gap-5 pt-2 text-muted-foreground">
-            {siteConfig.socials.map(({ icon: Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="transition-colors hover:text-accent"
-              >
-                <Icon className="h-5 w-5" />
-              </a>
-            ))}
+            </a>
+            <span className="ml-1 flex items-center gap-4 border-l border-border pl-4 text-muted-foreground">
+              {siteConfig.socials.map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="transition-colors hover:text-foreground"
+                >
+                  <Icon className="h-[18px] w-[18px]" />
+                </a>
+              ))}
+            </span>
           </StaggerItem>
         </Stagger>
 
-        {/* Quiet scroll cue — a whisper, not a shout; still under reduced motion. */}
         <a
           href="#work"
           aria-label="Scroll to work"
-          className="absolute inset-x-0 bottom-8 mx-auto flex w-fit flex-col items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground/40 transition-colors hover:text-accent"
+          className="eyebrow absolute inset-x-6 bottom-8 mx-auto flex w-fit items-center gap-2 text-subtle-foreground transition-colors hover:text-foreground"
         >
           Scroll
-          <ChevronDown className="h-3.5 w-3.5 motion-safe:animate-bounce" />
+          <ArrowDown className="h-3.5 w-3.5 motion-safe:animate-bounce" />
         </a>
-      </section>
-
-      {/* HOW I THINK — the belief, then what it means in practice. Placed high,
-          so the projects below read as evidence rather than a list. */}
-      <section
-        id="approach"
-        className="mx-auto max-w-3xl scroll-mt-24 px-6 py-24"
-      >
-        <WordReveal
-          className="font-display text-4xl font-semibold leading-[1.08] tracking-tight md:text-6xl"
-          segments={[
-            {
-              text: 'If someone’s confused,',
-              className: 'text-muted-foreground',
-            },
-            { text: 'the software failed.' },
-          ]}
-        />
       </section>
 
       {/* WORK */}
