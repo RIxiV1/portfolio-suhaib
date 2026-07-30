@@ -11,6 +11,7 @@ type Project = {
   hook?: string
   metric?: string
   image?: string
+  imagePosition?: string
   tech: string[]
   href: string
   liveUrl?: string
@@ -35,7 +36,8 @@ function Preview({
           alt={`${p.title} preview`}
           fill
           sizes={sizes}
-          className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          style={{ objectPosition: p.imagePosition ?? 'top' }}
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
         />
       )}
       <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-foreground/5" />

@@ -102,6 +102,7 @@ export const siteConfig = {
       liveUrl: 'https://addons.mozilla.org/en-US/firefox/addon/infoblend/',
       accent: '#59624b', // olive
       image: '/projects/infoblend.png',
+      imagePosition: 'center',
       metric: 'Published on Firefox Add-ons · 17 languages',
       caseStudy: {
         tagline:
