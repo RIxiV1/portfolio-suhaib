@@ -88,6 +88,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <div className="fixed inset-0 -z-50 bg-background" />
+        <div className="dot-grid pointer-events-none fixed inset-0 -z-40 opacity-[0.045]" />
         <div className="spotlight pointer-events-none fixed inset-x-0 top-0 -z-40 h-[70vh]" />
         <div className="grain pointer-events-none fixed inset-0 -z-30 opacity-[0.05] mix-blend-soft-light dark:opacity-[0.06]" />
         <Nav />
