@@ -5,7 +5,6 @@ import { FadeUp } from '@/components/ui/fade-up'
 import { Stagger, StaggerItem } from '@/components/ui/reveal'
 import { MagneticLink } from '@/components/ui/magnetic-link'
 import { ContactForm } from '@/components/ui/contact-form'
-import { ExperienceTabs } from '@/components/ui/experience-tabs'
 import { FeaturedProject, ProjectsList } from '@/components/ui/work-stack-link'
 
 const sectionHeading =
@@ -158,8 +157,28 @@ export default function Page() {
               <SectionEyebrow index="02" label="Experience" />
               <h2 className={sectionHeading}>Where I&apos;ve been.</h2>
             </header>
-            <ExperienceTabs items={siteConfig.experience} />
-            <div className="flex flex-col gap-1 border-t border-foreground/[0.06] pt-6 text-sm sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+            <ul className="divide-y divide-border border-t border-border">
+              {siteConfig.experience.map((item, i) => (
+                <li
+                  key={i}
+                  className="grid gap-2 py-6 md:grid-cols-[200px_1fr] md:gap-10"
+                >
+                  <div className="space-y-1">
+                    <p className="font-medium leading-snug">{item.org}</p>
+                    <p className="eyebrow text-subtle-foreground">
+                      {item.period}
+                    </p>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="font-medium">{item.role}</p>
+                    <p className="leading-relaxed text-muted-foreground">
+                      {item.description}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-col gap-1 border-t border-border pt-6 text-sm sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
               <p>
                 <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
                   Education
