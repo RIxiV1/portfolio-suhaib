@@ -4,7 +4,7 @@ import { Medium } from '@/components/ui/medium-icon'
 export const siteConfig = {
   name: 'Shaik Mohammed Suhaib',
   role: 'Software engineer',
-  focus: 'Full-stack · AI products · Browser extensions',
+  focus: 'Full-stack · AI products',
   location: 'Chennai, India',
   email: 'shaiksuhaib360@gmail.com',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://shaikuhaibdev.vercel.app',
