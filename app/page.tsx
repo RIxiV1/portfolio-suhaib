@@ -3,6 +3,7 @@ import { ArrowUpRight, ArrowDown } from 'lucide-react'
 import { siteConfig } from '@/data/site'
 import { FadeUp } from '@/components/ui/fade-up'
 import { Stagger, StaggerItem } from '@/components/ui/reveal'
+import { MagneticLink } from '@/components/ui/magnetic-link'
 import { ContactForm } from '@/components/ui/contact-form'
 import { ExperienceTabs } from '@/components/ui/experience-tabs'
 import { FeaturedProject, ProjectsList } from '@/components/ui/work-stack-link'
@@ -77,21 +78,21 @@ export default function Page() {
           </StaggerItem>
 
           <StaggerItem className="flex flex-wrap items-center gap-3 pt-2">
-            <a
+            <MagneticLink
               href="#contact"
-              className="group inline-flex items-center gap-1.5 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground shadow-sm transition-all duration-300 hover:bg-accent-strong hover:shadow-[0_10px_30px_-10px_var(--accent)]"
+              className="group inline-flex items-center gap-1.5 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground shadow-sm transition-[background-color,box-shadow] duration-300 hover:bg-accent-strong hover:shadow-[0_10px_30px_-10px_var(--accent)]"
             >
               Get in touch
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
-            <a
+            </MagneticLink>
+            <MagneticLink
               href={siteConfig.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-full border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-colors duration-300 hover:bg-muted"
             >
               Résumé
-            </a>
+            </MagneticLink>
             <span className="ml-1 flex items-center gap-4 border-l border-border pl-4 text-muted-foreground">
               {siteConfig.socials.map(({ icon: Icon, href, label }) => (
                 <a
