@@ -13,11 +13,7 @@ const sectionHeading =
 const sectionIntro = 'max-w-xl leading-relaxed text-muted-foreground'
 
 function SectionLabel({ children }: { children: string }) {
-  return (
-    <span className="font-mono text-sm lowercase text-accent">
-      <span className="text-accent/50">/</span> {children}
-    </span>
-  )
+  return <span className="eyebrow text-accent">{children}</span>
 }
 
 function SectionAction({ href, children }: { href: string; children: string }) {
@@ -148,7 +144,7 @@ export default function Page() {
       {/* EXPERIENCE */}
       <section
         id="experience"
-        className="mx-auto max-w-3xl scroll-mt-24 px-6 py-20"
+        className="mx-auto max-w-3xl scroll-mt-24 px-6 py-28"
       >
         <FadeUp>
           <div className="space-y-8">
@@ -179,7 +175,7 @@ export default function Page() {
       </section>
 
       {/* ABOUT — late, once you've decided you like the work */}
-      <section id="about" className="mx-auto max-w-3xl scroll-mt-24 px-6 py-20">
+      <section id="about" className="mx-auto max-w-3xl scroll-mt-24 px-6 py-28">
         <FadeUp>
           <div className="space-y-10">
             <header className="space-y-2">
@@ -229,7 +225,7 @@ export default function Page() {
       {/* CONTACT */}
       <section
         id="contact"
-        className="mx-auto max-w-3xl scroll-mt-24 px-6 py-20"
+        className="mx-auto max-w-3xl scroll-mt-24 px-6 py-28"
       >
         <FadeUp>
           <div className="space-y-8">

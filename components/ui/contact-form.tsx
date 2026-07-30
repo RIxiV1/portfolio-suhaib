@@ -12,9 +12,8 @@ type FormState =
   | { kind: 'error'; reason: string }
 
 const fieldClass =
-  'w-full bg-transparent border-b border-foreground/15 px-0 py-3 text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-accent focus:shadow-[0_8px_18px_-12px_var(--accent)] transition-[color,border-color,box-shadow] duration-300 disabled:opacity-50 disabled:cursor-not-allowed'
-const labelClass =
-  'block font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-2'
+  'w-full rounded-lg border border-border bg-elevated px-3.5 py-2.5 text-[15px] text-foreground placeholder:text-muted-foreground/50 transition-[border-color,box-shadow] duration-200 focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/15 disabled:cursor-not-allowed disabled:opacity-50'
+const labelClass = 'eyebrow mb-2 block text-muted-foreground'
 
 export function ContactForm() {
   const [state, setState] = useState<FormState>({ kind: 'idle' })
@@ -219,10 +218,10 @@ export function ContactForm() {
         disabled={submitting}
         aria-busy={submitting}
         className={cn(
-          'group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] transition-colors',
+          'group inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-300',
           submitting
-            ? 'text-muted-foreground cursor-not-allowed'
-            : 'text-foreground hover:text-accent',
+            ? 'cursor-not-allowed bg-muted text-muted-foreground'
+            : 'bg-accent text-accent-foreground hover:bg-accent-strong hover:shadow-[0_10px_30px_-10px_var(--accent)]',
         )}
       >
         {submitting ? (
