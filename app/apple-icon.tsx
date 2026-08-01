@@ -4,7 +4,7 @@ import { Logo } from '@/components/ui/logo'
 export const size = { width: 180, height: 180 }
 export const contentType = 'image/png'
 
-export default async function AppleIcon() {
+export default function AppleIcon() {
   return new ImageResponse(
     <div
       style={{
@@ -13,11 +13,11 @@ export default async function AppleIcon() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#1d1b18',
-        borderRadius: 36,
+        background: '#09090b',
+        borderRadius: 40,
       }}
     >
-      <Logo size={120} showBackground={false} hideAnimation={true} />
+      <Logo size={120} color="#818cf8" noise="#3f3f46" />
     </div>,
     { ...size },
   )

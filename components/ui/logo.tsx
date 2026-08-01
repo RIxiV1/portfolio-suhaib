@@ -1,13 +1,35 @@
+// The "Signal" mark: a clean S — the signal — resolved out of the dotted grid.
+// Smooth stroke reads at any size; optional noise dots frame it when large.
+export const SIGNAL_PATH =
+  'M66 33 C66 24 58 22 50 22 C40 22 34 28 34 37 C34 46 42 49 50 49 C58 49 66 52 66 62 C66 72 58 76 50 76 C42 76 34 74 34 66'
+
+// A sparse, fixed scatter that frames the S at larger sizes (favicon-size omits it).
+const NOISE = [
+  { x: 15, y: 22, r: 2, o: 0.5 },
+  { x: 85, y: 27, r: 1.6, o: 0.4 },
+  { x: 22, y: 79, r: 1.7, o: 0.45 },
+  { x: 82, y: 80, r: 2, o: 0.5 },
+  { x: 11, y: 52, r: 1.4, o: 0.32 },
+  { x: 89, y: 58, r: 1.5, o: 0.4 },
+  { x: 50, y: 11, r: 1.5, o: 0.4 },
+  { x: 49, y: 90, r: 1.6, o: 0.38 },
+]
+
 export function Logo({
-  size = 32,
-  className = '',
-  showBackground = false,
-  hideAnimation = false,
+  size = 28,
+  color = 'currentColor',
+  plate,
+  noise,
+  className,
 }: {
   size?: number
+  /** Stroke color of the S. Defaults to currentColor so it inherits text color. */
+  color?: string
+  /** Optional rounded background tile (favicon / app-icon contexts). */
+  plate?: string
+  /** Optional color for the framing noise dots; omit to hide them. */
+  noise?: string
   className?: string
-  showBackground?: boolean
-  hideAnimation?: boolean
 }) {
   return (
     <svg
@@ -15,45 +37,29 @@ export function Logo({
       height={size}
       viewBox="0 0 100 100"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg"
       className={className}
-      style={{
-        filter: 'drop-shadow(0 3px 8px rgba(29, 27, 24, 0.18))',
-      }}
+      aria-hidden="true"
     >
-      {/* Optional rounded dark background — used for favicon / app icon contexts */}
-      {showBackground && (
-        <rect width="100" height="100" rx="20" fill="#1d1b18" />
+      {plate && (
+        <rect x="3" y="3" width="94" height="94" rx="24" fill={plate} />
       )}
-
-      {/*
-        Isometric cube — three faces of a 3D module.
-        Reads as a building block / shipped unit / stack primitive.
-        Light from upper-front-left: top face brightest, left mid, right shadow.
-      */}
-      <g style={{ transformOrigin: '50px 50px' }}>
-        {/* Left face (walnut, mid) */}
-        <path d="M 22 34 L 50 50 L 50 82 L 22 66 Z" fill="#8c6a43" />
-
-        {/* Right face (dark walnut, in shadow) */}
-        <path d="M 78 34 L 50 50 L 50 82 L 78 66 Z" fill="#5c4527" />
-
-        {/* Top face (brass) — catches the light */}
-        <path d="M 50 18 L 78 34 L 50 50 L 22 34 Z" fill="#c79a5b" />
-
-        {/* Subtle highlight on the top vertex for premium depth */}
-        <circle cx="50" cy="18" r="2" fill="#f2e6ce" opacity="0.9" />
-
-        {!hideAnimation && (
-          <animateTransform
-            attributeName="transform"
-            type="rotate"
-            values="-2 50 50; 2 50 50; -2 50 50"
-            dur="6s"
-            repeatCount="indefinite"
+      {noise &&
+        NOISE.map((d, i) => (
+          <circle
+            key={i}
+            cx={d.x}
+            cy={d.y}
+            r={d.r}
+            fill={noise}
+            opacity={d.o}
           />
-        )}
-      </g>
+        ))}
+      <path
+        d={SIGNAL_PATH}
+        stroke={color}
+        strokeWidth="12"
+        strokeLinecap="round"
+      />
     </svg>
   )
 }

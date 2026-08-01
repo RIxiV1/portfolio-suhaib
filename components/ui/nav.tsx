@@ -6,6 +6,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { siteConfig } from '@/data/site'
 import { cn } from '@/lib/utils'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
+import { Logo } from '@/components/ui/logo'
 
 export function Nav() {
   const reduceMotion = useReducedMotion()
@@ -73,8 +74,8 @@ export function Nav() {
           className="group flex items-center gap-2.5 text-sm font-semibold tracking-tight text-foreground"
           aria-label="Home"
         >
-          <span className="flex h-6 w-6 items-center justify-center rounded-md bg-foreground text-[11px] font-bold leading-none text-background transition-transform duration-300 group-hover:rotate-[-8deg]">
-            S
+          <span className="logo-glow text-accent">
+            <Logo size={24} />
           </span>
           <span>Shaik Suhaib</span>
         </a>

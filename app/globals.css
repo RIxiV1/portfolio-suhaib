@@ -152,6 +152,22 @@
     );
   }
 
+  /* Logo mark: the S blooms with its indigo signal on hover. */
+  .logo-glow {
+    display: inline-flex;
+    transition: filter 0.3s ease;
+  }
+  .group:hover .logo-glow {
+    filter: drop-shadow(
+      0 0 7px color-mix(in srgb, var(--accent) 55%, transparent)
+    );
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .logo-glow {
+      transition: none;
+    }
+  }
+
   /* Dotted grid — a subtle, even texture so the background isn't dead-flat. */
   .dot-grid {
     background-image: radial-gradient(var(--foreground) 1px, transparent 1px);

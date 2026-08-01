@@ -1,11 +1,12 @@
 import { ImageResponse } from 'next/og'
+import { Logo } from '@/components/ui/logo'
 import { siteConfig } from '@/data/site'
 
 export const alt = `${siteConfig.name} — ${siteConfig.role}`
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
-export default async function OpengraphImage() {
+export default function OpengraphImage() {
   return new ImageResponse(
     <div
       style={{
@@ -14,10 +15,9 @@ export default async function OpengraphImage() {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        padding: '72px',
-        background:
-          'radial-gradient(ellipse at top left, rgba(140,106,67,0.10), transparent 55%), #f5f1ea',
-        color: '#1d1b18',
+        padding: '68px 72px',
+        background: 'linear-gradient(140deg, #0d0d14 0%, #09090b 55%)',
+        color: '#fafafa',
         fontFamily: 'sans-serif',
       }}
     >
@@ -25,45 +25,65 @@ export default async function OpengraphImage() {
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 12,
-          fontSize: 22,
-          letterSpacing: '0.25em',
-          textTransform: 'uppercase',
-          color: '#8c6a43',
+          justifyContent: 'space-between',
         }}
       >
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <Logo size={54} color="#818cf8" noise="#3f3f46" />
+          <span
+            style={{
+              fontSize: 21,
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+              color: '#a1a1aa',
+            }}
+          >
+            Portfolio
+          </span>
+        </div>
         <div
           style={{
-            width: 12,
-            height: 12,
-            borderRadius: 999,
-            background: '#8c6a43',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 12,
+            fontSize: 19,
+            letterSpacing: '0.16em',
+            textTransform: 'uppercase',
+            color: '#818cf8',
           }}
-        />
-        Available for internships
+        >
+          <div
+            style={{
+              width: 10,
+              height: 10,
+              borderRadius: 999,
+              background: '#34d399',
+            }}
+          />
+          Available for internships
+        </div>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
         <div
           style={{
-            fontSize: 160,
+            fontSize: 132,
             fontWeight: 800,
             letterSpacing: '-0.04em',
             lineHeight: 1,
-            textTransform: 'uppercase',
           }}
         >
-          {siteConfig.name}
+          Shaik Suhaib
         </div>
         <div
           style={{
-            fontSize: 44,
-            fontWeight: 300,
-            color: '#6b665e',
+            fontSize: 38,
+            fontWeight: 400,
+            color: '#a1a1aa',
             letterSpacing: '-0.01em',
           }}
         >
-          {siteConfig.focus}
+          {`${siteConfig.role} · ${siteConfig.focus}`}
         </div>
       </div>
 
@@ -72,14 +92,14 @@ export default async function OpengraphImage() {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          fontSize: 22,
-          color: '#8a857c',
-          letterSpacing: '0.2em',
+          fontSize: 21,
+          color: '#71717a',
+          letterSpacing: '0.14em',
           textTransform: 'uppercase',
         }}
       >
-        <span>{siteConfig.role}</span>
         <span>{siteConfig.location}</span>
+        <span>shaikuhaibdev.vercel.app</span>
       </div>
     </div>,
     { ...size },

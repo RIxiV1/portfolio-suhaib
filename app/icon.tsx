@@ -4,7 +4,7 @@ import { Logo } from '@/components/ui/logo'
 export const size = { width: 32, height: 32 }
 export const contentType = 'image/png'
 
-export default async function Icon() {
+export default function Icon() {
   return new ImageResponse(
     <div
       style={{
@@ -13,11 +13,11 @@ export default async function Icon() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#1d1b18',
-        borderRadius: 6,
+        background: '#09090b',
+        borderRadius: 7,
       }}
     >
-      <Logo size={24} showBackground={false} hideAnimation={true} />
+      <Logo size={26} color="#818cf8" />
     </div>,
     { ...size },
   )
