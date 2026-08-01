@@ -62,7 +62,6 @@ export const siteConfig = {
       ],
       href: 'https://github.com/RIxiV1/CVibe',
       liveUrl: 'https://cvibe.lovable.app',
-      accent: '#b0803f', // brass
       image: '/projects/caliber.png',
       metric: 'Cohen’s κ 0.87 on a 12-resume eval',
       caseStudy: {
@@ -100,7 +99,6 @@ export const siteConfig = {
       tech: ['Manifest V3', 'Shadow DOM', 'JavaScript', 'Zero deps', 'BYOK AI'],
       href: 'https://github.com/RIxiV1/InfoBlend',
       liveUrl: 'https://addons.mozilla.org/en-US/firefox/addon/infoblend/',
-      accent: '#59624b', // olive
       image: '/projects/infoblend-live.png',
       imagePosition: 'center',
       metric: 'Published on Firefox Add-ons · 17 languages',
@@ -146,7 +144,6 @@ export const siteConfig = {
       ],
       href: 'https://github.com/RIxiV1/SubSentry',
       liveUrl: 'https://ssubsentry.lovable.app',
-      accent: '#a45a3a', // rust
       image: '/projects/subsentry.png',
       metric: 'Live · per-user RLS isolation',
       caseStudy: {

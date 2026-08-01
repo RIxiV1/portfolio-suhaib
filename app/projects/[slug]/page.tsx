@@ -51,7 +51,7 @@ export default async function ProjectCaseStudyPage({
   const next = caseStudyProjects[(idx + 1) % caseStudyProjects.length]
 
   return (
-    <main className="relative">
+    <main id="main" tabIndex={-1} className="relative outline-none">
       <article className="mx-auto max-w-4xl px-6 pt-32 pb-24">
         <Link
           href="/#work"

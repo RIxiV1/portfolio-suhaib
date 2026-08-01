@@ -4,6 +4,7 @@ import { useRef, type ReactNode } from 'react'
 import {
   motion,
   useMotionValue,
+  useReducedMotion,
   useSpring,
   type HTMLMotionProps,
 } from 'motion/react'
@@ -23,6 +24,7 @@ export function MagneticLink({
   innerStrength = 0.12,
   ...rest
 }: MagneticLinkProps) {
+  const reduceMotion = useReducedMotion()
   const ref = useRef<HTMLAnchorElement>(null)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -34,6 +36,7 @@ export function MagneticLink({
   const isy = useSpring(iy, { stiffness: 260, damping: 20, mass: 0.3 })
 
   const onMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (reduceMotion) return
     const r = ref.current?.getBoundingClientRect()
     if (!r) return
     const cx = r.left + r.width / 2

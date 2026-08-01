@@ -46,7 +46,7 @@ const orderedProjects = [...siteConfig.projects].sort(
 
 export default function Page() {
   return (
-    <main className="relative">
+    <main id="main" tabIndex={-1} className="relative outline-none">
       {/* HERO */}
       <section
         id="home"

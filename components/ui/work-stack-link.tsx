@@ -15,7 +15,6 @@ type Project = {
   tech: string[]
   href: string
   liveUrl?: string
-  accent: string
   caseStudy?: unknown
 }
 
