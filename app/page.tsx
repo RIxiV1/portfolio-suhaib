@@ -6,6 +6,7 @@ import { Stagger, StaggerItem } from '@/components/ui/reveal'
 import { MagneticLink } from '@/components/ui/magnetic-link'
 import { ContactForm } from '@/components/ui/contact-form'
 import { FeaturedProject, ProjectsList } from '@/components/ui/work-stack-link'
+import { SignalField } from '@/components/ui/signal-field'
 
 const sectionHeading =
   'font-display text-3xl font-semibold tracking-tight md:text-4xl'
@@ -52,7 +53,12 @@ export default function Page() {
         id="home"
         className="relative mx-auto flex min-h-svh max-w-5xl flex-col justify-center px-6 pt-32 pb-24"
       >
-        <Stagger className="space-y-7">
+        {/* Live Signal mark — ambient on the right, hover to resolve it. */}
+        <div className="pointer-events-none absolute inset-y-0 right-0 hidden items-center justify-end pr-2 lg:flex">
+          <SignalField size={430} className="pointer-events-auto opacity-90" />
+        </div>
+
+        <Stagger className="relative z-10 max-w-2xl space-y-7">
           <StaggerItem>
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-elevated/60 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
               <span className="relative flex h-1.5 w-1.5">
