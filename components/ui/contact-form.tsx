@@ -15,13 +15,33 @@ const fieldClass =
   'w-full rounded-lg border border-border bg-elevated px-3.5 py-2.5 text-[15px] text-foreground placeholder:text-muted-foreground/50 transition-[border-color,box-shadow] duration-200 focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/15 disabled:cursor-not-allowed disabled:opacity-50'
 const labelClass = 'eyebrow mb-2 block text-muted-foreground'
 
+const FIELDS = ['name', 'email', 'message'] as const
+type Field = (typeof FIELDS)[number]
+const errorClass = 'border-error focus:border-error focus:ring-error/15'
+
 export function ContactForm() {
   const [state, setState] = useState<FormState>({ kind: 'idle' })
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [honeypot, setHoneypot] = useState('')
+  const [errors, setErrors] = useState<Partial<Record<Field, string>>>({})
   const reduce = useReducedMotion()
 
   const submitting = state.kind === 'submitting'
+
+  // Client-side validation mirrors the server's Zod rules so an invalid submit
+  // never round-trips — and each failure is announced on its own field.
+  const validate = (): Partial<Record<Field, string>> => {
+    const e: Partial<Record<Field, string>> = {}
+    if (formData.name.trim().length < 2) e.name = 'Please enter your name.'
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim()))
+      e.email = 'Enter a valid email address.'
+    if (formData.message.trim().length < 10)
+      e.message = 'A bit more detail helps — 10 characters or more.'
+    return e
+  }
+
+  const clearError = (f: Field) =>
+    setErrors((p) => (p[f] ? { ...p, [f]: undefined } : p))
 
   const send = async () => {
     // Belt-and-suspenders: ignore additional submits while one is in flight.
@@ -100,6 +120,13 @@ export function ContactForm() {
     <form
       onSubmit={(e) => {
         e.preventDefault()
+        const next = validate()
+        setErrors(next)
+        const firstInvalid = FIELDS.find((f) => next[f])
+        if (firstInvalid) {
+          document.getElementById(firstInvalid)?.focus()
+          return
+        }
         send()
       }}
       className="space-y-10"
@@ -135,13 +162,21 @@ export function ContactForm() {
             maxLength={80}
             autoComplete="name"
             disabled={submitting}
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? 'name-error' : undefined}
             value={formData.name}
-            onChange={(e) =>
+            onChange={(e) => {
               setFormData((p) => ({ ...p, name: e.target.value }))
-            }
+              clearError('name')
+            }}
             placeholder="Your name"
-            className={fieldClass}
+            className={cn(fieldClass, errors.name && errorClass)}
           />
+          {errors.name && (
+            <p id="name-error" className="mt-1.5 text-xs text-error">
+              {errors.name}
+            </p>
+          )}
         </div>
         <div>
           <label htmlFor="email" className={labelClass}>
@@ -154,13 +189,21 @@ export function ContactForm() {
             maxLength={120}
             autoComplete="email"
             disabled={submitting}
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? 'email-error' : undefined}
             value={formData.email}
-            onChange={(e) =>
+            onChange={(e) => {
               setFormData((p) => ({ ...p, email: e.target.value }))
-            }
+              clearError('email')
+            }}
             placeholder="you@example.com"
-            className={fieldClass}
+            className={cn(fieldClass, errors.email && errorClass)}
           />
+          {errors.email && (
+            <p id="email-error" className="mt-1.5 text-xs text-error">
+              {errors.email}
+            </p>
+          )}
         </div>
       </div>
 
@@ -174,13 +217,25 @@ export function ContactForm() {
           maxLength={4000}
           rows={4}
           disabled={submitting}
+          aria-invalid={!!errors.message}
+          aria-describedby={errors.message ? 'message-error' : undefined}
           value={formData.message}
-          onChange={(e) =>
+          onChange={(e) => {
             setFormData((p) => ({ ...p, message: e.target.value }))
-          }
+            clearError('message')
+          }}
           placeholder="What's on your mind?"
-          className={cn(fieldClass, 'resize-none')}
+          className={cn(
+            fieldClass,
+            'resize-none',
+            errors.message && errorClass,
+          )}
         />
+        {errors.message && (
+          <p id="message-error" className="mt-1.5 text-xs text-error">
+            {errors.message}
+          </p>
+        )}
       </div>
 
       {/* Persistent error — stays until the user dismisses or fixes & resubmits. */}

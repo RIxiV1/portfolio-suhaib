@@ -190,6 +190,25 @@
     }
   }
 
+  /* Gentle float for the scroll cue — calmer than Tailwind's bounce. */
+  .animate-float {
+    animation: float 2.6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(3px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float {
+      animation: none;
+    }
+  }
+
   /* Dotted grid — a subtle, even texture so the background isn't dead-flat. */
   .dot-grid {
     background-image: radial-gradient(var(--foreground) 1px, transparent 1px);

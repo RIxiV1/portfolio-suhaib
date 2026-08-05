@@ -123,14 +123,14 @@ export default function Page() {
           className="eyebrow absolute inset-x-6 bottom-8 mx-auto flex w-fit items-center gap-2 text-subtle-foreground transition-colors hover:text-foreground"
         >
           Scroll
-          <ArrowDown className="h-3.5 w-3.5 motion-safe:animate-bounce" />
+          <ArrowDown className="h-3.5 w-3.5 animate-float" />
         </a>
       </section>
 
       {/* WORK */}
       <section id="work" className="mx-auto max-w-5xl scroll-mt-24 px-6 py-28">
-        <FadeUp>
-          <div className="space-y-10">
+        <div className="space-y-10">
+          <FadeUp>
             <header className="space-y-3">
               <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
                 <div className="space-y-2">
@@ -144,12 +144,16 @@ export default function Page() {
                 for the whole story.
               </p>
             </header>
-            <div className="space-y-8">
+          </FadeUp>
+          <div className="space-y-8">
+            <FadeUp>
               <FeaturedProject project={orderedProjects[0]} />
+            </FadeUp>
+            <FadeUp delay={0.08}>
               <ProjectsList projects={orderedProjects.slice(1)} />
-            </div>
+            </FadeUp>
           </div>
-        </FadeUp>
+        </div>
       </section>
 
       {/* EXPERIENCE */}
