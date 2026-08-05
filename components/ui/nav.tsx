@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { siteConfig } from '@/data/site'
@@ -10,6 +11,10 @@ import { Logo } from '@/components/ui/logo'
 
 export function Nav() {
   const reduceMotion = useReducedMotion()
+  const pathname = usePathname()
+  // On subpages the in-page sections don't exist, so hash links must route home.
+  const onHome = pathname === '/'
+  const to = (hash: string) => (onHome ? hash : `/${hash}`)
   const [active, setActive] = useState<string>('')
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
@@ -69,12 +74,12 @@ export function Nav() {
     >
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         <a
-          href="#home"
+          href={onHome ? '#home' : '/'}
           onClick={() => setOpen(false)}
           className="group flex items-center gap-2.5 text-sm font-semibold tracking-tight text-foreground"
           aria-label="Home"
         >
-          <span className="logo-glow text-accent">
+          <span className="logo-glow logo-draw text-accent">
             <Logo size={24} />
           </span>
           <span>Shaik Suhaib</span>
@@ -88,7 +93,7 @@ export function Nav() {
               return (
                 <li key={l.href}>
                   <a
-                    href={l.href}
+                    href={to(l.href)}
                     className={cn(
                       'relative block rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors',
                       isActive
@@ -135,10 +140,13 @@ export function Nav() {
         {open && (
           <motion.div
             id="mobile-nav"
-            initial={{ opacity: 0, y: -8 }}
+            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.18, ease: 'easeOut' }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+            transition={{
+              duration: reduceMotion ? 0.12 : 0.18,
+              ease: 'easeOut',
+            }}
             className="md:hidden border-t border-foreground/[0.08] bg-background/95 backdrop-blur-xl"
           >
             <ul className="mx-auto flex max-w-5xl flex-col px-6 py-3">
@@ -147,7 +155,7 @@ export function Nav() {
                 return (
                   <li key={l.href}>
                     <a
-                      href={l.href}
+                      href={to(l.href)}
                       onClick={() => setOpen(false)}
                       className={cn(
                         'flex items-center gap-2 rounded-lg px-3 py-3 text-sm font-medium transition-colors',

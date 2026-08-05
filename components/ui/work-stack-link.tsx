@@ -94,7 +94,7 @@ function Actions({ p }: { p: Project }) {
 }
 
 const cardBase =
-  'group relative overflow-hidden rounded-2xl border border-border bg-elevated transition-all duration-300 hover:border-foreground/20 hover:shadow-[0_24px_70px_-40px_rgba(0,0,0,0.6)]'
+  'group relative overflow-hidden rounded-2xl border border-border bg-elevated transition-all duration-300 hover:-translate-y-0.5 hover:border-foreground/20 hover:shadow-[var(--card-shadow)] has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-accent has-[a:focus-visible]:ring-offset-2 has-[a:focus-visible]:ring-offset-background'
 
 // The one project that gets star treatment — a wide split card.
 export function FeaturedProject({ project: p }: { project: Project }) {

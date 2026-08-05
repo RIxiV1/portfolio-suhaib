@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import { ArrowUpRight, AlertCircle, Check, Loader2, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -19,6 +19,7 @@ export function ContactForm() {
   const [state, setState] = useState<FormState>({ kind: 'idle' })
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [honeypot, setHoneypot] = useState('')
+  const reduce = useReducedMotion()
 
   const submitting = state.kind === 'submitting'
 
@@ -68,7 +69,7 @@ export function ContactForm() {
   if (state.kind === 'success') {
     return (
       <motion.div
-        initial={{ opacity: 0, y: 8 }}
+        initial={reduce ? { opacity: 0 } : { opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.25 }}
         role="status"
@@ -187,16 +188,16 @@ export function ContactForm() {
         {state.kind === 'error' && (
           <motion.div
             key="err"
-            initial={{ opacity: 0, y: 6 }}
+            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -6 }}
             transition={{ duration: 0.18 }}
             role="alert"
-            className="flex items-start gap-3 border border-red-400/30 bg-red-400/[0.05] p-4 text-sm"
+            className="flex items-start gap-3 border border-error/30 bg-error/[0.06] p-4 text-sm"
           >
-            <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
+            <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-error" />
             <div className="flex-1 space-y-2">
-              <p className="text-red-300/90">{state.reason}</p>
+              <p className="text-foreground/90">{state.reason}</p>
               <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                 Adjust your input and resubmit, or dismiss this message.
               </p>

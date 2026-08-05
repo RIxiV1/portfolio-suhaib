@@ -33,7 +33,13 @@ export async function generateMetadata({
   return {
     title,
     description: cs.tagline,
-    openGraph: { title, description: cs.tagline, type: 'article' },
+    alternates: { canonical: `/projects/${slug}` },
+    openGraph: {
+      title,
+      description: cs.tagline,
+      type: 'article',
+      url: `/projects/${slug}`,
+    },
     twitter: { card: 'summary_large_image', title, description: cs.tagline },
   }
 }
@@ -98,7 +104,7 @@ export default async function ProjectCaseStudyPage({
                   className="group inline-flex items-center gap-1.5 rounded-full border border-accent/40 px-3.5 py-1.5 text-xs font-medium text-accent transition-colors hover:bg-accent/10"
                 >
                   <span className="relative flex h-1.5 w-1.5">
-                    <span className="absolute inset-0 animate-ping rounded-full bg-accent/60" />
+                    <span className="absolute inset-0 rounded-full bg-accent/60 motion-safe:animate-ping" />
                     <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
                   </span>
                   Live

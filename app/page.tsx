@@ -62,7 +62,7 @@ export default function Page() {
           <StaggerItem>
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-elevated/60 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
               <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inset-0 animate-ping rounded-full bg-positive/60" />
+                <span className="absolute inset-0 rounded-full bg-positive/60 motion-safe:animate-ping" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-positive" />
               </span>
               Available for internships
@@ -311,8 +311,8 @@ export default function Page() {
             </header>
             <ContactForm />
             <p className="pt-2 text-sm text-muted-foreground">
-              Or just say what you&apos;re working on — if it&apos;s an
-              interesting problem, I&apos;ll want to hear about it.
+              Or just say what you&apos;re working on — odds are I&apos;ll want
+              to hear about it.
             </p>
           </div>
         </FadeUp>
@@ -326,7 +326,7 @@ export default function Page() {
             <span className="font-display text-foreground">Suhaib</span>.
           </p>
           <p className="text-xs text-muted-foreground/70">
-            All rights reserved. ©
+            © {new Date().getFullYear()} Shaik Suhaib
           </p>
           <a
             href="#home"
