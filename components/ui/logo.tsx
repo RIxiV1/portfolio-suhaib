@@ -1,34 +1,25 @@
-// The "Signal" mark: a clean S — the signal — resolved out of the dotted grid.
-// Smooth stroke reads at any size; optional noise dots frame it when large.
-export const SIGNAL_PATH =
-  'M66 33 C66 24 58 22 50 22 C40 22 34 28 34 37 C34 46 42 49 50 49 C58 49 66 52 66 62 C66 72 58 76 50 76 C42 76 34 74 34 66'
-
-// A sparse, fixed scatter that frames the S at larger sizes (favicon-size omits it).
-const NOISE = [
-  { x: 15, y: 22, r: 2, o: 0.5 },
-  { x: 85, y: 27, r: 1.6, o: 0.4 },
-  { x: 22, y: 79, r: 1.7, o: 0.45 },
-  { x: 82, y: 80, r: 2, o: 0.5 },
-  { x: 11, y: 52, r: 1.4, o: 0.32 },
-  { x: 89, y: 58, r: 1.5, o: 0.4 },
-  { x: 50, y: 11, r: 1.5, o: 0.4 },
-  { x: 49, y: 90, r: 1.6, o: 0.38 },
-]
+// The mascot: a friendly little robot. Outline in the foreground colour, the
+// indigo signal accent living in his eyes + antenna dot. Reads down to 16px.
+// Path uses only M/H/V/Q/Z + circles so it renders under Satori (favicon/OG).
+export const ROBOT_HEAD =
+  'M40 28 H60 Q78 28 78 46 V64 Q78 82 60 82 H40 Q22 82 22 64 V46 Q22 28 40 28 Z'
+export const ROBOT_ANTENNA = 'M50 28 V14'
+export const ROBOT_SMILE = 'M43 70 Q50 75 57 70'
 
 export function Logo({
   size = 28,
   color = 'currentColor',
+  accent = 'var(--accent)',
   plate,
-  noise,
   className,
 }: {
   size?: number
-  /** Stroke color of the S. Defaults to currentColor so it inherits text color. */
+  /** Outline / stroke colour. Defaults to currentColor. */
   color?: string
+  /** Eyes + antenna dot. Defaults to the accent token. */
+  accent?: string
   /** Optional rounded background tile (favicon / app-icon contexts). */
   plate?: string
-  /** Optional color for the framing noise dots; omit to hide them. */
-  noise?: string
   className?: string
 }) {
   return (
@@ -43,21 +34,20 @@ export function Logo({
       {plate && (
         <rect x="3" y="3" width="94" height="94" rx="24" fill={plate} />
       )}
-      {noise &&
-        NOISE.map((d, i) => (
-          <circle
-            key={i}
-            cx={d.x}
-            cy={d.y}
-            r={d.r}
-            fill={noise}
-            opacity={d.o}
-          />
-        ))}
       <path
-        d={SIGNAL_PATH}
+        d={ROBOT_ANTENNA}
         stroke={color}
-        strokeWidth="12"
+        strokeWidth="5"
+        strokeLinecap="round"
+      />
+      <circle cx="50" cy="10" r="4.5" fill={accent} />
+      <path d={ROBOT_HEAD} stroke={color} strokeWidth="6" />
+      <circle cx="41" cy="52" r="7.5" fill={accent} />
+      <circle cx="59" cy="52" r="7.5" fill={accent} />
+      <path
+        d={ROBOT_SMILE}
+        stroke={color}
+        strokeWidth="4"
         strokeLinecap="round"
       />
     </svg>

@@ -29,7 +29,7 @@ export default function OpengraphImage() {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <Logo size={54} color="#818cf8" noise="#3f3f46" />
+          <Logo size={54} color="#fafafa" accent="#818cf8" />
           <span
             style={{
               fontSize: 21,

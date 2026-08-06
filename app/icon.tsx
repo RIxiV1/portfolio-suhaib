@@ -17,7 +17,7 @@ export default function Icon() {
         borderRadius: 7,
       }}
     >
-      <Logo size={26} color="#818cf8" />
+      <Logo size={30} color="#f5f5f7" accent="#818cf8" />
     </div>,
     { ...size },
   )

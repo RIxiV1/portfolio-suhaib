@@ -79,8 +79,8 @@ export function Nav() {
           className="group flex items-center gap-2.5 text-sm font-semibold tracking-tight text-foreground"
           aria-label="Home"
         >
-          <span className="logo-glow logo-draw text-accent">
-            <Logo size={24} />
+          <span className="logo-glow text-foreground">
+            <Logo size={26} />
           </span>
           <span>Shaik Suhaib</span>
         </a>

@@ -17,7 +17,7 @@ export default function AppleIcon() {
         borderRadius: 40,
       }}
     >
-      <Logo size={120} color="#818cf8" noise="#3f3f46" />
+      <Logo size={120} color="#f5f5f7" accent="#818cf8" />
     </div>,
     { ...size },
   )
