@@ -13,7 +13,9 @@ export const siteConfig = {
   resumeUrl: '/Shaik_Mohammed_Suhaib_Resume.pdf',
 
   bio: [
-    "I'm 20, studying IT at Vel Tech in Chennai. I mostly build things because something annoyed me and I wanted it to stop.",
+    "I'm 20, studying IT at Vel Tech in Chennai. It usually starts with something that annoys me — I had four browser extensions open just to read one article, so I built one to replace them. It's on the Firefox Add-ons store now.",
+    'After that I stopped building toys: a full-stack app that screens résumés and can prove it got them right, and a subscription tracker that never asks for your bank login.',
+    'These days it’s AI products — most recently a tool that reads a blood report and explains it in plain English. Same instinct as that first extension: find the confusing thing, make it make sense.',
   ],
 
   socials: [
