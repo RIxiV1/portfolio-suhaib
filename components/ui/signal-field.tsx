@@ -3,70 +3,38 @@
 import { useEffect, useRef } from 'react'
 import { useReducedMotion } from 'motion/react'
 
-// Draw a stylised WALL·E (binocular eyes, boxy body, treads) and sample his
-// outline as particle targets — so the noise resolves into him, in white dots.
-function walleEdges(): [number, number][] {
-  const W = 220
-  const H = 260
-  const oc = document.createElement('canvas')
-  oc.width = W
-  oc.height = H
-  const g = oc.getContext('2d')
-  if (!g) return []
-  g.fillStyle = '#fff'
-  const rr = (x: number, y: number, w: number, h: number, r: number) => {
-    g.beginPath()
-    g.moveTo(x + r, y)
-    g.arcTo(x + w, y, x + w, y + h, r)
-    g.arcTo(x + w, y + h, x, y + h, r)
-    g.arcTo(x, y + h, x, y, r)
-    g.arcTo(x, y, x + w, y, r)
-    g.closePath()
-    g.fill()
-  }
-  const circle = (x: number, y: number, r: number) => {
-    g.beginPath()
-    g.arc(x, y, r, 0, 7)
-    g.fill()
-  }
-  rr(40, 196, 60, 44, 20) // left tread
-  rr(120, 196, 60, 44, 20) // right tread
-  g.beginPath() // body / compactor cube
-  g.moveTo(66, 96)
-  g.lineTo(154, 96)
-  g.lineTo(166, 196)
-  g.lineTo(54, 196)
-  g.closePath()
-  g.fill()
-  rr(38, 110, 16, 74, 8) // left arm
-  rr(166, 110, 16, 74, 8) // right arm
-  circle(46, 190, 10) // left hand
-  circle(174, 190, 10) // right hand
-  rr(96, 80, 28, 20, 6) // neck
-  rr(58, 34, 104, 34, 17) // eye bar
-  circle(84, 50, 28) // left eye
-  circle(136, 50, 28) // right eye
+// WALL·E as a set of parts, sampled separately so the binocular eyes stay
+// distinct (white lens rings + indigo pupils) instead of merging into a blob.
+const circle = (cx: number, cy: number, r: number) =>
+  `M ${cx - r} ${cy} a ${r} ${r} 0 1 0 ${2 * r} 0 a ${r} ${r} 0 1 0 ${-2 * r} 0`
+const roundRect = (x: number, y: number, w: number, h: number, r: number) =>
+  `M ${x + r} ${y} H ${x + w - r} Q ${x + w} ${y} ${x + w} ${y + r} V ${y + h - r} Q ${x + w} ${y + h} ${x + w - r} ${y + h} H ${x + r} Q ${x} ${y + h} ${x} ${y + h - r} V ${y + r} Q ${x} ${y} ${x + r} ${y} Z`
 
-  const img = g.getImageData(0, 0, W, H).data
-  const on = (x: number, y: number) =>
-    x >= 0 && x < W && y >= 0 && y < H && img[(y * W + x) * 4 + 3] > 128
-  const edges: [number, number][] = []
-  for (let y = 0; y < H; y++) {
-    for (let x = 0; x < W; x++) {
-      if (
-        on(x, y) &&
-        (!on(x - 1, y) || !on(x + 1, y) || !on(x, y - 1) || !on(x, y + 1))
-      )
-        edges.push([x, y])
-    }
-  }
-  return edges
-}
+type Part = { d: string; n: number; c: 'fg' | 'acc' }
+const PARTS: Part[] = [
+  // binocular eye lenses (white rings)
+  { d: circle(40, 30, 15), n: 26, c: 'fg' },
+  { d: circle(64, 30, 15), n: 26, c: 'fg' },
+  // pupils (indigo)
+  { d: circle(40, 30, 6), n: 9, c: 'acc' },
+  { d: circle(64, 30, 6), n: 9, c: 'acc' },
+  // neck
+  { d: 'M47 45 V57', n: 5, c: 'fg' },
+  { d: 'M57 45 V57', n: 5, c: 'fg' },
+  // body (compactor cube)
+  { d: 'M34 57 H70 L76 92 H28 Z', n: 48, c: 'fg' },
+  // treads
+  { d: roundRect(24, 93, 26, 16, 7), n: 22, c: 'fg' },
+  { d: roundRect(56, 93, 26, 16, 7), n: 22, c: 'fg' },
+  // arms
+  { d: 'M23 62 V88', n: 8, c: 'fg' },
+  { d: 'M83 62 V88', n: 8, c: 'fg' },
+]
 
 /**
  * WALL·E, alive: a drifting field of grey noise that resolves into a dotted,
- * glowing WALL·E — and tightens when you hover him. Decorative; hidden from
- * assistive tech. Static under reduced-motion.
+ * glowing WALL·E — white body, indigo eyes — tightening when you hover him.
+ * Decorative; hidden from assistive tech. Static under reduced-motion.
  */
 export function SignalField({
   size = 420,
@@ -90,7 +58,11 @@ export function SignalField({
     if (!ctx) return
     ctx.scale(dpr, dpr)
 
-    const col = { fg: [250, 250, 250], noise: [113, 113, 122] }
+    const col = {
+      fg: [250, 250, 250],
+      acc: [129, 140, 248],
+      noise: [113, 113, 122],
+    }
     const hexRgb = (h: string): number[] => {
       h = h.trim().replace('#', '')
       if (h.length === 3)
@@ -107,39 +79,70 @@ export function SignalField({
     const readColors = () => {
       const s = getComputedStyle(document.documentElement)
       const f = s.getPropertyValue('--foreground').trim()
+      const a = s.getPropertyValue('--accent').trim()
       const n = s.getPropertyValue('--subtle-foreground').trim()
       if (f) col.fg = hexRgb(f)
+      if (a) col.acc = hexRgb(a)
       if (n) col.noise = hexRgb(n)
     }
     readColors()
     const rgba = (c: number[], a: number) =>
       `rgba(${c[0]},${c[1]},${c[2]},${a})`
 
-    // build WALL·E targets, scaled to fit the square canvas (he's portrait)
-    const edges = walleEdges()
-    const scale = (size * 0.92) / 260
-    const ox = (size - 220 * scale) / 2
-    const oy = (size - 260 * scale) / 2
-    const N = 300
-    const rnd = (a: number, b: number) => a + Math.random() * (b - a)
-    const dot = size / 240 + 1
-    const core = Array.from({ length: N }, (_, i) => {
-      const e = edges.length
-        ? edges[Math.floor((i * edges.length) / N)]
-        : [110, 130]
-      return {
-        x: rnd(0, size),
-        y: rnd(0, size),
-        tx: ox + e[0] * scale,
-        ty: oy + e[1] * scale,
-        ph: rnd(0, 6.28),
+    // sample every part in design space, then fit-and-centre into the canvas
+    const NS = 'http://www.w3.org/2000/svg'
+    const svg = document.createElementNS(NS, 'svg')
+    svg.setAttribute('width', '0')
+    svg.setAttribute('height', '0')
+    svg.style.position = 'absolute'
+    svg.style.opacity = '0'
+    document.body.appendChild(svg)
+    const raw: { x: number; y: number; c: 'fg' | 'acc' }[] = []
+    for (const part of PARTS) {
+      const p = document.createElementNS(NS, 'path')
+      p.setAttribute('d', part.d)
+      svg.appendChild(p)
+      const len = p.getTotalLength()
+      for (let i = 0; i < part.n; i++) {
+        const q = p.getPointAtLength((i / part.n) * len)
+        raw.push({ x: q.x, y: q.y, c: part.c })
       }
-    })
+      svg.removeChild(p)
+    }
+    document.body.removeChild(svg)
+
+    // fit the bounding box into ~86% of the canvas, centred
+    let minX = Infinity,
+      minY = Infinity,
+      maxX = -Infinity,
+      maxY = -Infinity
+    for (const r of raw) {
+      if (r.x < minX) minX = r.x
+      if (r.x > maxX) maxX = r.x
+      if (r.y < minY) minY = r.y
+      if (r.y > maxY) maxY = r.y
+    }
+    const bw = maxX - minX,
+      bh = maxY - minY
+    const scale = (size * 0.86) / Math.max(bw, bh)
+    const offX = (size - bw * scale) / 2 - minX * scale
+    const offY = (size - bh * scale) / 2 - minY * scale
+
+    const rnd = (a: number, b: number) => a + Math.random() * (b - a)
+    const dot = size / 230 + 1
+    const core = raw.map((r) => ({
+      x: rnd(0, size),
+      y: rnd(0, size),
+      tx: offX + r.x * scale,
+      ty: offY + r.y * scale,
+      ph: rnd(0, 6.28),
+      c: r.c,
+    }))
 
     if (reduce) {
       ctx.clearRect(0, 0, size, size)
-      ctx.fillStyle = rgba(col.fg, 1)
       for (const p of core) {
+        ctx.fillStyle = rgba(p.c === 'acc' ? col.acc : col.fg, 1)
         ctx.beginPath()
         ctx.arc(p.tx, p.ty, dot, 0, 6.283)
         ctx.fill()
@@ -212,14 +215,15 @@ export function SignalField({
 
       const k = 0.05 + coh * 0.16
       const jit = (1 - coh) * 8
-      g.fillStyle = rgba(col.fg, 1)
-      g.shadowColor = rgba(col.fg, 1)
-      g.shadowBlur = 4 + hoverV * 10
       for (const p of core) {
+        const c = p.c === 'acc' ? col.acc : col.fg
         p.x += (p.tx - p.x) * k + Math.cos(t * 1.6 + p.ph) * jit * 0.05
         p.y += (p.ty - p.y) * k + Math.sin(t * 1.6 + p.ph) * jit * 0.05
+        g.fillStyle = rgba(c, 1)
+        g.shadowColor = rgba(c, 1)
+        g.shadowBlur = 4 + hoverV * 10
         g.beginPath()
-        g.arc(p.x, p.y, dot, 0, 6.283)
+        g.arc(p.x, p.y, p.c === 'acc' ? dot + 0.4 : dot, 0, 6.283)
         g.fill()
       }
       g.shadowBlur = 0
