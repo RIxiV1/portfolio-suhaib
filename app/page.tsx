@@ -77,7 +77,9 @@ export default function Page() {
 
           <StaggerItem className="max-w-2xl">
             <p className="text-pretty text-lg leading-relaxed text-muted-foreground md:text-xl">
-              I build <span className="text-foreground">software</span>.
+              I make confusing things{' '}
+              <span className="text-foreground">understandable</span> — like an
+              AI app that explains your blood report in plain English.
             </p>
           </StaggerItem>
 
