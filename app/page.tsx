@@ -77,10 +77,10 @@ export default function Page() {
 
           <StaggerItem className="max-w-2xl">
             <p className="text-pretty text-lg leading-relaxed text-muted-foreground md:text-xl">
-              Software engineer building tools that turn complexity into{' '}
-              <span className="text-foreground">clarity</span> — most recently
-              an AI app that reads a blood report and explains it in plain
-              English.
+              I build software that makes confusing things{' '}
+              <span className="text-foreground">make sense</span> — most
+              recently an AI app that reads a blood report and explains it in
+              plain English.
             </p>
           </StaggerItem>
 
