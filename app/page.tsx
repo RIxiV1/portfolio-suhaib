@@ -84,7 +84,7 @@ export default function Page() {
             <p className="text-pretty text-lg leading-relaxed text-muted-foreground md:text-xl">
               Early in the journey — a software engineer building AI tools that
               make complicated things{' '}
-              <span className="text-foreground">feel simple</span>.
+              <span className="italic text-foreground">feel simple</span>.
             </p>
           </StaggerItem>
 
