@@ -9,7 +9,7 @@ type FormState =
   | { kind: 'idle' }
   | { kind: 'submitting' }
   | { kind: 'success' }
-  | { kind: 'error'; reason: string }
+  | { kind: 'error'; reason: string; input: boolean }
 
 const fieldClass =
   'w-full rounded-lg border border-border bg-elevated px-3.5 py-2.5 text-[15px] text-foreground placeholder:text-muted-foreground/50 transition-[border-color,box-shadow] duration-200 focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/15 disabled:cursor-not-allowed disabled:opacity-50'
@@ -62,7 +62,7 @@ export function ContactForm() {
         } catch {
           // response wasn't JSON — keep the HTTP fallback message
         }
-        setState({ kind: 'error', reason })
+        setState({ kind: 'error', reason, input: response.status === 400 })
         return
       }
 
@@ -72,7 +72,11 @@ export function ContactForm() {
         err instanceof Error && err.message
           ? err.message
           : 'Network error — check your connection and try again.'
-      setState({ kind: 'error', reason: `Network error: ${message}` })
+      setState({
+        kind: 'error',
+        reason: `Network error: ${message}`,
+        input: false,
+      })
     }
   }
 
@@ -254,7 +258,9 @@ export function ContactForm() {
             <div className="flex-1 space-y-2">
               <p className="text-foreground/90">{state.reason}</p>
               <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                Adjust your input and resubmit, or dismiss this message.
+                {state.input
+                  ? 'Adjust your input and resubmit, or dismiss this message.'
+                  : 'This one’s on my end — you can also email me directly.'}
               </p>
             </div>
             <button
