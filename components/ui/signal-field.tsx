@@ -150,16 +150,17 @@ export function SignalField({
       return
     }
 
-    const noiseN = Math.round(size / 5.5)
+    const noiseN = Math.round(size / 13)
     const noise = Array.from({ length: noiseN }, () => ({
       x: rnd(0, size),
       y: rnd(0, size),
-      vx: rnd(-0.26, 0.26),
-      vy: rnd(-0.26, 0.26),
-      a: rnd(0.12, 0.45),
-      rr: rnd(size / 180, size / 95),
+      vx: rnd(-0.18, 0.18),
+      vy: rnd(-0.18, 0.18),
+      a: rnd(0.05, 0.18),
+      rr: rnd(size / 200, size / 120),
     }))
-    const base = 0.32
+    // Crisp by default; hover only adds bloom. (Most visitors never hover.)
+    const base = 0.82
 
     let hoverV = 0
     let hoverT = 0
@@ -213,8 +214,8 @@ export function SignalField({
       }
       g.globalAlpha = 1
 
-      const k = 0.05 + coh * 0.16
-      const jit = (1 - coh) * 8
+      const k = 0.08 + coh * 0.14
+      const jit = (1 - coh) * 5
       for (const p of core) {
         const c = p.c === 'acc' ? col.acc : col.fg
         p.x += (p.tx - p.x) * k + Math.cos(t * 1.6 + p.ph) * jit * 0.05
