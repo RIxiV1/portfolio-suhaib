@@ -14,7 +14,6 @@ export const siteConfig = {
 
   bio: [
     "I'm 20, studying IT at Vel Tech in Chennai. I mostly build things because something annoyed me and I wanted it to stop.",
-    "Outside that I'm reading about space, tinkering with browser extensions, or losing at Souls games.",
   ],
 
   socials: [

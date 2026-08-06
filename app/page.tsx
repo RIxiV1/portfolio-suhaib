@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Dancing_Script } from 'next/font/google'
 import { ArrowUpRight, ArrowDown } from 'lucide-react'
 import { siteConfig } from '@/data/site'
 import { FadeUp } from '@/components/ui/fade-up'
@@ -7,6 +8,10 @@ import { MagneticLink } from '@/components/ui/magnetic-link'
 import { ContactForm } from '@/components/ui/contact-form'
 import { FeaturedProject, ProjectsList } from '@/components/ui/work-stack-link'
 import { SignalField } from '@/components/ui/signal-field'
+import { Signature } from '@/components/ui/signature'
+
+// Script face for the hand-written sign-off in About.
+const signatureFont = Dancing_Script({ subsets: ['latin'], weight: '600' })
 
 const sectionHeading =
   'font-display text-3xl font-semibold tracking-tight md:text-4xl'
@@ -267,6 +272,24 @@ export default function Page() {
                   </a>{' '}
                   — usually maths I keep circling back to.
                 </p>
+                <div className="space-y-3 border-t border-border pt-6">
+                  <p className="eyebrow text-accent">In my spare time</p>
+                  <p className="leading-relaxed text-muted-foreground">
+                    I&apos;m probably making tweaks to my portfolio or hanging
+                    out on Discord.
+                  </p>
+                  <p className="leading-relaxed text-muted-foreground">
+                    Other than that, you&apos;ll find me playing football or
+                    gaming, and trying to get my hands on the latest tech.
+                  </p>
+                  <p className="pt-1 text-foreground">
+                    Thanks for stopping by.
+                  </p>
+                  <Signature
+                    name="Suhaib"
+                    className={`${signatureFont.className} inline-block pt-1 text-5xl leading-none text-foreground`}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -330,6 +353,9 @@ export default function Page() {
           </p>
           <p className="text-xs text-muted-foreground/70">
             © {new Date().getFullYear()} Shaik Suhaib
+          </p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground/45">
+            Made in Chennai · powered by curiosity and mild spite
           </p>
           <a
             href="#home"
