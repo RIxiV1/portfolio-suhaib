@@ -8,6 +8,7 @@ import MagneticLink from '@/components/ui/magnetic-link-loader'
 import { FeaturedProject, ProjectsList } from '@/components/ui/work-stack-link'
 import ContactFormLoader from '@/components/ui/contact-form-loader'
 import { Signature } from '@/components/ui/signature'
+import AbstractParallax from '@/components/ui/abstract-parallax'
 
 // Script face for the hand-written sign-off in About.
 const signatureFont = Dancing_Script({ subsets: ['latin'], weight: '600' })
@@ -128,14 +129,13 @@ export default function Page() {
               {/* Decorative abstract brand mark — subtle, indigo-tinted cluster that
                   echoes the dot-grid. Uses an inline SVG file in /public so no
                   extra JS is shipped. Hidden from assistive tech (decorative). */}
-              <Image
+              {/* Decorative abstract mark with a lightweight pointer-parallax interaction */}
+              <AbstractParallax
                 src="/logo-abstract.svg"
-                alt=""
-                aria-hidden="true"
+                alt="Decorative brand mark"
                 width={220}
                 height={220}
-                className="pointer-events-none absolute right-12 top-20 w-[220px] opacity-80 mix-blend-screen"
-                priority={false}
+                className="pointer-events-auto absolute right-12 top-20 w-[220px] opacity-80 mix-blend-screen"
               />
             </div>
             <div className="absolute left-10 top-8 text-[10px] font-medium uppercase tracking-[0.4em] text-[color:var(--hero-soft)]">
