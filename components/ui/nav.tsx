@@ -79,7 +79,7 @@ export function Nav() {
           aria-label="Home"
         >
           <span className="logo-glow text-foreground">
-            <Logo size={26} />
+            <Logo size={26} className="nav-logo" />
           </span>
           <span>Shaik Suhaib</span>
         </a>
