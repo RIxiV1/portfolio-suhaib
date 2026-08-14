@@ -8,7 +8,6 @@ import MagneticLink from '@/components/ui/magnetic-link-loader'
 import { FeaturedProject, ProjectsList } from '@/components/ui/work-stack-link'
 import ContactFormLoader from '@/components/ui/contact-form-loader'
 import { Signature } from '@/components/ui/signature'
-import AbstractParallax from '@/components/ui/abstract-parallax'
 
 // Script face for the hand-written sign-off in About.
 const signatureFont = Dancing_Script({ subsets: ['latin'], weight: '600' })
@@ -129,13 +128,15 @@ export default function Page() {
               {/* Decorative abstract brand mark — subtle, indigo-tinted cluster that
                   echoes the dot-grid. Uses an inline SVG file in /public so no
                   extra JS is shipped. Hidden from assistive tech (decorative). */}
-              {/* Decorative abstract mark with a lightweight pointer-parallax interaction */}
-              <AbstractParallax
+              {/* Decorative abstract mark — static SVG so the panel remains JS-free */}
+              <Image
                 src="/logo-abstract.svg"
-                alt="Decorative brand mark"
+                alt=""
+                aria-hidden="true"
                 width={220}
                 height={220}
-                className="pointer-events-auto absolute right-12 top-20 w-[220px] opacity-80 mix-blend-screen"
+                className="pointer-events-none absolute right-12 top-20 w-[220px] opacity-80 mix-blend-screen z-0"
+                priority={false}
               />
             </div>
             <div className="absolute left-10 top-8 text-[10px] font-medium uppercase tracking-[0.4em] text-[color:var(--hero-soft)]">
@@ -144,7 +145,7 @@ export default function Page() {
               <span className="mt-3 block">Learn.</span>
               <span className="mt-3 block">Repeat.</span>
             </div>
-            <div className="absolute right-9 top-8 h-[168px] w-[180px] rounded-[16px] border border-[color:var(--hero-panel-border)] bg-[color:var(--hero-surface)] p-4 shadow-[0_10px_28px_rgba(1,4,14,0.12)] backdrop-blur-sm">
+            <div className="absolute right-9 top-8 h-[168px] w-[180px] rounded-[16px] border border-[color:var(--hero-panel-border)] bg-[color:var(--hero-surface)] p-4 shadow-[0_10px_28px_rgba(1,4,14,0.12)] backdrop-blur-sm z-10">
               <div className="mb-3 flex items-center justify-between text-[8px] font-medium uppercase tracking-[0.28em] text-[color:var(--hero-soft)]">
                 <span>Stack.exe</span>
                 <span className="h-2 w-2 rounded-full bg-[color:var(--hero-primary)] shadow-[0_0_10px_rgba(141,118,255,0.8)]" />
@@ -158,7 +159,7 @@ export default function Page() {
                 ))}
               </ul>
             </div>
-            <div className="absolute bottom-8 right-9 w-[220px] rounded-[16px] border border-[color:var(--hero-panel-border)] bg-[color:var(--hero-surface)] p-4 shadow-[0_10px_28px_rgba(1,4,14,0.12)] backdrop-blur-sm">
+            <div className="absolute bottom-8 right-9 w-[220px] rounded-[16px] border border-[color:var(--hero-panel-border)] bg-[color:var(--hero-surface)] p-4 shadow-[0_10px_28px_rgba(1,4,14,0.12)] backdrop-blur-sm z-10">
               <div className="mb-2 flex items-center justify-between text-[8px] font-medium uppercase tracking-[0.28em] text-[color:var(--hero-soft)]">
                 <span>Status</span>
                 <span className="inline-flex items-center gap-2 text-[color:var(--hero-primary)]">
