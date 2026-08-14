@@ -139,7 +139,7 @@ export default function Page() {
                 aria-hidden="true"
                 width={220}
                 height={220}
-                className="pointer-events-none absolute right-12 top-20 w-[220px] opacity-80 mix-blend-screen z-0 hidden dark:block"
+                className="pointer-events-none absolute right-24 lg:right-20 xl:right-28 top-20 lg:top-20 w-[160px] md:w-[180px] lg:w-[200px] xl:w-[220px] opacity-80 mix-blend-screen z-0 hidden dark:block"
                 priority={false}
               />
 
@@ -149,7 +149,7 @@ export default function Page() {
                 aria-hidden="true"
                 width={220}
                 height={220}
-                className="pointer-events-none absolute right-12 top-20 w-[220px] opacity-80 mix-blend-normal z-0 block dark:hidden"
+                className="pointer-events-none absolute right-24 lg:right-20 xl:right-28 top-20 lg:top-20 w-[160px] md:w-[180px] lg:w-[200px] xl:w-[220px] opacity-80 mix-blend-normal z-0 block dark:hidden"
                 priority={false}
               />
             </div>
