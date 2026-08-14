@@ -1,6 +1,6 @@
-// The mascot: a WALL·E-style robot — boxy body, treads, and the signature
-// binocular eyes carrying the indigo accent. Reads down to ~16px. Uses only
-// rect / path (M/H/L/Z) / circle so it renders under Satori (favicon + OG).
+// Minimal, geometric monogram 'SS' — compact, legible at small sizes, and
+// designed to feel technical yet refined. Uses simple strokes so it renders
+// well as an SVG, favicon, and when converted by Satori for OG images.
 export function Logo({
   size = 28,
   color = 'currentColor',
@@ -9,9 +9,9 @@ export function Logo({
   className,
 }: {
   size?: number
-  /** Body / outline colour. Defaults to currentColor. */
+  /** Primary stroke colour. Defaults to currentColor. */
   color?: string
-  /** Eye lenses. Defaults to the accent token. */
+  /** Small accent dot colour. Defaults to the accent token. */
   accent?: string
   /** Optional rounded background tile (favicon / app-icon contexts). */
   plate?: string
@@ -25,26 +25,25 @@ export function Logo({
       fill="none"
       className={className}
       aria-hidden="true"
+      role="img"
     >
       {plate && (
-        <rect x="2" y="2" width="96" height="96" rx="24" fill={plate} />
+        <rect x="2" y="2" width="96" height="96" rx="20" fill={plate} />
       )}
-      {/* treads */}
-      <rect x="22" y="80" width="26" height="15" rx="7" fill={color} />
-      <rect x="52" y="80" width="26" height="15" rx="7" fill={color} />
-      {/* body */}
-      <path d="M33 50 H67 L73 82 H27 Z" fill={color} />
-      {/* arms */}
-      <rect x="19" y="54" width="7" height="27" rx="3.5" fill={color} />
-      <rect x="74" y="54" width="7" height="27" rx="3.5" fill={color} />
-      {/* neck + binocular head */}
-      <rect x="46" y="44" width="8" height="8" fill={color} />
-      <rect x="23" y="18" width="54" height="27" rx="13.5" fill={color} />
-      {/* eyes (accent lenses + dark pupils) */}
-      <circle cx="38" cy="31" r="8.5" fill={accent} />
-      <circle cx="62" cy="31" r="8.5" fill={accent} />
-      <circle cx="38" cy="31" r="3.2" fill="#0a0a0f" />
-      <circle cx="62" cy="31" r="3.2" fill="#0a0a0f" />
+
+      {/* Two stylized 'S' strokes, mirrored and tightened into a compact monogram */}
+      <g stroke={color} strokeWidth={8} strokeLinecap="round" strokeLinejoin="round" fill="none">
+        <path d="M68 18 C50 18 44 34 60 40 C78 47 52 64 36 68 C20 72 22 86 40 86" />
+        <path d="M56 18 C38 18 32 34 48 40 C66 47 40 64 24 68 C8 72 10 86 28 86" opacity="0.18" />
+      </g>
+
+      {/* Accent: small indigo dot for signal and brand recognition */}
+      <circle cx="74" cy="24" r="4.5" fill={accent} />
+
+      {/* Optional subtle outline when used without a plate to improve contrast */}
+      {!plate && (
+        <rect x="1" y="1" width="98" height="98" rx="22" stroke="none" fill="none" />
+      )}
     </svg>
   )
 }
