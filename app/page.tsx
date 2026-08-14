@@ -124,7 +124,20 @@ export default function Page() {
           <div className="hero-panel relative hidden h-[min(72vw,720px)] w-full max-w-[760px] rounded-[32px] lg:block">
             <div className="absolute inset-0 rounded-[32px] border border-[color:var(--hero-panel-border)] bg-[color:var(--hero-panel)] shadow-[0_30px_90px_rgba(10,13,22,0.12)]" />
             <div className="absolute inset-[18px] rounded-[24px] border border-[color:var(--hero-panel-border)] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02),transparent_58%)]" />
-            <div className="hero-grid absolute inset-[20px] rounded-[22px] opacity-85" />
+            <div className="hero-grid absolute inset-[20px] rounded-[22px] opacity-85">
+              {/* Decorative abstract brand mark — subtle, indigo-tinted cluster that
+                  echoes the dot-grid. Uses an inline SVG file in /public so no
+                  extra JS is shipped. Hidden from assistive tech (decorative). */}
+              <Image
+                src="/logo-abstract.svg"
+                alt=""
+                aria-hidden="true"
+                width={220}
+                height={220}
+                className="pointer-events-none absolute right-12 top-20 w-[220px] opacity-80 mix-blend-screen"
+                priority={false}
+              />
+            </div>
             <div className="absolute left-10 top-8 text-[10px] font-medium uppercase tracking-[0.4em] text-[color:var(--hero-soft)]">
               <span className="block">Code.</span>
               <span className="mt-3 block">Build.</span>
