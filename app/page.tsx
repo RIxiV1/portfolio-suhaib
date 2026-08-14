@@ -128,14 +128,28 @@ export default function Page() {
               {/* Decorative abstract brand mark — subtle, indigo-tinted cluster that
                   echoes the dot-grid. Uses an inline SVG file in /public so no
                   extra JS is shipped. Hidden from assistive tech (decorative). */}
-              {/* Decorative abstract mark — static SVG so the panel remains JS-free */}
+              {/* Decorative abstract marks (theme-aware):
+                  - dark SVG is used in dark mode (mix-blend-mode: screen works well)
+                  - light SVG is used in light mode (normal blend so it reads on white)
+                  Both are decorative, non-interactive, and sit behind floating cards (z-0).
+               */}
               <Image
                 src="/logo-abstract.svg"
                 alt=""
                 aria-hidden="true"
                 width={220}
                 height={220}
-                className="pointer-events-none absolute right-12 top-20 w-[220px] opacity-80 mix-blend-screen z-0"
+                className="pointer-events-none absolute right-12 top-20 w-[220px] opacity-80 mix-blend-screen z-0 hidden dark:block"
+                priority={false}
+              />
+
+              <Image
+                src="/logo-abstract-light.svg"
+                alt=""
+                aria-hidden="true"
+                width={220}
+                height={220}
+                className="pointer-events-none absolute right-12 top-20 w-[220px] opacity-80 mix-blend-normal z-0 block dark:hidden"
                 priority={false}
               />
             </div>
