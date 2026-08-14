@@ -3,14 +3,13 @@
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
+// Lightweight CSS-based animations used instead of `motion/react` to reduce client bundle size
 import { siteConfig } from '@/data/site'
 import { cn } from '@/lib/utils'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { Logo } from '@/components/ui/logo'
 
 export function Nav() {
-  const reduceMotion = useReducedMotion()
   const pathname = usePathname()
   // On subpages the in-page sections don't exist, so hash links must route home.
   const onHome = pathname === '/'
@@ -72,11 +71,11 @@ export function Nav() {
           'border-b border-foreground/5 bg-background/70 backdrop-blur-xl',
       )}
     >
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-4">
         <a
           href={onHome ? '#home' : '/'}
           onClick={() => setOpen(false)}
-          className="group flex items-center gap-2.5 text-sm font-semibold tracking-tight text-foreground"
+          className="group flex items-center gap-2.5 text-[13px] font-semibold tracking-tight text-foreground"
           aria-label="Home"
         >
           <span className="logo-glow text-foreground">
@@ -87,7 +86,7 @@ export function Nav() {
 
         <div className="flex items-center gap-2">
           {/* Desktop pill nav */}
-          <ul className="hidden items-center gap-1 rounded-full border border-foreground/[0.06] bg-foreground/[0.02] p-1 md:flex">
+          <ul className="hidden items-center gap-1 rounded-full border border-foreground/[0.08] bg-foreground/[0.02] p-1 md:flex">
             {siteConfig.navLinks.map((l) => {
               const isActive = active === l.href
               return (
@@ -95,22 +94,14 @@ export function Nav() {
                   <a
                     href={to(l.href)}
                     className={cn(
-                      'relative block rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors',
+                      'relative block rounded-full px-3.5 py-1.75 text-[11px] font-medium tracking-[0.02em] transition-colors',
                       isActive
                         ? 'text-background'
                         : 'text-muted-foreground hover:bg-foreground/[0.05] hover:text-foreground',
                     )}
                   >
                     {isActive && (
-                      <motion.span
-                        layoutId="navActivePill"
-                        className="absolute inset-0 rounded-full bg-foreground"
-                        transition={
-                          reduceMotion
-                            ? { duration: 0 }
-                            : { type: 'spring', stiffness: 400, damping: 32 }
-                        }
-                      />
+                      <span className="absolute inset-0 rounded-full bg-foreground nav-active-pill" />
                     )}
                     <span className="relative z-10">{l.name}</span>
                   </a>
@@ -136,43 +127,31 @@ export function Nav() {
       </div>
 
       {/* Mobile sheet */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            id="mobile-nav"
-            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
-            transition={{
-              duration: reduceMotion ? 0.12 : 0.18,
-              ease: 'easeOut',
-            }}
-            className="md:hidden border-t border-foreground/[0.08] bg-background/95 backdrop-blur-xl"
-          >
-            <ul className="mx-auto flex max-w-5xl flex-col px-6 py-3">
-              {siteConfig.navLinks.map((l) => {
-                const isActive = active === l.href
-                return (
-                  <li key={l.href}>
-                    <a
-                      href={to(l.href)}
-                      onClick={() => setOpen(false)}
-                      className={cn(
-                        'flex items-center gap-2 rounded-lg px-3 py-3 text-sm font-medium transition-colors',
-                        isActive
-                          ? 'bg-foreground/[0.06] text-foreground'
-                          : 'text-muted-foreground hover:bg-foreground/[0.03] hover:text-foreground',
-                      )}
-                    >
-                      {l.name}
-                    </a>
-                  </li>
-                )
-              })}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {open && (
+        <div id="mobile-nav" className="md:hidden border-t border-foreground/[0.08] bg-background/95 backdrop-blur-xl transition-opacity duration-180">
+          <ul className="mx-auto flex max-w-5xl flex-col px-6 py-3">
+            {siteConfig.navLinks.map((l) => {
+              const isActive = active === l.href
+              return (
+                <li key={l.href}>
+                  <a
+                    href={to(l.href)}
+                    onClick={() => setOpen(false)}
+                    className={cn(
+                      'flex items-center gap-2 rounded-lg px-3 py-3 text-sm font-medium transition-colors',
+                      isActive
+                        ? 'bg-foreground/[0.06] text-foreground'
+                        : 'text-muted-foreground hover:bg-foreground/[0.03] hover:text-foreground',
+                    )}
+                  >
+                    {l.name}
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      )}
     </nav>
   )
 }

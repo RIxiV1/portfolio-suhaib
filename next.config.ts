@@ -1,6 +1,9 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  // Emit browser source maps in production so we can run a bundle analysis
+  // with source-map-explorer and get a precise module breakdown.
+  productionBrowserSourceMaps: true,
   // Pin the workspace root so Turbopack doesn't pick up the stray
   // package-lock.json in the home directory (C:\Users\shaik\).
   turbopack: {
