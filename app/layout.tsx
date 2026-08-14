@@ -68,7 +68,7 @@ const personJsonLd = {
 
 // Runs before first paint: apply the stored theme, or fall back to the
 // visitor's system preference. Keeps light-vs-dark from flashing on load.
-const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',d);}catch(e){}})();`
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');var mq = matchMedia('(prefers-color-scheme: dark)');var apply = function(isDark){document.documentElement.classList.toggle('dark', !!isDark)};if(t){apply(t==='dark')}else{apply(mq.matches);if(mq.addEventListener){mq.addEventListener('change', function(e){apply(e.matches)})}else if(mq.addListener){mq.addListener(function(e){apply(e.matches)})}}}catch(e){}})();`
 
 export default function RootLayout({
   children,
