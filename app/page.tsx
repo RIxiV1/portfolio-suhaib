@@ -5,9 +5,8 @@ import { siteConfig } from '@/data/site'
 import { FadeUp } from '@/components/ui/fade-up'
 import { Stagger, StaggerItem } from '@/components/ui/reveal'
 import { MagneticLink } from '@/components/ui/magnetic-link'
-import { ContactForm } from '@/components/ui/contact-form'
 import { FeaturedProject, ProjectsList } from '@/components/ui/work-stack-link'
-import { SignalField } from '@/components/ui/signal-field'
+import ContactFormLoader from '@/components/ui/contact-form-loader'
 import { Signature } from '@/components/ui/signature'
 
 // Script face for the hand-written sign-off in About.
@@ -401,7 +400,7 @@ export default function Page() {
                 </div>
               </header>
               <div className="rounded-[28px] border border-border bg-background/55 p-5 shadow-[0_20px_80px_-50px_rgba(0,0,0,0.5)] backdrop-blur-xl md:p-6">
-                <ContactForm />
+                <ContactFormLoader />
               </div>
             </div>
           </div>
